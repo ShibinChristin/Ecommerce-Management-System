@@ -175,7 +175,42 @@ void Authentication::CourierLogin()
         }
 }
 
+////////////////////////////////CUSTOMER PART////////////////////////////////////////////////////////////////////////////
+ifstream customer("products.txt",ios::in);
+ofstream buy("orders.txt",ios::out|ios::in|ios::app);
+void Customer::CustomerChoiceDisplay(){
+// ostream customerb("temp.txt");
+std::cout<<"What would you like to buy\n";
+        std::cout<<"1.Electronics\n";
+        std::cout<<"2.Furniture\n";
+        std::cout<<"3.Clothings\n";
+        std::cout<<"Enter your choice : ";
+        std::cin>>customerChoice;
+        switch(customerChoice){
+            case 1 :
+            subString="ele";
+            CustomerCondition();
+                break;
 
+         case 2 :
+            subString="furniture";
+            CustomerCondition();
+            
+                break;
+        case 3 :
+        subString="clothes";
+        CustomerCondition();
+        break;
+}
+}
+///////////////////////////////////////////////////////////
+
+void Customer::CustomerCondition(){
+    do{
+    if(line.find(subString)!=std::string::npos)
+                cout<<line<<"\n";
+                }while(getline(customer,line));
+}
 
 
 
