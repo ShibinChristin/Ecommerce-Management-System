@@ -16,18 +16,23 @@ case 1:
     int CustomerChoice;
     system("clear");
     cout<<"***********************************************************************\n\n";
-        cout<<"                      Welcome to CUstomer Portal                             \n\n";
+        cout<<"                      Welcome to Customer Portal                             \n\n";
         cout<<"*******************        MENU        ********************************\n\n";
         cout<<"1.Login\n";
         cout<<"2.Register\n";
         cout<<"Enter choice : ";
         cin>>CustomerChoice;
-        if(CustomerChoice==1){auth.CustomerLogin();}
+        if(CustomerChoice==1){
+         auth.CustomerLogin();
+        sleep(2);
+        system("clear");
+        cust.CustomerChoiceDisplay();                    
+        }
         if(CustomerChoice==2){auth.CustomerRegistration();}
     break;
 case 2:
  cout<<"***********************************************************************\n\n";
-        cout<<"                      Welcome to CUstomer Portal                             \n\n";
+        cout<<"                      Welcome to Merchant Portal                             \n\n";
         system("clear");
         auth.MerchantLogin();
 break;
