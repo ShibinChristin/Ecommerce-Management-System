@@ -12,4 +12,14 @@ void forgotPassword();
 void MerchantLogin();
 void CourierLogin();
 };
+class Customer{   
+    public:
+int customerChoice;
+std::string line; 
+int  ProductBuy;  
+string subString; //added on 31/august/2022
+void CustomerBuy();
+void CustomerCondition();
+void CustomerChoiceDisplay();
+};
 
