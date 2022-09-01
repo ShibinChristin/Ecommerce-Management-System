@@ -218,3 +218,40 @@ void Customer::CustomerCondition(){
 
 
 
+/////////////////////////////////////////////////////////////////////////
+
+void Products::addProduct(){
+   std :: cout <<"Enter the Merchant ID : ";
+    getline(std::cin >> ws, merchantId);
+    std :: cout <<"\nEnter the Product ID : ";
+    getline(std::cin >> ws, productId);
+    std :: cout <<"\nEnter the Name of the Product : ";
+    getline(std::cin >> ws, productName);
+    std :: cout <<"\nEnter the Price of the Product : ";
+    getline(std::cin >> ws, productPrice);
+    std :: cout <<"\nEnter the Type of the Product (Electronics/Furniture/Clothings) : ";
+    getline(std::cin >> ws, productType);
+    std :: cout <<"\nThe number of available " << productType <<  " Products : ";
+//     fflush(stdin);
+    getline(std::cin >> ws, productCount);
+
+    fstream merchant_file;
+    merchant_file.open("products.txt", std::ios::out | std::ios::app);
+    merchant_file << merchantId << " "<< productId << " "<< productName << " " << productPrice << " " << productType << "Count : " << productCount;
+    cout <<"\n";
+    merchant_file.close();
+}
+void Products::merchantOptions(){
+     cout<<"*******************        MENU        ********************************\n\n";
+        cout<<"1.Add Products\n";
+        cout<<"2.Assign Delivery to Courier\n";
+        cout<<"3.Canceled Orders\n";
+        cout<<"4.Order Status\n"<<endl;
+
+}
+
+//////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////////////

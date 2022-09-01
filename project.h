@@ -24,3 +24,12 @@ void CustomerCondition();
 void CustomerChoiceDisplay();
 };
 
+class Products{
+    public:
+std::string merchantId , productId ;
+ std::string productName , productPrice ;
+ std::string productType ,productCount ,MerchantChoice;
+void addProduct();
+void merchantOptions();
+};
+

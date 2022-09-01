@@ -3,6 +3,7 @@ int main(){
 int choice;
 Authentication auth; 
 Customer cust;
+Products Mer;
  cout<<"***********************************************************************\n\n";
         cout<<"                      Welcome to ShopTronics                               \n\n";
         cout<<"*******************        MENU        ********************************\n\n";
@@ -25,18 +26,28 @@ case 1:
         cin>>CustomerChoice;
         if(CustomerChoice==1){
          auth.CustomerLogin();
-        sleep(2);
+        sleep(1);
         system("clear");
         cust.CustomerChoiceDisplay();                    
         }
-        if(CustomerChoice==2){auth.CustomerRegistration();}
+        if(CustomerChoice==2){
+            auth.CustomerRegistration();
+            }
     break;
 case 2:
  cout<<"***********************************************************************\n\n";
         cout<<"                      Welcome to Merchant Portal                             \n\n";
         system("clear");
         auth.MerchantLogin();
-break;
+        sleep(2);
+        system("clear");
+        Mer.merchantOptions();
+        // if(MerchantChoice=="1"){
+        // Mer.addProduct();
+        // }
+        // if(MerchantChoice=="2"){
+        // }
+         break;
 case 3:
 cout<<"***********************************************************************\n\n";
         cout<<"                      Welcome to Courier Portal                             \n\n";
