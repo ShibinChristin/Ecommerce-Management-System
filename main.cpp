@@ -2,6 +2,7 @@
 int main(){
 int choice;
 Authentication auth; 
+Customer cust;
  cout<<"***********************************************************************\n\n";
         cout<<"                      Welcome to ShopTronics                               \n\n";
         cout<<"*******************        MENU        ********************************\n\n";

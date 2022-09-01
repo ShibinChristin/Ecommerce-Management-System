@@ -56,16 +56,20 @@ void Authentication::CustomerLogin()
                 // cin.get();
                 // cin.get();
         }
-        // else
-        // {
-        //         cout<<endl<<"LOGIN ERROR"<<endl;
+        else
+        {
+                int i = 3;
+                cout<<endl<<"LOGIN ERROR"<<endl;
+                cout<<"Please try again......"<<endl;
+                --i;
+                // while(i>0){
         //         cout<<"********Would you like to reset your password?(Y/N) ";
         //         cin>>condition;
         //         if(condition=="y"||"Y")
-        //             forgotPassword();
+        //             forgotPassword();}
         //         else{
-        //             goto retry;
-        //         }
+                    goto retry;
+                }
         // }
 }
 
