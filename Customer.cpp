@@ -3,37 +3,8 @@ ifstream customer("products.txt",ios::in);
 ofstream buy("orders.txt",ios::out|ios::in|ios::app);
 void Customer::CustomerChoiceDisplay(){
 // ostream customerb("temp.txt");
-std::cout<<"What would you like to buy\n";
-//         std::cout<<"1.Electronics\n";
-//         std::cout<<"2.Furniture\n";
-//         std::cout<<"3.Clothings\n";
-//         std::cout<<"Enter your choice : ";
-//         std::cin>>customerChoice;
-//         switch(customerChoice){
-//             case 1 :
-//             subString="Electronics";
-//             CustomerCondition(subString);
-//                 break;
-
-//          case 2 :
-//             subString="Furniture";
-//             CustomerCondition(subString);
-            
-//                 break;
-//         case 3 :
-//         subString="Clothes";
-//         CustomerCondition(subString);
-//         break;
-// }
-// }
-///////////////////////////////////////////////////////////
-
-// void Customer::CustomerCondition(std::string Sub){
-    // do{
-    // if(line.find(subString)!=std::string::npos)
-    //             // cout<<line<<"\n";
-    //             cout<<line;
-    //             }while(getline(customer,line));
+// std::cout<<"What would you like to buy\n";
+//        
 
 ///////////////////////////////////////////////////
  std::string line1, name, price;
@@ -53,9 +24,9 @@ std::cout<<"What would you like to buy\n";
             if(token.rfind("Price ",0)==0){
                 cout<<" |"<<"Price : "<<token.substr(6)<<endl;
             }
-             if(token.rfind("Count ",0)==0){
-                cout<<" |"<<"Count : "<<token.substr(5)<<endl;
-            }
+            //  if(token.rfind("Count ",0)==0){
+            //     cout<<" |"<<"Count : "<<token.substr(5)<<endl;
+            // }
             line1.erase(0,pos+delimiter.length());
 }
     }
