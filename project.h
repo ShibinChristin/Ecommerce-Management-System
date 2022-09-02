@@ -20,8 +20,8 @@ std::string line;
 int  ProductBuy;  
 string subString; //added on 31/august/2022
 void CustomerBuy();
-void CustomerCondition(std::string sub);
 void CustomerChoiceDisplay();
+void showProducts();
 };
 
 class Products{
@@ -29,8 +29,10 @@ class Products{
 std::string merchantId , productId ;
  std::string productName , productPrice ;
  std::string productType ,productCount; //,MerchantChoice;
- int productChoice;
+ int productChoice , MerchantChoice;
 void addProduct();
 void merchantOptions();
+void displayProducts();
+void MerchantCondition(std::string sub);
 };
 

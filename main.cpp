@@ -28,7 +28,20 @@ case 1:
          auth.CustomerLogin();
         sleep(1);
         system("clear");
-        cust.CustomerChoiceDisplay();                    
+        cust.CustomerChoiceDisplay();
+        std::string Moptions;
+        cout<<"Enter choice : ";
+        cin>>Moptions;
+        switch(stoi(Moptions)){
+            case 1:
+            system("clear");
+            cust.CustomerBuy();
+            break;
+        case 2:
+        system("clear");
+        cust.showProducts();      
+        break;  
+        }           
         }
         if(CustomerChoice==2){
             auth.CustomerRegistration();
@@ -40,16 +53,19 @@ case 2:
         cout<<"                      Welcome to Merchant Portal                             \n\n";
         system("clear");
         auth.MerchantLogin();
-        sleep(2);
+        sleep(1);
         system("clear");
         Mer.merchantOptions();
         cout<<"Enter your choice :";
         cin>>MerchantChoice;
         if(MerchantChoice==1){
+        system("clear");
         Mer.addProduct();
         }
-        // if(MerchantChoice=="2"){
-        // }
+        if(MerchantChoice==2){
+            system("clear");
+            Mer.displayProducts();
+        }
          break;
 case 3:
 cout<<"***********************************************************************\n\n";
