@@ -35,6 +35,7 @@ case 1:
             }
     break;
 case 2:
+    int MerchantChoice;
  cout<<"***********************************************************************\n\n";
         cout<<"                      Welcome to Merchant Portal                             \n\n";
         system("clear");
@@ -42,9 +43,11 @@ case 2:
         sleep(2);
         system("clear");
         Mer.merchantOptions();
-        // if(MerchantChoice=="1"){
-        // Mer.addProduct();
-        // }
+        cout<<"Enter your choice :";
+        cin>>MerchantChoice;
+        if(MerchantChoice==1){
+        Mer.addProduct();
+        }
         // if(MerchantChoice=="2"){
         // }
          break;

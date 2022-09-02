@@ -1,0 +1,2 @@
+Merchant ID 12;Product ID 12;Name Samsung s11;Price 12,00,00;Type Electronics;Count 25;
+Merchant ID 10;Product ID 10;Name Iphone 6s;Price 120,000;Type Electronics;Count 20;
