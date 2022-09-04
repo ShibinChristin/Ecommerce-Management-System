@@ -1,3 +1,7 @@
-MerchantID 12;ProductID 12;Name Samsung s11;Price 12,00,00;Type Electronics;Count 25;
-MerchantID 10;ProductID 10;Name Iphone 6s;Price 120,000;Type Electronics;Count 20;
-MerchantID 15;ProductID 10;Name Samsung S7;Price 100000;Type Electronics;Count 100;
+ProductID 10;Name Samsung S11;Price 120000;Type Electronics;Count 20;
+ProductID 12;Name Iphine 6S;Price 250000;Type Electronics;Count 20;
+ProductID 12;Name BC 6S;Price 250000;Type Clothes;Count 20;
+ProductID 12;Name AA 6S;Price 250000;Type Clothes;Count 20;
+ProductID 25;Name IPHONE 1;Price 25000;Type Electronics;Count 20;
+ProductID 25;Name IPHONE 1;Price 25000;Type Furniture;Count 20;
+

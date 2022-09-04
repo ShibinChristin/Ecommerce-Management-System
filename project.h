@@ -26,6 +26,7 @@ public:
     void CustomerBuy();
     void CustomerChoiceDisplay();
     void showProducts();
+    void orderStatus();
 };
 
 class Products
@@ -39,4 +40,9 @@ public:
     void merchantOptions();
     void displayProducts();
     void MerchantCondition(std::string sub);
+};
+
+class Courier{
+public:
+void AddCourier();
 };

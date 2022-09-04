@@ -1,8 +1,8 @@
 #include "project.h"
 void Products::addProduct()
 {
-        std ::cout << "Enter the Merchant ID : ";
-        getline(std::cin >> ws, merchantId);
+        // std ::cout << "Enter the Merchant ID : ";
+        // getline(std::cin >> ws, merchantId);
         std ::cout << "\nEnter the Product ID : ";
         getline(std::cin >> ws, productId);
         std ::cout << "\nEnter the Name of the Product : ";
@@ -33,12 +33,12 @@ choice:
         getline(std::cin >> ws, productCount);
         fstream merchant_file;
         merchant_file.open("products.txt", std::ios::out | std::ios::app);
-        merchant_file << "MerchantID " << merchantId << ";"
-                      << "ProductID " << productId << ";"
-                      << "Name " << productName << ";"
-                      << "Price " << productPrice << ";"
-                      << "Type " << productType << ";"
-                      << "Count " << productCount << ";" << endl;
+        merchant_file //<< "MerchantID " << merchantId << ";"
+            << "ProductID " << productId << ";"
+            << "Name " << productName << ";"
+            << "Price " << productPrice << ";"
+            << "Type " << productType << ";"
+            << "Count " << productCount << ";" << endl;
         cout << "\n";
         merchant_file.close();
         cout << "Would you like to continue?(Y/N) ";
@@ -94,12 +94,61 @@ void Products::displayProducts()
 
 void Products::MerchantCondition(std::string Sub)
 {
-        std::string line1;
+                std::string line1;
         ifstream MerchantDisplay("products.txt");
-        do
-        {
-                if (line1.find(Sub) != std::string::npos)
-                        // cout<<line<<"\n";
-                        cout << line1 << endl;
-        } while (getline(MerchantDisplay, line1));
+                do
+                {
+                        if (line1.find(Sub) != std::string::npos)
+                                // cout<<line<<"\n";
+                                cout << line1 << endl;
+                } while (getline(MerchantDisplay, line1));
+
+        // std::string line1, name, price, Type, Count;
+        // std::string delimiter = ";";
+        // ifstream in("products.txt", ios::in);
+        // bool found = false;
+        // while (std::getline(in, line1))
+        // {
+        //         size_t pos = 0;
+        //         std::string token;
+        //         while ((pos = line1.find(delimiter)) != std::string::npos)
+        //         {
+        //                 token = line1.substr(0, pos);
+        //                 if (token.rfind("Name ", 0) == 0)
+        //                 {
+        //                         /*std::cout << "Name : " << */ name = token.substr(5);
+        //                 }
+        //                 if (token.rfind("Price ", 0) == 0)
+        //                 {
+        //                         /* cout << " |"
+        //                               << "Price : " << */
+        //                         price = token.substr(6);
+        //                 }
+        //                 if (token.rfind("Type ", 0) == 0)
+        //                 {
+        //                         /*  cout << " |"
+        //                                << "Price : " << */
+        //                         Type = token.substr(5);
+        //                         if (Type == Sub)
+        //                         {
+        //                                 found = true;
+        //                         }
+        //                 }
+        //                 if (token.rfind("Count ", 0) == 0)
+        //                 {
+        //                         /*  cout << " |"
+        //                                << "Count : " << */
+        //                         Count = token.substr(6); //<< endl;
+        //                 }
+        //                 line1.erase(0, pos + delimiter.length());
+        //         }
+        //         if (found == true)
+        //         {
+        //                 cout << "Name : " << name << "|"
+        //                      << "Price : " << price << "|"
+        //                      << "Type : " << Type << "|"
+        //                      << "Count :" << Count << endl;
+        //         }
+        // }
+        // in.close();
 }
