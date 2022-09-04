@@ -94,14 +94,14 @@ void Products::displayProducts()
 
 void Products::MerchantCondition(std::string Sub)
 {
-                std::string line1;
+        std::string line1;
         ifstream MerchantDisplay("products.txt");
-                do
-                {
-                        if (line1.find(Sub) != std::string::npos)
-                                // cout<<line<<"\n";
-                                cout << line1 << endl;
-                } while (getline(MerchantDisplay, line1));
+        do
+        {
+                if (line1.find(Sub) != std::string::npos)
+                        // cout<<line<<"\n";
+                        cout << line1 << endl;
+        } while (getline(MerchantDisplay, line1));
 
         // std::string line1, name, price, Type, Count;
         // std::string delimiter = ";";
@@ -151,4 +151,41 @@ void Products::MerchantCondition(std::string Sub)
         //         }
         // }
         // in.close();
+}
+
+void Products::OrderStatusView()
+{
+
+        ifstream customer1("orders.txt", ios::in);
+        std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
+        cout << "***********************************************************************\n\n";
+        cout << "                      Order Status                             \n\n";
+        cout << "***********************************************************************\n\n";
+
+        while (std::getline(customer1, line2))
+        {
+                size_t pos = 0;
+                std::string token;
+                while ((pos = line2.find(delimiter)) != std::string::npos)
+                {
+                        token = line2.substr(0, pos);
+                        if (token.rfind("ProductID ", 0) == 0)
+                        {
+                                cout << "ProductID :" << token.substr(10);
+                        }
+                        if (token.rfind("Name ", 0) == 0)
+                        {
+                                cout << " | Name :" << token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0)
+                        {
+                                cout << " | Type :" << token.substr(4);
+                        }
+                        if (token.rfind("Count ", 0) == 0)
+                        {
+                                cout << " | Count :" << token.substr(5) << endl;
+                        }
+                        line2.erase(0, pos + delimiter.length());
+                }
+        }
 }

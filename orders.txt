@@ -1,2 +1,1 @@
-ProductID  25;Name IPHONE 1;Count 2;
-ProductID 25;Name IPHONE 1;Count 1;
+ProductID 25;Name IPHONE 1;Type  Furniture;Count 2;

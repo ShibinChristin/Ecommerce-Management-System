@@ -45,7 +45,8 @@ sgain:
                 break;
             case 2:
                 system("clear");
-                cust.showProducts();
+                // cust.showProducts();
+                cust.orderStatus();
                 break;
             }
         }
@@ -68,7 +69,8 @@ sgain:
         if (MerchantChoice == 1)
         {
             system("clear");
-            Mer.addProduct();
+            // Mer.addProduct();
+            Mer.OrderStatusView();
         }
         if (MerchantChoice == 2)
         {
