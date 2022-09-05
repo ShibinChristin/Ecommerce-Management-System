@@ -5,7 +5,7 @@ int main()
     Authentication auth;
     Customer cust;
     Products Mer;
-    // int i = 3;
+	std::regex m("^[1-3]$");
     cout << "***********************************************************************\n\n";
     cout << "                      Welcome to ShopTronics                               \n\n";
     cout << "*******************        MENU        ********************************\n\n";
@@ -15,6 +15,7 @@ int main()
 sgain:
     cout << "\nEnter your choice : ";
     cin >> choice;
+
     cout << endl;
     switch (choice)
     {
@@ -33,22 +34,35 @@ sgain:
             auth.CustomerLogin();
             sleep(1);
             system("clear");
+            Coptions:
             cust.CustomerChoiceDisplay();
-            std::string Moptions;
+            std::string options;              
             cout << "Enter choice : ";
-            cin >> Moptions;
-            switch (stoi(Moptions))
+            cin >>options;
+            switch (stoi(options))
             {
             case 1:
                 system("clear");
                 cust.CustomerBuy();
+                goto Coptions;
                 break;
             case 2:
                 system("clear");
-                // cust.showProducts();
-                cust.orderStatus();
+                cust.showProducts();
+                sleep(3);
+                goto Coptions;
                 break;
-            }
+            case 3:
+                system("clear");
+                cust.orderStatus();
+                sleep(3);
+                goto Coptions;
+                case 4:
+                cust.CancelOrder();
+                sleep(5);
+                goto Coptions;
+                break;
+        }
         }
         if (CustomerChoice == 2)
         {

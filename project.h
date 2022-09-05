@@ -27,6 +27,7 @@ public:
     void CustomerChoiceDisplay();
     void showProducts();
     void orderStatus();
+    void CancelOrder();
 };
 
 class Products
