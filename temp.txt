@@ -1,5 +1,0 @@
-ProductID ;Name AA 6S;Count 3
-ProductID ;Name AA 6S;Count 3
-ProductID ;Name AA 6S;Count 3
-ProductID ;Name AA 6S;Count 3
-ProductID ;Name AA 6S;Count 3

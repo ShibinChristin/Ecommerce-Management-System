@@ -103,54 +103,6 @@ void Products::MerchantCondition(std::string Sub)
                         cout << line1 << endl;
         } while (getline(MerchantDisplay, line1));
 
-        // std::string line1, name, price, Type, Count;
-        // std::string delimiter = ";";
-        // ifstream in("products.txt", ios::in);
-        // bool found = false;
-        // while (std::getline(in, line1))
-        // {
-        //         size_t pos = 0;
-        //         std::string token;
-        //         while ((pos = line1.find(delimiter)) != std::string::npos)
-        //         {
-        //                 token = line1.substr(0, pos);
-        //                 if (token.rfind("Name ", 0) == 0)
-        //                 {
-        //                         /*std::cout << "Name : " << */ name = token.substr(5);
-        //                 }
-        //                 if (token.rfind("Price ", 0) == 0)
-        //                 {
-        //                         /* cout << " |"
-        //                               << "Price : " << */
-        //                         price = token.substr(6);
-        //                 }
-        //                 if (token.rfind("Type ", 0) == 0)
-        //                 {
-        //                         /*  cout << " |"
-        //                                << "Price : " << */
-        //                         Type = token.substr(5);
-        //                         if (Type == Sub)
-        //                         {
-        //                                 found = true;
-        //                         }
-        //                 }
-        //                 if (token.rfind("Count ", 0) == 0)
-        //                 {
-        //                         /*  cout << " |"
-        //                                << "Count : " << */
-        //                         Count = token.substr(6); //<< endl;
-        //                 }
-        //                 line1.erase(0, pos + delimiter.length());
-        //         }
-        //         if (found == true)
-        //         {
-        //                 cout << "Name : " << name << "|"
-        //                      << "Price : " << price << "|"
-        //                      << "Type : " << Type << "|"
-        //                      << "Count :" << Count << endl;
-        //         }
-        // }
-        // in.close();
 }
 
 void Products::OrderStatusView()

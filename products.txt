@@ -1,5 +1,0 @@
-ProductID 10;Name Samsung S11;Price 120000;Type Electronics;Count 20;
-ProductID 12;Name Iphine 6S;Price 250000;Type Electronics;Count 20;
-ProductID 13;Name BC 6S;Price 250000;Type Clothes;Count 20;
-ProductID 14;Name AA 6S;Price 250000;Type Clothes;Count 20;
-ProductID 15;Name IPHONE 1;Price 25000;Type Electronics;Count 20;

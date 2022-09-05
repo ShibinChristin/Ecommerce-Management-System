@@ -1,2 +1,2 @@
-ProductID ;Name AA 6S;Type Clothes;Count 3;
-ProductID ;Name AA 6S;Type Clothes;Count 3;
+
+ProductID ;Name Samsung S11;Type Electronics;Count 2;

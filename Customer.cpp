@@ -55,7 +55,7 @@ void Customer::CustomerBuy()
 {
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[0-5]$");
-    std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType; /// cProduct   --- Customer Product
+    std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType, Val; /// cProduct   --- Customer Product
     bool found = false;
     ofstream buy("orders.txt", ios::out | ios::app);
     showProducts();
@@ -104,7 +104,7 @@ gotobuy:
             buy << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
                 << "Type " << ProductType << ";"
-                << "Count " << count << ";" << endl; // cout << "Product not found " << endl;
+                << "Count " << count << ";" << endl;
 
             break;
         }
@@ -119,8 +119,7 @@ gotobuy:
     bool idfound = false;
     while (std::getline(in1, line))
     {
-        std::string delimiter = ";", Val;
-        // int tempCount;
+        std::string delimiter = ";";
         size_t pos = 0;
         idfound = false;
         std::string originalLine = line;
@@ -131,36 +130,55 @@ gotobuy:
             if (token.rfind("Count ", 0) == 0)
             {
                 Val = token.substr(6);
-                // tempCount = stoi(Val);
             }
             if (token.rfind("Name ", 0) == 0)
             {
                 std::string name = token.substr(5);
             }
             line.erase(0, pos + delimiter.length());
-            //   }
-            // int TempCount = stoi(count);
-            // int ProductC = stoi(Val);            /////Error
+        }
+        in1.close();
+    }
+    int TempCount = stoi(count);
+    int ProductC = stoi(Val);
+    ifstream in3("products.txt", ios::in);
+    std::string line3;
+    while (std::getline(in3, line3))
+    {
+        std::string delimiter = ";";
+        size_t pos = 0;
+        idfound = false;
+        std::string originalLine = line3;
+        std::string token;
+        while ((pos = line3.find(delimiter)) != std::string::npos)
+        {
+            token = line3.substr(0, pos);
+            if (token.rfind("Name ", 0) == 0)
+            {
+                name = token.substr(5);
+            }
+            line3.erase(0, pos + delimiter.length());
+        }
 
-            if (Cproduct == name)
-            {
-                idfound = true;
-                temp << "ProductID " << ProductID;
-                temp << ";Name " << name;
-                temp << ";Count " << count<<endl;// ProductC - TempCount << endl;
-                break;
-            }
-            else if (idfound == false)
-            {
-                temp << originalLine << endl;
-            }
+        if (Cproduct == name)
+        {
+            idfound = true;
+            temp << "ProductID " << ProductID;
+            temp << ";Name " << name;
+            temp<<";Type "<<ProductType;
+            temp << ";Count " << ProductC - TempCount << endl; // ProductC - TempCount << endl;
+            break;
+        }
+        else
+        {
+            temp << originalLine << endl;
         }
     }
     temp.close();
-    in1.close();
-    // .close();
+    in3.close();
     // remove("products.txt");
     // rename("temp.txt", "products.txt");
+    // }
 }
 /*Code to check status of order*/
 void Customer::orderStatus()
