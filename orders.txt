@@ -1,1 +1,2 @@
-ProductID ;Name BC 6S;Type Clothes;Count 2;
+ProductID ;Name AA 6S;Type Clothes;Count 3;
+ProductID ;Name AA 6S;Type Clothes;Count 3;
