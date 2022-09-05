@@ -53,17 +53,51 @@ choice:
                 merchantOptions();
         }
 }
+void Products::searchProducts()
+{
+    std::string search, str;
+    std::string line;
+    std::ifstream file;
+    bool found = false;
+    file.open("products.txt", std::ios::in);
+    std::cout<<"Search for item: ";
+    std::cin >> search;
+    std::cout<< "Search results : \n";
+    file >> str;
+        file.seekg(16, std::ios::beg);
+        while(!file.eof() && getline(file,line))
+        {
+            if ((line.find(search)) != std::string::npos)  
+            {
+                found = true;
+                std::cout << line << std::endl;  
+            }  
+        }
+        if(found == false)
+        {
+            std::cout <<"Search not found...!!!" << std::endl;
+        }          
+    file.close();
+}
+
+void Products::OutofStockProducts()
+{
+        
+}
+
 void Products::merchantOptions()
 {
         cout << "*******************        MENU        ********************************\n\n";
         cout << "1.Add Products\n";
-        cout << "2.View Products\n";
-        cout << "2.Assign Delivery to Courier\n";
-        cout << "3.Canceled Orders\n";
-        cout << "4.Order Status\n"
-             << endl;
+        cout << "2.Search Products\n";
+        cout << "3.List of out of stock products\n";
+        cout << "4.Canceled Orders\n";
+        cout << "5.Order Status\n";
+        cout << "6.Go Back\n";
+            
 }
 ifstream MerchantDisplay("products.txt");
+
 void Products::displayProducts()
 {
         std::string subString;
@@ -153,7 +187,7 @@ void Products::MerchantCondition(std::string Sub)
         // in.close();
 }
 
-void Products::OrderStatusView()
+void Products::orderStatus()
 {
 
         ifstream customer1("orders.txt", ios::in);

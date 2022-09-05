@@ -9,9 +9,12 @@ using namespace std;
 class Authentication
 {
 public:
+    int choice;
+    void HomePage();
     void CustomerLogin();
     void CustomerRegistration();
     void forgotPassword();
+    void MerchantRegistration();
     void MerchantLogin();
     void CourierLogin();
     void Validate(string user);
@@ -37,10 +40,13 @@ public:
     std::string productType, productCount; //,MerchantChoice;
     int productChoice, MerchantChoice;
     void addProduct();
+    void searchProducts();
     void merchantOptions();
+    void OutofStockProducts();
+    void cancelledOrders();
     void displayProducts();
     void MerchantCondition(std::string sub);
-    void OrderStatusView();
+    void orderStatus();
 };
 
 class Courier{

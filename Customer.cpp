@@ -11,8 +11,10 @@ void Customer::CustomerChoiceDisplay()
     cout << "1.Buy Product\n";
     cout << "2.Show Product\n";
     cout << "3.Order Status\n";
-    cout << "3.Cancel Order\n"
+    cout << "4.Cancel Order\n";
+    cout << "5.Go Back\n"
          << endl;
+    
 }
 void Customer::showProducts()
 {

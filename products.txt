@@ -5,3 +5,6 @@ ProductID 12;Name AA 6S;Price 250000;Type Clothes;Count 20;
 ProductID 25;Name IPHONE 1;Price 25000;Type Electronics;Count 20;
 ProductID 25;Name IPHONE 1;Price 25000;Type Furniture;Count 20;
 
+ProductID P#001;Name Sofa set;Price 20000;Type Furniture;Count 2;
+ProductID P#002;Name Dining table;Price 15000;Type Furniture;Count 1;
+ProductID P#003;Name Dell laptop;Price 40000;Type Electronics;Count 2;
