@@ -148,43 +148,7 @@ buy:
     // remove("products.txt");
     // rename("temp.txt", "products.txt");
 }
-// void Customer::orderStatus(){
-// ofstream out("status.txt",ios::out|ios::app);
-// ifstream in("orders.txt",ios::in);
-
-// }
-
-// void Customer::orderStatus(){
-//     std::string line1, name, price;
-//     std::string delimiter = ";";
-//     ifstream in("orders.txt", ios::in);
-//     ofstream out("OrderStatus.txt",ios::out|ios::app);
-//     while (std::getline(in, line1))
-//     {
-//         size_t pos = 0;
-//         std::string token;
-//         while ((pos = line1.find(delimiter)) != std::string::npos)
-//         {
-//             token = line1.substr(0, pos);
-//             if (token.rfind("Name ", 0) == 0)
-//             {
-//                 std::cout << "Name : " << token.substr(5);
-//             }
-//             if (token.rfind("Price ", 0) == 0)
-//             {
-//                 cout << " |"
-//                      << "Price : " << token.substr(6) ;
-//             }
-//              if (token.rfind("Type ", 0) == 0)
-//             {
-//                 cout << " |"
-//                      << "Type : " << token.substr(5) << endl;
-//             }
-//             line1.erase(0, pos + delimiter.length());
-//         }
-//     }
-//     in.close();
-// }
+/*Code to check status of order*/
 void Customer::orderStatus()
 {
     std::string line1, name, price;
@@ -217,13 +181,13 @@ void Customer::orderStatus()
             }
             line1.erase(0, pos + delimiter.length());
         }
-        out << "ProductID " << ProductS << ";"
-            << "Name " << nameS << ";"
-            << "Type "
-            << TypeS << ";"
-            << "Status "
-            << " Pending"
-            << ";" << endl;
+        out << "ProductID "<< ProductS << ";"
+            <<"Name "<< nameS <<";"
+            <<"Type "
+            <<TypeS<< ";"
+            <<"Status "
+            <<" Pending"
+            <<";"<< endl;
     }
     in.close();
     out.close();
