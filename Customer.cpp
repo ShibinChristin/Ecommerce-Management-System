@@ -105,7 +105,10 @@ gotobuy:
             buy << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
                 << "Type " << ProductType << ";"
-                << "Count " << count << ";" << endl;
+                << "Count " << count << ";"
+                << ";Status "
+                << "Pending"
+                << ";" << endl;
 
             break;
         }
@@ -135,27 +138,23 @@ gotobuy:
                 if (Pname == Cproduct)
                 {
                     idfound = true;
-                   
                 }
             }
-             if (token.rfind("Count ", 0) == 0 && idfound)
+            if (token.rfind("Count ", 0) == 0 && idfound)
             {
                 Val = token.substr(6);
                 cout << Val << "value1 ";
             }
-            
+
             line.erase(0, pos + delimiter.length());
         }
-
-       
     }
-     in1.close();
-    cout << Val << "value2  "<<count<<" ";
+    in1.close();
     int TempCount;
     int ProductC;
 
-        TempCount = stoi(count);
-        ProductC = stoi(Val);
+    TempCount = stoi(count);
+    ProductC = stoi(Val);
     ifstream in3("products.txt", ios::in);
     std::string line3;
     while (std::getline(in3, line3))
@@ -176,7 +175,7 @@ gotobuy:
                     idfound = true;
                 }
             }
-            if (token.rfind("ProductID ", 0) == 0 )
+            if (token.rfind("ProductID ", 0) == 0)
             {
                 ProductID = token.substr(10);
             }
@@ -195,7 +194,6 @@ gotobuy:
 
             temp << originalLine << endl;
         }
-        
     }
     temp.close();
     in3.close();
@@ -252,7 +250,7 @@ void Customer::orderStatus()
             << ";" << endl;
     }
     in.close();
-    out.close();
+    // out.close();
 }
 void Customer::CancelOrder()
 {
@@ -277,12 +275,3 @@ void Customer::CancelOrder()
         }
     }
 }
-
-// int Customer::idGenerate(){
-// {
-//     int id;
-//     srand(time(0));//srand() initialize random number generators
-//     id = rand();//generate random numbers
-//     return id;
-// }
-// }
