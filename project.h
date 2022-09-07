@@ -40,8 +40,10 @@ public:
     void addProduct();
     void merchantOptions();
     void displayProducts();
+    void searchProducts();
     void MerchantCondition(std::string sub);
     void OrderStatusView();
+    void displayOutofStock();
 };
 
 class Courier{

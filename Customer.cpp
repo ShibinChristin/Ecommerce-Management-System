@@ -12,7 +12,7 @@ void Customer::CustomerChoiceDisplay()
     cout << "2.Show Product\n";
     cout << "3.Order Status\n";
     cout << "4.Cancel Order\n";
-    cout << "Press q to logout\n"
+    cout << "Press 5 to logout\n"
          << endl;
 }
 void Customer::showProducts()
@@ -127,18 +127,24 @@ gotobuy:
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
+
+            if (token.rfind("Name ", 0) == 0)
+            {
+                std::string Pname = token.substr(5);
+                if (Pname == Cproduct)
+                {
+                    idfound == true;
+                }
+            }
             if (token.rfind("Count ", 0) == 0)
             {
                 Val = token.substr(6);
-            }
-            if (token.rfind("Name ", 0) == 0)
-            {
-                std::string name = token.substr(5);
             }
             line.erase(0, pos + delimiter.length());
         }
         in1.close();
     }
+    cout << Val << "value";
     int TempCount = stoi(count);
     int ProductC = stoi(Val);
     ifstream in3("products.txt", ios::in);
@@ -155,29 +161,37 @@ gotobuy:
             token = line3.substr(0, pos);
             if (token.rfind("Name ", 0) == 0)
             {
-                name = token.substr(5);
+                std::string ChecK_name = token.substr(5);
+                if (Cproduct == ChecK_name)
+                {
+                    idfound = true;
+                }
+            }
+            if (token.rfind("ProductID ", 0) == 0 && idfound)
+            {
+                ProductID = token.substr(10);
             }
             line3.erase(0, pos + delimiter.length());
         }
-
-        if (Cproduct == name)
+        if (idfound)
         {
-            idfound = true;
             temp << "ProductID " << ProductID;
             temp << ";Name " << name;
-            temp<<";Type "<<ProductType;
-            temp << ";Count " << ProductC - TempCount << endl; // ProductC - TempCount << endl;
-            break;
+            temp << ";Type " << ProductType;
+            temp << ";Count " << ProductC - TempCount << ";" << endl; // ProductC - TempCount << endl;
+            cout << TempCount;
         }
+
         else
         {
+
             temp << originalLine << endl;
         }
     }
     temp.close();
     in3.close();
-    // remove("products.txt");
-    // rename("temp.txt", "products.txt");
+    remove("products.txt");
+    rename("temp.txt", "products.txt");
     // }
 }
 /*Code to check status of order*/
@@ -234,15 +248,14 @@ void Customer::orderStatus()
 void Customer::CancelOrder()
 {
     cout << "***********************      Orders     ********************************\n\n";
+    orderStatus();
     std::string line2, name, price;
     std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line2))
     {
-        std::string delimiter = ";", Val;
-        // int tempCount;
+        std::string delimiter = ";";
         size_t pos = 0;
-        std::string originalLine = line2;
         std::string token, cancel;
         while ((pos = line2.find(delimiter)) != std::string::npos)
         {

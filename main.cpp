@@ -6,13 +6,13 @@ int main()
     Customer cust;
     Products Mer;
 	std::regex m("^[1-3]$");
+    sgain:
     cout << "***********************************************************************\n\n";
     cout << "                      Welcome to ShopTronics                               \n\n";
     cout << "*******************        MENU        ********************************\n\n";
     cout << "1.Customer\n";
     cout << "2.Merchant\n";
     cout << "3.Courier\n";
-sgain:
     cout << "\nEnter your choice : ";
     cin >> choice;
 
@@ -62,34 +62,47 @@ sgain:
                 sleep(5);
                 goto Coptions;
                 break;
+               default:
+            //    if(stoi(options)==5){
+                goto sgain;
+            //    }
         }
         }
         if (CustomerChoice == 2)
         {
             auth.CustomerRegistration();
+            goto Coptions;
+            break;
         }
         break;
     case 2:
         int MerchantChoice;
+        mgain:
         cout << "***********************************************************************\n\n";
         cout << "                      Welcome to Merchant Portal                             \n\n";
         system("clear");
         auth.MerchantLogin();
         sleep(1);
         system("clear");
+        mopt:
         Mer.merchantOptions();
         cout << "Enter your choice :";
         cin >> MerchantChoice;
         if (MerchantChoice == 1)
         {
             system("clear");
-            // Mer.addProduct();
-            Mer.OrderStatusView();
+            Mer.addProduct();
+            goto mopt;
+            
         }
         if (MerchantChoice == 2)
         {
             system("clear");
-            Mer.displayProducts();
+            Mer.searchProducts();
+            goto mopt;
+        }
+        if(MerchantChoice==5){
+            goto sgain;
         }
         break;
     case 3:

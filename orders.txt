@@ -1,2 +1,4 @@
-
-ProductID ;Name Samsung S11;Type Electronics;Count 2;
+ProductID ;Name AC;Type Fashion;Count 2;
+ProductID ;Name AC;Type Fashion;Count 2;
+ProductID ;Name AC;Type Fashion;Count 4;
+ProductID ;Name AC;Type Fashion;Count 5;
