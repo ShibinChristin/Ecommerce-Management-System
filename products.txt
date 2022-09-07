@@ -1,3 +1,3 @@
-ProductID 10;Name AA;Price 100000;Type Electronics;Count 20;
-ProductID 13;Name AB;Type Electronics;Count 1;
-ProductID 11;Name AC;Type Fashion;Count 15;
+ProductID 10;Name AA;Type Electronics;Count 14;
+ProductID 13;Name AB;Type Electronics;Count 9;
+ProductID 11;Name AC;Type Fashion;Count 7;

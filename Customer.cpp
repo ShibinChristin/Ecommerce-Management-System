@@ -87,15 +87,15 @@ gotobuy:
                     found = true;
                 }
             }
-            if (token.rfind("ProductID ", 0) == 0 && found == true)
+            if (token.rfind("ProductID ", 0) == 0)
             {
                 ProductID = token.substr(10);
-                found = true;
+                // found = true;
             }
-            if (token.rfind("Type ", 0) == 0 && found == true)
+            if (token.rfind("Type ", 0) == 0 )
             {
                 ProductType = token.substr(5);
-                found = true;
+                // found = true;
             }
 
             line2.erase(0, pos + delimiter.length());
@@ -105,7 +105,7 @@ gotobuy:
             buy << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
                 << "Type " << ProductType << ";"
-                << "Count " << count << ";"
+                << "Count " << count
                 << ";Status "
                 << "Pending"
                 << ";" << endl;
@@ -228,8 +228,6 @@ void Customer::orderStatus()
             }
             if (token.rfind("Type ", 0) == 0)
             {
-                // cout << " |"
-                //      << "Type : " << token.substr(5) << endl;
                 TypeS = token.substr(5);
             }
             line1.erase(0, pos + delimiter.length());
