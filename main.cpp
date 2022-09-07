@@ -1,4 +1,5 @@
 #include "project.h"
+
 int main()
 {
     int choice;
@@ -13,6 +14,7 @@ int main()
     cout << "1.Customer\n";
     cout << "2.Merchant\n";
     cout << "3.Courier\n";
+    cout<<"4.Exit\n";
     cout << "\nEnter your choice : ";
     cin >> choice;
 
@@ -113,8 +115,9 @@ int main()
         break;
 
     default:
-        cout << "Invalid Choice....." << endl;
-        goto sgain;
+        // cout << "Invalid Choice....." << endl;
+        // goto sgain;
+        exit(0);
         return 0;
     }
 }

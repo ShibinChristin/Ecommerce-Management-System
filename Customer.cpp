@@ -1,4 +1,5 @@
 #include "project.h"
+
 ifstream customer("products.txt", ios::in);
 
 void Customer::CustomerChoiceDisplay()
@@ -133,20 +134,28 @@ gotobuy:
                 std::string Pname = token.substr(5);
                 if (Pname == Cproduct)
                 {
-                    idfound == true;
+                    idfound = true;
+                   
                 }
             }
-            if (token.rfind("Count ", 0) == 0)
+             if (token.rfind("Count ", 0) == 0 && idfound)
             {
                 Val = token.substr(6);
+                cout << Val << "value1 ";
             }
+            
             line.erase(0, pos + delimiter.length());
         }
-        in1.close();
+
+       
     }
-    cout << Val << "value";
-    int TempCount = stoi(count);
-    int ProductC = stoi(Val);
+     in1.close();
+    cout << Val << "value2  "<<count<<" ";
+    int TempCount;
+    int ProductC;
+
+        TempCount = stoi(count);
+        ProductC = stoi(Val);
     ifstream in3("products.txt", ios::in);
     std::string line3;
     while (std::getline(in3, line3))
@@ -167,7 +176,7 @@ gotobuy:
                     idfound = true;
                 }
             }
-            if (token.rfind("ProductID ", 0) == 0 && idfound)
+            if (token.rfind("ProductID ", 0) == 0 )
             {
                 ProductID = token.substr(10);
             }
@@ -179,7 +188,6 @@ gotobuy:
             temp << ";Name " << name;
             temp << ";Type " << ProductType;
             temp << ";Count " << ProductC - TempCount << ";" << endl; // ProductC - TempCount << endl;
-            cout << TempCount;
         }
 
         else
@@ -187,6 +195,7 @@ gotobuy:
 
             temp << originalLine << endl;
         }
+        
     }
     temp.close();
     in3.close();
@@ -268,3 +277,12 @@ void Customer::CancelOrder()
         }
     }
 }
+
+// int Customer::idGenerate(){
+// {
+//     int id;
+//     srand(time(0));//srand() initialize random number generators
+//     id = rand();//generate random numbers
+//     return id;
+// }
+// }
