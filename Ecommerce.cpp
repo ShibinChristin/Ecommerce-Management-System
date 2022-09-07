@@ -199,7 +199,43 @@ retry:
 		goto courier;
 	}
 }
+void Authentication::CourierRegistration()
+{
+	string username, password, password_confirm;
+	file.open("courierAuthentication.txt", ios::out | ios::app);
+	std::regex s("^[a-zA-Z0-9\\s]+$");
+user:
+	cout << "Enter your desired username : ";
+	getline(cin >> ws, username);
+	if (!(regex_match(username, s)))
+	{
+		std::cout << "\n";
+		std::cout << "       ===Invalid name! Please try again.===\n";
+		std::cout << "\n";
+		goto user;
+	}
+	Validate(username);
+	cout << "Enter password :";
+	cin >> password;
+passwordStart:
+	cout << "Enter password to confirm :";
+	getline(cin >> ws, password_confirm);
+	if (password != password_confirm)
+	{
+		cout << "\nThe passwords do not match. Please enter a new password\n";
+		goto passwordStart;
+	}
+	else
+	{
+		cout << "Awesome....Your Registration is successful......" << endl;
+	}
+	cout << "Your USERID :"
+			 << "\e[1m" << username << endl
+			 << endl;
+	file << username << " " << password << endl;
+	file.close();
 
+}
 void Authentication::Validate(string user)
 {
 	std::string line;

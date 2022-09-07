@@ -17,6 +17,7 @@ public:
     void MerchantRegistration();
     void MerchantLogin();
     void CourierLogin();
+    void CourierRegistration();
     void Validate(string user);
 };
 class Customer
@@ -26,6 +27,7 @@ public:
     std::string line;
     int ProductBuy;
     string subString; // added on 31/august/2022
+    void searchProduct();
     void CustomerBuy();
     void CustomerChoiceDisplay();
     void showProducts();
@@ -52,4 +54,6 @@ public:
 class Courier{
 public:
 void AddCourier();
+
+void orderStatus();
 };

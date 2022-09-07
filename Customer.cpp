@@ -8,13 +8,61 @@ void Customer::CustomerChoiceDisplay()
     ///////////////////////////////////////////////////
     // ifstream customer("products.txt", ios::in);
     cout << "***********************       MENU        ********************************\n\n";
-    cout << "1.Buy Product\n";
-    cout << "2.Show Product\n";
-    cout << "3.Order Status\n";
-    cout << "4.Cancel Order\n";
-    cout << "5.Go Back\n"
+    cout << "1.Search Product\n";
+    cout << "2.Buy Product\n";
+    cout << "3.Show Product\n";
+    cout << "4.Order Status\n";
+    cout << "5.Cancel Order\n";
+    cout << "6.Go Back\n"
          << endl;
     
+}
+
+void Customer::searchProduct()
+{   int searchChoice;
+    std::cout<< "Enter Choice\n";
+    std::cin >> searchChoice;
+    std::string search1, str1, search2;
+        std::string line;
+        std::ifstream file;
+    file.open("products.txt", std::ios::in);
+        std::cout<<"Search for product by name: ";
+        std::cin >> search1;
+        std::cout<< "Search results : \n";
+        file >> str1;
+    switch (searchChoice)
+    {
+        case 1:
+        cout<<"Search by Name\n";
+        
+        bool found = false;
+        
+            file.seekg(0, std::ios::beg);
+            while(!file.eof() && getline(file,line))
+            {
+                if ((line.find(search1)) != std::string::npos)  
+                {
+                    found = true;
+                    std::cout << line << std::endl;  
+                }  
+            }
+            if(found == false)
+            {
+                std::cout <<"Search not found...!!!" << std::endl;
+            }          
+        
+
+        break;
+
+        case 2:
+        cout<<"Search product by type\n"; 
+
+        
+    }
+    file.close();
+    
+
+
 }
 void Customer::showProducts()
 {
@@ -87,8 +135,8 @@ void Customer::CustomerBuy()
         }
     }
 buy:
-    cout << "How many would you like to buy? ";
-    cin >> count;
+    std::cout << "How many would you like to buy? ";
+    std:: cin >> count;
     if (!(regex_match(count, obj)))
     {
         cout << "Invalid input or you cannot buy more than 5 products " << endl;

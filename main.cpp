@@ -42,19 +42,23 @@ start:
             {
             case 1:
                 //system("clear");
-                cust.CustomerBuy();
+                cust.searchProduct();
                 break;
             case 2:
-                // cust.showProducts();
+                //system("clear");
+                cust.CustomerBuy();
                 break;
             case 3:
+                // cust.showProducts();
+                break;
+            case 4:
                 //system("clear");
                 cust.orderStatus();
                 break;
-            case 4:
+            case 5:
                 //cust.cancelOrder();
                 break;
-            case 5:
+            case 6:
                 goto start;
                 break;
 
@@ -118,7 +122,7 @@ start:
             //system("clear");
             Mer.searchProducts();
             //goto a;
-            Mer.
+            
         }
         else if(MerchantChoice==3)
         {
@@ -145,6 +149,10 @@ start:
         if(CourierChoice==1)
         {
             auth.CourierLogin();
+        }
+        else if(CourierChoice==2)
+        {
+            auth.CourierRegistration();
         }
         
         break;

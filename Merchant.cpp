@@ -64,7 +64,7 @@ void Products::searchProducts()
     std::cin >> search;
     std::cout<< "Search results : \n";
     file >> str;
-        file.seekg(16, std::ios::beg);
+        file.seekg(0, std::ios::beg);
         while(!file.eof() && getline(file,line))
         {
             if ((line.find(search)) != std::string::npos)  
