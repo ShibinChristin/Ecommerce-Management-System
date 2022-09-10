@@ -28,6 +28,7 @@ public:
     void showProducts();
     void orderStatus();
     void CancelOrder();
+    int idGenerate();
 };
 
 class Products
@@ -44,9 +45,10 @@ public:
     void MerchantCondition(std::string sub);
     void OrderStatusView();
     void displayOutofStock();
+    void AssignCourier();
 };
 
-// class Courier{
-// public:
-// void AddCourier();
-// };
+class Courier{
+public:
+void listOfOrders();
+};

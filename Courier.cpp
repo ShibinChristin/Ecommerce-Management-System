@@ -1,107 +1,62 @@
-// #include "project.h"
+#include "project.h"
+void Courier::listOfOrders()
+{
+    std::string location, choice;
+    cout << "1.Kochi\n2.Ernakulam\n ";
+ch:
+    cout << "Enter choice :";
+    getline(cin >> ws, choice);
+    if (choice == "1")
+    {
+        location = "Kochi";
+    }
+    else if (choice == "2")
+    {
+        location = "Ernakulam";
+    }
+    else
+    {
+        std::cout << "       ===Not a valid choice !! Please retry.......===\n";
+        goto ch;
+    }
+    std::string line, Location;
+    bool found = false;
+    std::string delimiter = ";";
+    ifstream in("orders.txt", ios::in);
+    while (std::getline(in, line))
+    {
+        size_t pos = 0;
+        std::string token;
+        while ((pos = line.find(delimiter)) != std::string::npos)
+        {
+            token = line.substr(0, pos);
+            if (token.rfind("Courier ", 0) == 0)
+            {
+                Location = token.substr(8);
+                cout << location << "location\n";
+                cout << Location << "Location\n";
 
-
-
-
-// void Courier :: orderDetails()
-// {
-//    std::cout<<"------ORDER DETAILS------\n";
-//    std::ofstream Orderfile;
-//    Orderfile.open("order.txt",std::ios::app);
-//    while(Orderfile.is_open())
-//    {
-
-//     std::cout<<"Enter the product ID ";
-//     getline(std::cin>>ws,productId);
-//     Orderfile<<"productId "<<productId<<";";
-//     std::cout<<"Enter the product name:"<<std::endl;
-//     getline(std::cin>>ws,productName);
-//     Orderfile<<"productName"<<productName<<";";
-//     std::cout<<"Enter the product price";
-//     getline(std::cin>>ws,Price);
-//     Orderfile<<"Price "<<Price<<";";
-//     std::cout<<"Enter the product type:"<<std::endl;
-//     getline(std::cin>>ws,Type);
-//     Orderfile<<"Type "<<Type<<";";
-//     std::cout<<"Enter the product count:"<<std::endl;
-//     getline(std::cin>>ws,Count);
-//     Orderfile<<"Count "<<Count<<";"<<endl;
-//     Orderfile.close();
-    
-//    }
-
-// }
-
-// void Courier ::orderStatus()
-
-// {
-
-//     std:: string line1;
-//     std:: string delimiter=";";
-//     ifstream Orderfile("order.txt",ios::in);
-//     ofstream statusFile("delivered.txt",ios::out | ios::app);
-//     while (std::getline(Orderfile,line1))
-//     {
-//       std:: string ProductIds;
-//       size_t pos=0;
-//       std:: string token;
-//       while ((pos=line1.find(delimiter)) !=std:: string::npos)
-//       {
-//         token = line1.substr(0,pos);
-//         if (token.rfind("productId",0)==0)
-//         {
-//            ProductIds=token.substr(10);
-//         }
-//         line1.erase(0, pos + delimiter.length());
-//       }
-//       std::cout<<"productId"<<ProductIds<<"\t Status:"<<"\t pending"<<std::endl;
-//     }
-
-
-//   //  ifstream Orderfile("order.txt",ios::in);
-//   //  ofstream statusFile("delivered.txt",ios::out | ios::app);
-//   //  std::cout << "List of assigned orders" << std::endl;
-//   //  std::string details;
-//   //  if (Orderfile && statusFile)
-//   //   {
-//   //    while (getline (Orderfile, details))
-//   //     {
-//   //       statusFile << details<<"\n";
-//   //     }
-//   //     //replace()
-//   //   }
-//   //    else
-//   //   {
-//   //    std::cout<<"No orders";
-//   //   }
-//   //   Orderfile.close();
-
-// }
-
-
-// void Courier :: assignedOrders()
-// {
-  
-//    ifstream Orderfile("order.txt",ios::in);
-//    ofstream orderdetailsFile("details.txt",ios::out | ios::app);
-//    std::cout << "List of assigned orders" << std::endl;
-//    std::string details;
-//    if (Orderfile && orderdetailsFile)
-//     {
-//      while (getline (Orderfile, details))
-//       {
-//         orderdetailsFile << details<<"\n";
-//         std:: cout<<details;
-//       }
-//     }
-//      else
-//     {
-//      std::cout<<"No orders";
-//     }
-//     Orderfile.close();
-
-
-// }
-
-// //void Courier :: updateDelivery()  
-
+                if (location == Location)
+                {
+                    found = true;
+                }
+            }
+            if (token.rfind("Name ", 0) == 0 && found)
+            {
+                std::cout << " |Name : " << token.substr(5);
+            }
+            if (token.rfind("Price ", 0) == 0 && found)
+            {
+                cout << " |"
+                     << "Price : " << token.substr(6);
+            }
+            if (token.rfind("Type ", 0) == 0 && found)
+            {
+                cout << " |"
+                     << "Type : " << token.substr(5) << endl;
+            }
+            line.erase(0, pos + delimiter.length());
+        }
+    }
+    in.close();
+}

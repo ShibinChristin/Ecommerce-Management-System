@@ -105,42 +105,46 @@
 
 // }
 
-// void Products::OrderStatusView()
-// {
+void Products::OrderStatusView()
+{
 
-//         ifstream customer1("orders.txt", ios::in);
-//         std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
-//         cout << "***********************************************************************\n\n";
-//         cout << "                      Order Status                             \n\n";
-//         cout << "***********************************************************************\n\n";
+        ifstream customer1("orders.txt", ios::in);
+        std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
+        cout << "***********************************************************************\n\n";
+        cout << "                      Order Status                             \n\n";
+        cout << "***********************************************************************\n\n";
 
-//         while (std::getline(customer1, line2))
-//         {
-//                 size_t pos = 0;
-//                 std::string token;
-//                 while ((pos = line2.find(delimiter)) != std::string::npos)
-//                 {
-//                         token = line2.substr(0, pos);
-//                         if (token.rfind("ProductID ", 0) == 0)
-//                         {
-//                                 cout << "ProductID :" << token.substr(10);
-//                         }
-//                         if (token.rfind("Name ", 0) == 0)
-//                         {
-//                                 cout << " | Name :" << token.substr(5);
-//                         }
-//                         if (token.rfind("Type ", 0) == 0)
-//                         {
-//                                 cout << " | Type :" << token.substr(4);
-//                         }
-//                         if (token.rfind("Count ", 0) == 0)
-//                         {
-//                                 cout << " | Count :" << token.substr(5) << endl;
-//                         }
-//                         line2.erase(0, pos + delimiter.length());
-//                 }
-//         }
-// }
+        while (std::getline(customer1, line2))
+        {
+                size_t pos = 0;
+                std::string token;
+                while ((pos = line2.find(delimiter)) != std::string::npos)
+                {
+                        token = line2.substr(0, pos);
+                        if (token.rfind("OrderID ", 0) == 0)
+                        {
+                                cout << "OrderID :" << token.substr(8);
+                        }
+                        if (token.rfind("ProductID ", 0) == 0)
+                        {
+                                cout << " | ProductID :" << token.substr(10);
+                        }
+                        if (token.rfind("Name ", 0) == 0)
+                        {
+                                cout << " | Name :" << token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0)
+                        {
+                                cout << " | Type :" << token.substr(4);
+                        }
+                        if (token.rfind("Count ", 0) == 0)
+                        {
+                                cout << " | Count :" << token.substr(5) << endl;
+                        }
+                        line2.erase(0, pos + delimiter.length());
+                }
+        }
+}
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -263,8 +267,7 @@ b:
         std::fstream merchantFile;
         merchantFile.open("products.txt", std::ios::in | std::ios::out | std::ios::app);
         //     merchantFile << "Product Name "<< productName <<";" << "ProductId "<< productId << ";"<< "Product Price " << productPrice << ";" << "Product Type " << productType << ";"<< "ProductCount " << productCount << ";" << std::endl;
-        merchantFile << "ProductID " << productId << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount;
-        std::cout << "\n";
+        merchantFile << "ProductID " << productId << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount<<";"<<endl;
 
         writeData.close();
         merchantFile.close();
@@ -289,10 +292,12 @@ void Products::merchantOptions()
         std::cout << "*******************        MENU        ********************************\n\n";
         std::cout << "1.Add Products\n";
         std::cout << "2.Search Products\n";
-        std::cout << "3.List of Out Of Stock products\n";
-        std::cout << "4.Assign Delivery to Courier\n";
+        std::cout << "3.Orders List\n";
 
-        std::cout << "5.Exit\n";
+        std::cout << "4.List of Out Of Stock products\n";
+        std::cout << "5.Assign Delivery to Courier\n";
+
+        std::cout << "6.Exit\n";
         // cout<<"5.Order Status\n"<<endl;
 }
 void Products::searchProducts()
@@ -326,95 +331,158 @@ void Products::searchProducts()
         file.close();
 }
 
-// void Products::displayOutOfStock()
-// {
-//     std::string line;
-//     std::ifstream file;
-//     file.open("products.txt", std::ios::in);
-//     std::string delimiter = ";";
-//     while (std::getline(file, line))
-//     {
-//         size_t pos = 0;
-//         std::string token;
-//         std::string originalCount;
-//         while((pos = line.find(delimiter)) != std::string::npos)
-//         {
-//             token = line.substr(0, pos);
+void Products::displayOutofStock()
+{
+        std::cout << "*******************      Out of Stock Products      ********************************\n\n";
 
-//             if(token.rfind("Product Count ",0)==0){
-//                 std::string originalCount;
-//                 originalCount = (token.substr(14));
-//                 int x = stoi(originalCount);
-//                 std::cout << x << std::endl;
+        std::string line, name, ProductID, outCount, ProductType;
+        int CountVal;
+        bool found = false;
+        ifstream file("products.txt", std::ios::in);
+        std::string delimiter = ";";
+        while (std::getline(file, line))
+        {
+                size_t pos = 0;
+                std::string token;
+                while ((pos = line.find(delimiter)) != std::string::npos)
+                {
+                        token = line.substr(0, pos);
+                        if (token.rfind("Count ", 0) == 0)
+                        {
+                                outCount = token.substr(6); // out of stock count
+                                CountVal = stoi(outCount);
+                                cout << CountVal << "Count" << endl;
+                                if (CountVal <= 0)
+                                {
+                                        found = true;
+                                }
+                        }
+                        if (token.rfind("Name ", 0) == 0 && found)
+                        {
+                                name = token.substr(5);
+                        }
+                        if (token.rfind("ProductID ", 0) == 0 && found)
+                        {
+                                ProductID = token.substr(10);
+                        }
+                        if (token.rfind("Type ", 0) == 0 && found)
+                        {
+                                ProductType = token.substr(5);
+                        }
 
-//             int num = 0;
-//             if(num == x)
-//             {
-//                 std::cout <<"This product is not available";
-//                 std::cout <<"\n";
-//                 break;
-//             }
-//             else{
-//             }
-//             }
-//             line.erase(0,pos+delimiter.length());
-//         }
-//     }
-// std::ofstream countFile;
-// countFile.open("count.txt", std::ios::out | std::ios::app);
-// countFile <<
+                        line.erase(0, pos + delimiter.length());
+                }
+                if (found)
+                {
+                        cout << "Product ID: " << ProductID << " | "
+                             << "Name: " << name << " | "
+                             << "Type: " << ProductType << endl;
+                }
+        }
+}
 
-// // }
-// void Merchant::assignDelivery()
-// {
-//     std::string line;
-//     std::string Cname, pId, Pname,PType, PCount;
-//     bool found = false;
-//     std::ifstream orderFile;
-//     orderFile.open("order.txt", std::ios::in);
-//     std::ofstream assignCourier;
-//     assignCourier.open("courier.txt", std::ios::out | std::ios::app);
-//     while (std::getline(orderFile, line))
-//     {
-//         size_t pos = 0;
-//         std::string token;
-//         std::string delimiter = ";";
-//         while ((pos = line.find(delimiter)) != std::string::npos)
-//         {
+void Products::AssignCourier()
+{
+        std::string OrderId, line;
+        bool iffound = false;
+        int CourierChoice;
+        std::string delimiter = ";";
+        ifstream courier("orders.txt", ios::in);
+        ofstream temp("Temp.txt", ios::out);
+        OrderStatusView();
+        cout << "Enter the order ID to be assigned to Courier \n";
+        getline(cin >> ws, OrderId);
+        cout << "Enter Courier Person to be assigned :\n";
+        cout << "1.Kochi\n2.Ernakulam\n";
+        cin >> CourierChoice;
+        while (std::getline(courier, line))
+        {
+                std::string OrderID, ProductID, Name, Type, Count, Status;
+                size_t pos = 0;
+                std::string token, OriginalLine = line;
+                while ((pos = line.find(delimiter)) != std::string::npos)
+                {
+                        token = line.substr(0, pos);
+                        if (token.rfind("OrderID ", 0) == 0)
+                        {
+                                OrderID = token.substr(8);
+                                if (OrderID == OrderId)
+                                {
+                                        iffound = true;
+                                }
+                        }
+                        if (token.rfind("ProductID ", 0) == 0 && iffound)
+                        {
+                                ProductID = token.substr(9);
+                        }
+                        if (token.rfind("Name ", 0) == 0 && iffound)
+                        {
+                                // std::cout << "Name : " << token.substr(5);
+                                Name = token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0 && iffound)
+                        {
+                                Type = token.substr(5);
+                        }
+                        if (token.rfind("Count ", 0) == 0 && iffound)
+                        {
+                                Count = token.substr(6);
+                        }
+                        if (token.rfind("Status ", 0) == 0 && iffound)
+                        {
+                                Status = token.substr(7);
+                                cout<<Status<<"Status";
+                        }
+                        line.erase(0, pos + delimiter.length());
+                }
 
-//             token = line.substr(0, pos);
-//             if (token.rfind("CustomerName ", 1) == 0)
-//             {
-//                 Cname = token.substr(13);
-//                 assignCourier << "Cname : " << Cname <<";";
-//             }
-//             if (token.rfind("ProductId ", 1) == 0)
-//             {
-//                 pId = token.substr(10);
-//                 assignCourier << "PID : " << pId << ";";
-
-//             }
-//             if (token.rfind("Name ", 0) == 0 )
-//             {
-//                 Pname = token.substr(4);
-//                 assignCourier << "Pname : " << Pname << ";";
-
-//             }
-//             if (token.rfind("Type ", 0) == 0 )
-//             {
-//                 PType = token.substr(4);
-//                 assignCourier << "PType : " << PType << ";";
-//             }
-//             if (token.rfind("Count ", 0) == 0 )
-//             {
-//                 PCount = token.substr(5);
-//                 assignCourier<< "PCount : " << PCount << std::endl;
-//             }
-
-//             line.erase(0, pos + delimiter.length());
-//         }
-//     }
-//     orderFile.close();
-//     assignCourier.close();
-
-// }
+                switch (CourierChoice)
+                {
+                case 1:
+                        if (iffound)
+                        {
+                                temp << "OrderID " << OrderID << ";"
+                                     << "ProductID " << ProductID << ";"
+                                     << "Name " << Name << ";"
+                                     << "Type " << Type << ";"
+                                     << "Count " << Count << ";"
+                                     << "Courier "
+                                     << "Kochi"
+                                     << ";"
+                                     << "Status "
+                                     << "Shipping"
+                                     << ";" << endl;
+                                break;
+                        }
+                        else
+                        {
+                                temp << OriginalLine << endl;
+                        }
+                case 2:
+                        if (iffound)
+                        {
+                                temp << "OrderID " << OrderID << ";"
+                                     << "ProductID " << ProductID << ";"
+                                     << "Name " << Name << ";"
+                                     << "Type " << Type << ";"
+                                     << "Count " << Count << ";"
+                                     << "Courier "
+                                     << "Ernakulam"
+                                     << ";"
+                                     << "Status "
+                                     << "Shipping"
+                                     << ";" << endl;
+                                break;
+                                cout << "Order assigned successfully\n";
+                        }
+                        else
+                        {
+                                temp << OriginalLine << endl;
+                        }
+                }
+        }
+        courier.close();
+        temp.close();
+// remove("orders.txt");
+// rename("Temp.txt","orders.txt");
+}
