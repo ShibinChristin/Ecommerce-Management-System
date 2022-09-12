@@ -2,6 +2,7 @@
 void Courier::listOfOrders()
 {
     std::string location, choice;
+    std::string Name, OrderID, Count, Courier, Type;
     cout << "1.Kochi\n2.Ernakulam\n ";
 ch:
     cout << "Enter choice :";
@@ -33,9 +34,6 @@ ch:
             if (token.rfind("Courier ", 0) == 0)
             {
                 Location = token.substr(8);
-                cout << location << "location\n";
-                cout << Location << "Location\n";
-
                 if (location == Location)
                 {
                     found = true;
@@ -43,20 +41,50 @@ ch:
             }
             if (token.rfind("Name ", 0) == 0 && found)
             {
-                std::cout << " |Name : " << token.substr(5);
+                Name = token.substr(5);
             }
-            if (token.rfind("Price ", 0) == 0 && found)
+            if (token.rfind("OrderID ", 0) == 0 && found)
             {
-                cout << " |"
-                     << "Price : " << token.substr(6);
+                Name = token.substr(8);
             }
             if (token.rfind("Type ", 0) == 0 && found)
             {
-                cout << " |"
-                     << "Type : " << token.substr(5) << endl;
+                Type = token.substr(5);
+            }
+            if (token.rfind("Count ", 0) == 0 && found)
+            {
+                Count = token.substr(5);
             }
             line.erase(0, pos + delimiter.length());
         }
+        if(found==false){
+            cout<<"Order ID "<<OrderID<<" | "<<"Name "<<Name<<" | "<<"Type "<<Type<<" | "<<"Count "<<Count<<endl;
+            break;
+        }
     }
+
     in.close();
+}
+
+void Courier::StatusUpdate()
+{
+    std::string location, choice;
+    cout << "*********************Status Updater*********************\n";
+    cout << "1.Kochi\n2.Ernakulam\n ";
+ch:
+    cout << "Enter choice :";
+    getline(cin >> ws, choice);
+    if (choice == "1")
+    {
+        location = "Kochi";
+    }
+    else if (choice == "2")
+    {
+        location = "Ernakulam";
+    }
+    else
+    {
+        std::cout << "       ===Not a valid choice !! Please retry.......===\n";
+        goto ch;
+    }
 }

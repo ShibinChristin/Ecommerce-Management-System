@@ -267,7 +267,7 @@ b:
         std::fstream merchantFile;
         merchantFile.open("products.txt", std::ios::in | std::ios::out | std::ios::app);
         //     merchantFile << "Product Name "<< productName <<";" << "ProductId "<< productId << ";"<< "Product Price " << productPrice << ";" << "Product Type " << productType << ";"<< "ProductCount " << productCount << ";" << std::endl;
-        merchantFile << "ProductID " << productId << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount<<";"<<endl;
+        merchantFile << "ProductID " << productId << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << endl;
 
         writeData.close();
         merchantFile.close();
@@ -431,7 +431,7 @@ void Products::AssignCourier()
                         if (token.rfind("Status ", 0) == 0 && iffound)
                         {
                                 Status = token.substr(7);
-                                cout<<Status<<"Status";
+                                cout << Status << "Status";
                         }
                         line.erase(0, pos + delimiter.length());
                 }
@@ -452,12 +452,14 @@ void Products::AssignCourier()
                                      << "Status "
                                      << "Shipping"
                                      << ";" << endl;
+                                iffound = false;
                                 break;
                         }
                         else
                         {
                                 temp << OriginalLine << endl;
                         }
+                        break;
                 case 2:
                         if (iffound)
                         {
@@ -472,6 +474,7 @@ void Products::AssignCourier()
                                      << "Status "
                                      << "Shipping"
                                      << ";" << endl;
+                                iffound = false;
                                 break;
                                 cout << "Order assigned successfully\n";
                         }
@@ -479,10 +482,14 @@ void Products::AssignCourier()
                         {
                                 temp << OriginalLine << endl;
                         }
+                        break;
+                default:
+                cout<<"Not Valid...."<<endl;
                 }
         }
         courier.close();
         temp.close();
-// remove("orders.txt");
-// rename("Temp.txt","orders.txt");
+        remove("orders.txt");
+        rename("Temp.txt","orders.txt");
 }
+////////////////////////////////////////////////////////////

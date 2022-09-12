@@ -147,6 +147,9 @@ sgain:
                 case 1 :
                 system("clear");
                 C.listOfOrders();
+                break;
+                case 2:
+                C.StatusUpdate();
             }
 
             break;
