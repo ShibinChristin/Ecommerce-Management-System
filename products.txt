@@ -7,6 +7,6 @@ ProductID 10460;Name Dining Table;Price 35000;Type Furniture;Count 2;
 ProductID 28301;Name Oppo A9;Type Electronics;Count 8;
 ProductID 7334;Name Oppo A10;Price 14000;Type Electronics;Count 3;
 ProductID 10460;Name Table4;Price 35000;Type Furniture;Count 2;
-ProductID 28301;Name iPhone 13;Price 79900;Type Electronics;Count 10;
+ProductID 28301;Name iPhone 14;Price 79900;Type Electronics;Count 10;
 ProductID 7334;Name Oppo A5;Price 14000;Type Electronics;Count 3;
 ProductID 10460;Name Table;Price 35000;Type Furniture;Count 2;

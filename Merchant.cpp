@@ -146,11 +146,10 @@ void Products::merchantOptions()
 void Products::displayOutofStock()
 {
         std::cout << "*******************      Out of Stock Products      ********************************\n\n";
-
         std::string line, name, ProductID, outCount, ProductType;
-        int CountVal;
         bool found = false;
-        ifstream file("products.txt", std::ios::in);
+        ifstream file;
+        file.open("products.txt", std::ios::in);
         std::string delimiter = ";";
         while (std::getline(file, line))
         {
@@ -162,35 +161,34 @@ void Products::displayOutofStock()
                         if (token.rfind("Count ", 0) == 0)
                         {
                                 outCount = token.substr(6); // out of stock count
-                                CountVal = stoi(outCount);
-                                cout << CountVal << "Count" << endl;
-                                if (CountVal <= 0)
+                                int CountVal = stoi(outCount);
+                                if (CountVal <= 5)
                                 {
                                         found = true;
                                 }
                         }
-                        if (token.rfind("Name ", 0) == 0 && found)
-                        {
-                                name = token.substr(5);
-                        }
-                        if (token.rfind("ProductID ", 0) == 0 && found)
+                        if (token.rfind("ProductID ", 0) == 0)
                         {
                                 ProductID = token.substr(10);
                         }
-                        if (token.rfind("Type ", 0) == 0 && found)
+                        if (token.rfind("Name ", 0) == 0)
+                        {
+                                name = token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0)
                         {
                                 ProductType = token.substr(5);
                         }
-
                         line.erase(0, pos + delimiter.length());
                 }
                 if (found)
                 {
-                        cout << "Product ID: " << ProductID << " | "
-                             << "Name: " << name << " | "
-                             << "Type: " << ProductType << endl;
+                        std::cout << "Product ID: " << ProductID << " | "
+                                  << "Name: " << name << " | "
+                                  << "Type: " << ProductType << std::endl;
                 }
         }
+        file.close();
 }
 
 void Products::AssignCourier()
@@ -311,7 +309,7 @@ void Products::searchProducts()
         ifstream file("products.txt", ios::in);
         cout << "1.Search By Name\n2.Search By Type\n";
         cout << "Enter choice :";
-        getline(cin>>ws,choice);
+        getline(cin >> ws, choice);
         if (choice == "1")
         {
                 std::string search, line, Name;
@@ -424,23 +422,23 @@ void Products::searchProducts()
                                         }
                                 }
 
-                                if (token.rfind("Product ID ", 0) == 0)
+                                if (token.rfind("ProductID ", 0) == 0 && found)
                                 {
-                                        id = token.substr(11);
+                                        id = token.substr(10);
                                 }
-                                if (token.rfind("Name ", 0) == 0)
+                                if (token.rfind("Name ", 0) == 0 && found)
                                 {
                                         name = token.substr(5);
                                 }
-                                if (token.rfind("Price ", 0) == 0)
+                                if (token.rfind("Price ", 0) == 0 && found)
                                 {
                                         price = token.substr(6);
                                 }
-                                if (token.rfind("Type ", 0) == 0)
+                                if (token.rfind("Type ", 0) == 0 && found)
                                 {
                                         Type = token.substr(5);
                                 }
-                                if (token.rfind("Count ", 0) == 0)
+                                if (token.rfind("Count ", 0) == 0 && found)
                                 {
                                         count = token.substr(5);
                                 }
