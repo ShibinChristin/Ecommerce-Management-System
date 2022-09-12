@@ -142,7 +142,7 @@ sgain:
             auth.CourierLogin();
             sleep(1);
             C.courierOptions();
-        A:
+        // A:
             cout<<"Enter your choice: ";
             cin>>courierChoice;
             switch(courierChoice)
@@ -161,11 +161,8 @@ sgain:
                 case 4 :
                 system("clear");
                 cout<<"Invalid Choice......Try again\n";
-                goto A;
+                // goto A;
             }
-
-            break;
-
         default:
             // std::string choice1 = to_string(choice);
             //   regex e("^[^4]+$");

@@ -113,24 +113,7 @@ void Courier::StatusUpdate()
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
     while (std::getline(courier, line))
-        cout << "********************* Status Updater *********************\n";
-    cout << "1.Kochi\n2.Ernakulam\n ";
-ch:
-    std::string location,choice;
-
-    cout << "Enter choice :";
-    getline(cin >> ws, choice);
-    if (choice == "1")
-    {
-        location = "Kochi";
-    }
-    else if (choice == "2")
-    {
-        location = "Ernakulam";
-    }
-    else
-    {
-        std::string OrderID, ProductID, Name, Type, Count, Status;
+  std::string OrderID, ProductID, Name, Type, Count, Status;
         size_t pos = 0;
         std::string token, OriginalLine = line;
         while ((pos = line.find(delimiter)) != std::string::npos)
@@ -174,16 +157,12 @@ ch:
                  << "Type " << Type << ";"
                  << "Count " << Count << ";"
                  << "Courier "
-                 << "Kochi"
+                 << "Ernakulam"
                  << ";"
                  << "Status "
-                 << "Delivered"
+                 << "Shipping"
                  << ";" << endl;
             flag = false;
+            break;
         }
-        else
-        {
-            temp << OriginalLine << endl;
-        }
-    }
 }

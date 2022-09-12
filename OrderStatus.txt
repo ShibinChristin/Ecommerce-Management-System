@@ -1,5 +1,0 @@
-ProductID  ;Name AC;Type Fashion;Status  Pending;
-ProductID  ;Name AC;Type Fashion;Status  Pending;
-ProductID  ;Name AC;Type Fashion;Status  Pending;
-ProductID  ;Name AC;Type Fashion;Status  Pending;
-ProductID  ;Name AC;Type Fashion;Status  Pending;
