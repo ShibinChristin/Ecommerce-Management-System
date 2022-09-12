@@ -38,7 +38,7 @@ public:
     std::string productName, productPrice;
     std::string productType, productCount; //,MerchantChoice;
     int productChoice, MerchantChoice;
-    void addProduct();
+    void addProducts();
     void merchantOptions();
     void displayProducts();
     void searchProducts();
@@ -47,6 +47,7 @@ public:
     void displayOutofStock();
     void AssignCourier();
     void CancelledProducts();
+    int idGeneration();
 };
 
 class Courier

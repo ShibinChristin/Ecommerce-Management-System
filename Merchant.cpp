@@ -41,78 +41,29 @@ void Products::OrderStatusView()
 }
 
 ///////////////////////////////////////////////////////////////////////////
-
-void Products::addProduct()
+int Products::idGeneration()
 {
-
-        int productChoice;
+        int productId;
+        srand(time(0));
+        productId = rand() % 100 + 1;
+        return productId;
+}
+void Products::addProducts()
+{
         std::string line;
+        int productChoice;
         std::fstream writeData;
-        // bool flag=false;
-        Products p;
         writeData.open("products.txt", std::ios::in | std::ios::out);
 
         std ::cout << "<---------------------- ADD PRODUCTS----------------------->" << std ::endl;
-name:
-        std ::cout << "\nEnter the Name of the Product : ";
-        std ::getline(std::cin >> std::ws, productName);
-        while (std::getline(writeData, line))
-        {
-                std::string delimiter = ";";
-                size_t pos = 0;
-                std::string token;
-                while ((pos = line.find(delimiter)) != std::string::npos)
-                {
-                        token = line.substr(0, pos);
-                        if (token.rfind("Name ", 0) == 0)
-                        {
-                                std::string name = token.substr(5);
-                                if (name == productName)
-                                {
-                                        std::cout << "       ===This Product Name already exists! Please try again.===\n";
-                                        goto name;
-                                }
-                        }
-                        line.erase(0, pos + delimiter.length());
-                }
-        }
 
-begin:
-        std ::cout << "\nEnter the Product ID : ";
-        std ::getline(std::cin >> std::ws, productId);
-        std::regex u("^\\d{2}$"); // 4 digits
-        if (std::regex_match(productId, u))
-        {
-        }
-        else
-        {
-                std::cout << "\n";
-                std::cout << "       ===Only 2-digit ID is allowed! Please try again.===\n";
-                std::cout << "\n";
-                goto begin;
-        }
-        while (std::getline(writeData, line))
-        {
-                std::string delimiter = ";";
-                size_t pos = 0;
-                std::string token;
-                while ((pos = line.find(delimiter)) != std::string::npos)
-                {
-                        token = line.substr(0, pos);
-                        if (token.rfind("ProductID", 0) == 0)
-                        {
-                                std::string id = token.substr(10);
-                                if (id == productId)
-                                {
-                                        std::cout << "       ===This Product ID already exists! Please try again.===\n";
-                                        goto begin;
-                                }
-                        }
-                        line.erase(0, pos + delimiter.length());
-                }
-        }
+        productId = idGeneration();
+
+        std ::cout << "\nEnter the Product Name : ";
+        std ::getline(std::cin >> std::ws, productName);
+
 choice:
-        std ::cout << "\nEnter the Type of the Product \n1.Electronics\n2.Furniture\n3.Fashion \n";
+        std ::cout << "\nEnter the Type of the Product \n1.Electronics\n2.Furniture\n3.Fashion\nEnter choice :";
         std ::cin >> productChoice;
         if (productChoice == 1)
         {
@@ -133,8 +84,8 @@ choice:
         }
 b:
         std ::cout << "\nEnter the Price of the Product : ";
-        std ::getline(std::cin >> std::ws, productPrice);
-        std::regex q("[^0][0-9]+");
+        std::getline(std::cin >> std::ws, productPrice);
+        std::regex q("^[1-9]+[0-9]*$");
         if (std::regex_match(productPrice, q))
         {
         }
@@ -144,10 +95,10 @@ b:
                 std::cout << "\n";
                 goto b;
         }
-
+Type:
         std ::cout << "\nThe number of available " << productType << " Products : ";
         std ::getline(std::cin >> std::ws, productCount);
-        std::regex i("[0-9]+");
+        std::regex i("^[1-9]+[0-9]*$");
         if (std::regex_match(productCount, i))
         {
         }
@@ -155,28 +106,28 @@ b:
         {
                 std::cout << "Invalid data...! Please Try Again.." << std::endl;
                 std::cout << "\n";
-                goto b;
+                goto Type;
         }
-
         std::fstream merchantFile;
         merchantFile.open("products.txt", std::ios::in | std::ios::out | std::ios::app);
-        merchantFile << "ProductID " << productId << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << endl;
+        merchantFile << "ProductID " << idGeneration() << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << std::endl;
+        std::cout << "\n";
 
         writeData.close();
         merchantFile.close();
+
         std::cout << "<----------------------- PRODUCT ADDED SUCCESFULLY---------------------------->";
-        std::string conditionChoice;
-        std::cout << "\nWould you like to continue(Y/N) :" << std::endl;
-        std::cin >> conditionChoice;
-        if (conditionChoice == "y" || conditionChoice == "Y")
+        cout << "\nWould you like to continue?(Y/N) ";
+        std::string choice;
+        getline(std::cin >> std::ws, choice);
+        if (choice == "Y" || choice == "y")
         {
-                std::cout << std::endl;
-                p.addProduct();
+                system("clear");
+                addProducts();
         }
         else
         {
-                p.merchantOptions();
-                //     goto continuation;
+                merchantOptions();
         }
 }
 void Products::merchantOptions()
@@ -190,38 +141,7 @@ void Products::merchantOptions()
         std::cout << "5.Cancelled Products\n";
         std::cout << "6.Assign Delivery to Courier\n";
         std::cout << "7.Exit\n";
-        // cout<<"5.Order Status\n"<<endl;
 }
-// void Products::searchProducts()
-// {
-
-//         std::string search;
-//         std::string line;
-//         std::ifstream file;
-//         bool found = false;
-//         file.open("products.txt", std::ios::in);
-
-//         std::cout << "Search for item: ";
-//         std::cin >> search;
-//         std::cout << "Search results : \n";
-
-//         file.seekg(0, std::ios::beg);
-//         while (!file.eof() && getline(file, line))
-//         {
-
-//                 if ((line.find(search)) != std::string::npos)
-//                 {
-//                         found = true;
-//                         std::cout << line << std::endl;
-//                 }
-//         }
-//         if (found == false)
-//         {
-//                 std::cout << "Search not found...!!!" << std::endl;
-//         }
-
-//         file.close();
-// }
 
 void Products::displayOutofStock()
 {
@@ -387,22 +307,164 @@ void Products::AssignCourier()
 ////////////////////////////////////////////////////////////
 void Products::searchProducts()
 {
-        int choice;
+        std::string choice;
         ifstream file("products.txt", ios::in);
         cout << "1.Search By Name\n2.Search By Type\n";
         cout << "Enter choice :";
-        cin >> choice;
-        switch (choice)
+        getline(cin>>ws,choice);
+        if (choice == "1")
         {
-        case 1:
-                cout << "1";
-                break;
-        case 2:
-                cout << "2";
-                break;
-        default:
-                cout << "3";
-                break;
+                std::string search, line, Name;
+                std::cout << "Enter the name of the product :";
+                getline(std::cin >> std::ws, search);
+                std::string Id, name1, price1, Type1, count1;
+                bool found = false;
+                std::string delimiter = ";";
+                ifstream pName("products.txt", std::ios::in);
+                while (std::getline(pName, line))
+                {
+                        size_t pos = 0;
+                        std::string token;
+                        while ((pos = line.find(delimiter)) != std::string::npos)
+                        {
+                                token = line.substr(0, pos);
+                                if (token.rfind("Name ", 0) == 0)
+                                {
+                                        Name = token.substr(5);
+                                        if (search == Name)
+                                        {
+                                                found = true;
+                                        }
+                                }
+
+                                if (token.rfind("ProductID ", 0) == 0)
+                                {
+                                        Id = token.substr(10);
+                                }
+                                if (token.rfind("Name ", 0) == 0)
+                                {
+                                        name1 = token.substr(5);
+                                }
+                                if (token.rfind("Price ", 0) == 0)
+                                {
+                                        price1 = token.substr(6);
+                                }
+                                if (token.rfind("Type ", 0) == 0)
+                                {
+                                        Type1 = token.substr(5);
+                                }
+                                if (token.rfind("Count ", 0) == 0)
+                                {
+                                        count1 = token.substr(5);
+                                }
+                                line.erase(0, pos + delimiter.length());
+                        }
+                        if (found)
+                        {
+                                std::cout << "Product ID " << Id << " | "
+                                          << "Name " << name1 << " | "
+                                          << "Price " << price1 << " | "
+                                          << "Type " << Type1 << " | "
+                                          << "Count " << count1 << endl;
+                                sleep(2);
+                                break;
+                        }
+                }
+                if (found == false)
+                {
+                        std::cout << "Product not Found... Try Again..." << std::endl;
+                }
+                pName.close();
+        }
+        else if (choice == "2")
+        {
+                std::string pType;
+                std::string name, id, count, price;
+                int choice;
+                std::cout << "\n1.Electronics\n2.Furniture\n3.Fashion";
+        ch:
+                std::cout << "Enter your choice:";
+                cin >> choice;
+
+                if (choice == 1)
+                {
+                        pType = "Electronics";
+                }
+                else if (choice == 2)
+                {
+                        pType = "Furniture";
+                }
+                else if (choice == 3)
+                {
+                        pType = "Fashion";
+                }
+                else
+                {
+                        std::cout << "       ===Not a valid choice !! Please Try Again.......===\n";
+                        goto ch;
+                }
+                std::string line, Type;
+                bool found = false;
+                std::string delimiter = ";";
+                ifstream productFile;
+                productFile.open("products.txt", ios::in);
+                while (std::getline(productFile, line))
+                {
+                        size_t pos = 0;
+                        std::string token;
+                        while ((pos = line.find(delimiter)) != std::string::npos)
+                        {
+                                token = line.substr(0, pos);
+                                if (token.rfind("Type ", 0) == 0)
+                                {
+                                        Type = token.substr(5);
+                                        if (pType == Type)
+                                        {
+                                                found = true;
+                                        }
+                                }
+
+                                if (token.rfind("Product ID ", 0) == 0)
+                                {
+                                        id = token.substr(11);
+                                }
+                                if (token.rfind("Name ", 0) == 0)
+                                {
+                                        name = token.substr(5);
+                                }
+                                if (token.rfind("Price ", 0) == 0)
+                                {
+                                        price = token.substr(6);
+                                }
+                                if (token.rfind("Type ", 0) == 0)
+                                {
+                                        Type = token.substr(5);
+                                }
+                                if (token.rfind("Count ", 0) == 0)
+                                {
+                                        count = token.substr(5);
+                                }
+                                line.erase(0, pos + delimiter.length());
+                        }
+                        if (found)
+                        {
+                                std::cout << "Product ID " << id << " | "
+                                          << "Name " << name << " | "
+                                          << "Price " << price << " | "
+                                          << "Type " << Type << " | "
+                                          << "Count " << count << std::endl;
+                        }
+                }
+                if (found == false)
+                {
+                        std::cout << "Product not Found... Try Again..." << std::endl;
+                }
+                productFile.close();
+        }
+        else
+        {
+                cout << "Invalid choice...";
+                sleep(1);
         }
 }
 
@@ -440,7 +502,7 @@ void Products::CancelledProducts()
                         {
                                 countS = token.substr(6);
                         }
-                         if (token.rfind("OrderID ", 0) == 0)
+                        if (token.rfind("OrderID ", 0) == 0)
                         {
                                 OrderS = token.substr(8);
                         }
@@ -448,15 +510,15 @@ void Products::CancelledProducts()
                 }
                 // if (id==true)
                 // {
-                        cout << "Order ID " << OrderS << "|"
-                             << "Name " << nameS << "|"
-                             << "Type "
-                             << TypeS << "|"
-                             << "Count "
-                             << countS << "|"
-                             << "Status "
-                             << defstatus
-                             << endl;
+                cout << "Order ID " << OrderS << "|"
+                     << "Name " << nameS << "|"
+                     << "Type "
+                     << TypeS << "|"
+                     << "Count "
+                     << countS << "|"
+                     << "Status "
+                     << defstatus
+                     << endl;
                 // }
         }
         in.close();

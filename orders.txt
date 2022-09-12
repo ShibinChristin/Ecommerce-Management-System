@@ -1,4 +1,1 @@
-OrderID ;ProductID 20;Name AD;Type Electronics;Count 5;Status Cancelled
-
-OrderID ;ProductID 20;Name AB;Type Electronics;Count 13;Status Cancelled
-OrderID ;ProductID 20;Name AZ;Type Electronics;Count 2;Status Cancelled
+OrderID 74;ProductID 7334;Name Oppo A9;Type Electronics;Count 2;Status Pending;

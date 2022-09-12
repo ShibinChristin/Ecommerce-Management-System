@@ -108,7 +108,7 @@ sgain:
             if (merchoice == 1)
             {
                 system("clear");
-                Mer.addProduct();
+                Mer.addProducts();
                 goto mopt;
             }
             if (merchoice == 2)
