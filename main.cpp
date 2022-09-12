@@ -141,8 +141,8 @@ sgain:
             system("clear");
             auth.CourierLogin();
             sleep(1);
+            copt:
             C.courierOptions();
-        // A:
             cout<<"Enter your choice: ";
             cin>>courierChoice;
             switch(courierChoice)
@@ -150,18 +150,24 @@ sgain:
                 case 1 :
                 system("clear");
                 C.listOfOrders();
+                sleep(4);
+                goto copt;
                 break;
                 case 2:
                 C.StatusUpdate();
+                sleep(3);
+                goto copt;
                 break;
                 //case 3 :
                 //system("clear");
                 //C.listOfCompletedandPending();
                 //break;
                 case 4 :
-                system("clear");
-                cout<<"Invalid Choice......Try again\n";
-                // goto A;
+                goto sgain;
+                break;
+            default:
+            cout<<"Invalid choice.......Try again\n";
+            goto copt;
             }
         default:
             // std::string choice1 = to_string(choice);

@@ -108,7 +108,6 @@ gotobuy:
         }
         if (found == true)
         {
-            // buy<< "OrderID "<<"#"<<idGenerate<< ";"
             buy << "OrderID " << idGenerate() << ";"
                 << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
