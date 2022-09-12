@@ -147,10 +147,6 @@ sgain:
             cin>>courierChoice;
             switch(courierChoice)
             {
-                // case 1:
-                // system("clear");
-                // C.courierOptions();
-                // break;
                 case 1 :
                 system("clear");
                 C.listOfOrders();
