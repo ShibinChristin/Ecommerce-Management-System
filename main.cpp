@@ -175,94 +175,47 @@ sgain:
         case 1:
             auth.CourierLogin();
             sleep(1);
-
         copt:
-
             C.courierOptions();
-
             cout << "Enter your choice: ";
-
             cin >> courierChoice;
-
             switch (courierChoice)
-
             {
-
             case 1:
-
                 system("clear");
-
                 C.listOfOrders();
-
                 sleep(4);
-
                 goto copt;
-
                 break;
-
             case 2:
-
                 C.StatusUpdate();
-
                 sleep(3);
-
                 goto copt;
-
                 break;
-
             case 3:
                 system("clear");
                 C.PendingAndDelivered();
                 sleep(3);
                 goto copt;
                 break;
-
             case 4:
-
                 goto sgain;
-
                 break;
-
             default:
-
                 cout << "Invalid choice.......Try again\n";
-
                 goto copt;
+                break;
             }
             break;
-            // dopt:
-
             // case 2:
             //     auth.CourierRegistration();
             //     goto dopt;
             //     break;
-
-        default:
-            goto sgain;
-            break;
         }
+    default:
+        cout << "Hello";
+        break;
     }
-
-    //     break;
-
-    // default:
-    //     cout << "Invalid Choice....." << endl;
-    //     goto sgain;
-    //         auth.CourierLogin();
-    //         sleep(1);
-    //         cout<<"Enter your choice: ";
-    //         cin>>courierChoice;
-    //         switch(courierChoice)
-    //         {
-    //             case 1 :
-    //             system("clear");
-    //             C.listOfOrders();
-    //             break;
-    //             case 2:
-    //             C.StatusUpdate();
-    //         break;
-    //         }
-
     //     //default:
     //         // std::string choice1 = to_string(choice);
     //         //   regex e("^[^4]+$");
