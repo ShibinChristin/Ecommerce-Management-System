@@ -20,6 +20,7 @@ ch:
         std::cout << "       ===Not a valid choice !! Please retry.......===\n";
         goto ch;
     }
+    
     std::string line, Location;
     bool found = false;
     std::string delimiter = ";";
@@ -45,7 +46,7 @@ ch:
             }
             if (token.rfind("OrderID ", 0) == 0 && found)
             {
-                Name = token.substr(8);
+                OrderID = token.substr(8);
             }
             if (token.rfind("Type ", 0) == 0 && found)
             {
@@ -65,11 +66,36 @@ ch:
 
     in.close();
 }
-
+void Courier::courierOptions()
+{
+    int crChoice;
+    B:
+    std::cout<<"\n\n*********WELCOME TO COURIER PORTAL********\n\n";
+    std::cout<< "\t1. View assigned orders \n";
+    std::cout<< "\t2. Update status of orders \n";
+    std::cout<< "\t3. List of pending and completed delivery \n";
+    std::cout<< "\t4. LOGOUT\n\n";
+    std::cout<<"Enter your choice:";
+    std::cin >> crChoice;
+    switch(crChoice)
+    {   
+        case 1: listOfOrders();
+                break;
+        case 2: StatusUpdate();
+                break;
+        //case 3: listOfCompletedandPending();
+                //break;
+        case 4: std::cout << "-------------- LOGGING OUT -------------- \n";
+                break;
+        default:std::cout << "Please enter a valid value\n";
+                goto B;
+                break;
+    }
+}
 void Courier::StatusUpdate()
 {
     std::string location, choice;
-    cout << "*********************Status Updater*********************\n";
+    cout << "********************* Status Updater *********************\n";
     cout << "1.Kochi\n2.Ernakulam\n ";
 ch:
     cout << "Enter choice :";
