@@ -46,6 +46,7 @@ public:
     void OrderStatusView();
     void displayOutofStock();
     void AssignCourier();
+    void CancelledProducts();
 };
 
 class Courier

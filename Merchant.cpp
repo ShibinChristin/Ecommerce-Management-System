@@ -186,43 +186,42 @@ void Products::merchantOptions()
         std::cout << "1.Add Products\n";
         std::cout << "2.Search Products\n";
         std::cout << "3.Orders List\n";
-
-        std::cout << "4.List of Out Of Stock products\n";
-        std::cout << "5.Assign Delivery to Courier\n";
-
-        std::cout << "6.Exit\n";
+        std::cout << "4.Products Out Of Stock\n";
+        std::cout << "5.Cancelled Products\n";
+        std::cout << "6.Assign Delivery to Courier\n";
+        std::cout << "7.Exit\n";
         // cout<<"5.Order Status\n"<<endl;
 }
-void Products::searchProducts()
-{
+// void Products::searchProducts()
+// {
 
-        std::string search;
-        std::string line;
-        std::ifstream file;
-        bool found = false;
-        file.open("products.txt", std::ios::in);
+//         std::string search;
+//         std::string line;
+//         std::ifstream file;
+//         bool found = false;
+//         file.open("products.txt", std::ios::in);
 
-        std::cout << "Search for item: ";
-        std::cin >> search;
-        std::cout << "Search results : \n";
+//         std::cout << "Search for item: ";
+//         std::cin >> search;
+//         std::cout << "Search results : \n";
 
-        file.seekg(0, std::ios::beg);
-        while (!file.eof() && getline(file, line))
-        {
+//         file.seekg(0, std::ios::beg);
+//         while (!file.eof() && getline(file, line))
+//         {
 
-                if ((line.find(search)) != std::string::npos)
-                {
-                        found = true;
-                        std::cout << line << std::endl;
-                }
-        }
-        if (found == false)
-        {
-                std::cout << "Search not found...!!!" << std::endl;
-        }
+//                 if ((line.find(search)) != std::string::npos)
+//                 {
+//                         found = true;
+//                         std::cout << line << std::endl;
+//                 }
+//         }
+//         if (found == false)
+//         {
+//                 std::cout << "Search not found...!!!" << std::endl;
+//         }
 
-        file.close();
-}
+//         file.close();
+// }
 
 void Products::displayOutofStock()
 {
@@ -333,7 +332,7 @@ void Products::AssignCourier()
                 case 1:
                         if (iffound)
                         {
-                                cout<<"Updated Successfully......"<<endl;
+                                cout << "Updated Successfully......" << endl;
                                 temp << "OrderID " << OrderID << ";"
                                      << "ProductID " << ProductID << ";"
                                      << "Name " << Name << ";"
@@ -386,3 +385,79 @@ void Products::AssignCourier()
         rename("Temp.txt", "orders.txt");
 }
 ////////////////////////////////////////////////////////////
+void Products::searchProducts()
+{
+        int choice;
+        ifstream file("products.txt", ios::in);
+        cout << "1.Search By Name\n2.Search By Type\n";
+        cout << "Enter choice :";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+                cout << "1";
+                break;
+        case 2:
+                cout << "2";
+                break;
+        default:
+                cout << "3";
+                break;
+        }
+}
+
+void Products::CancelledProducts()
+{
+        bool id = false;
+        std::string line, defstatus = "Cancelled";
+        std::string delimiter = ";";
+        ifstream in("orders.txt", ios::in);
+        while (std::getline(in, line))
+        {
+                std::string OrderS, nameS, PriceS, TypeS, Status, countS;
+                size_t pos = 0;
+                std::string token;
+                while ((pos = line.find(delimiter)) != std::string::npos)
+                {
+                        token = line.substr(0, pos);
+                        if (token.rfind("Status ", 0) == 0)
+                        {
+                                Status = token.substr(9);
+                                if (defstatus == Status)
+                                {
+                                        id = true;
+                                }
+                        }
+                        if (token.rfind("Name ", 0) == 0)
+                        {
+                                nameS = token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0)
+                        {
+                                TypeS = token.substr(5);
+                        }
+                        if (token.rfind("Count ", 0) == 0)
+                        {
+                                countS = token.substr(6);
+                        }
+                         if (token.rfind("OrderID ", 0) == 0)
+                        {
+                                OrderS = token.substr(8);
+                        }
+                        line.erase(0, pos + delimiter.length());
+                }
+                // if (id==true)
+                // {
+                        cout << "Order ID " << OrderS << "|"
+                             << "Name " << nameS << "|"
+                             << "Type "
+                             << TypeS << "|"
+                             << "Count "
+                             << countS << "|"
+                             << "Status "
+                             << defstatus
+                             << endl;
+                // }
+        }
+        in.close();
+}

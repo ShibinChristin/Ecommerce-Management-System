@@ -5,8 +5,8 @@ ifstream customer("products.txt", ios::in);
 int Customer::idGenerate()
 {
     int id;
-    srand(time(0)); // srand() initialize random number generators
-    id = rand()%100+1;    // generate random numbers
+    srand(time(0));        // srand() initialize random number generators
+    id = rand() % 100 + 1; // generate random numbers
     return id;
 }
 
@@ -150,7 +150,6 @@ gotobuy:
             if (token.rfind("Count ", 0) == 0 && idfound)
             {
                 Val = token.substr(6);
-                cout << Val << "value1 ";
             }
 
             line.erase(0, pos + delimiter.length());
@@ -197,6 +196,7 @@ gotobuy:
             if (ProductC - TempCount <= 0)
             {
                 cout << "Product Out of stock......\nPlease try again later\n";
+                sleep(2);
             }
         }
 
@@ -266,229 +266,242 @@ void Customer::orderStatus()
 }
 void Customer::CancelOrder()
 {
-    cout << "***********************      Orders     ********************************\n";
-    orderStatus();
-    cout << endl;
-    ifstream orders("orders.txt", ios::in);
-    std::regex obj("^[0-9]*$");
-    std::string CancelProduct, line4, delimiter = ";", name, ProductID, cancelCount, ProductCount, Val; /// cProduct   --- Customer Product
-    bool found = false;
-    ofstream buy("orders.txt", ios::out | ios::app);
-cancelChoice:
-    cout << "Enter the product name you want to cancel :";
-    getline(std::cin >> std::ws, CancelProduct);
-cancel:
-    cout << "How many would you like to cancel? ";
-    cin >> cancelCount;
-    if (!(regex_match(cancelCount, obj)))
-    {
-        cout << "Invalid input " << endl;
-        goto cancel;
-    }
-    while (std::getline(orders, line4))
-    {
-        size_t pos = 0;
-        std::string token;
-        while ((pos = line4.find(delimiter)) != std::string::npos)
-        {
-            token = line4.substr(0, pos);
-            if (token.rfind("Name ", 0) == 0)
-            {
-                name = token.substr(5);
+//     cout << "***********************      Orders     ********************************\n";
+//     orderStatus();
+//     cout << endl;
+//     ifstream orders("orders.txt", ios::in);
+//     std::regex obj("^[0-9]*$");
+//     std::string CancelProduct, line4, delimiter = ";", name, ProductID, cancelCount, ProductCount, Val, OrderID, Status; /// cProduct   --- Customer Product
+//     bool found = false;
+//     ofstream buy("orders.txt", ios::out | ios::app);
+// cancelChoice:
+//     cout << "Enter the product name you want to cancel :";
+//     getline(std::cin >> std::ws, CancelProduct);
+// cancel:
+//     cout << "How many would you like to cancel? ";
+//     cin >> cancelCount;
+//     if (!(regex_match(cancelCount, obj)))
+//     {
+//         cout << "Invalid input " << endl;
+//         goto cancel;
+//     }
+//     while (std::getline(orders, line4))
+//     {
+//         size_t pos = 0;
+//         std::string token;
+//         while ((pos = line4.find(delimiter)) != std::string::npos)
+//         {
+//             token = line4.substr(0, pos);
+//             if (token.rfind("Name ", 0) == 0)
+//             {
+//                 name = token.substr(5);
 
-                if (CancelProduct == name)
-                {
-                    found = true;
-                }
-            }
+//                 if (CancelProduct == name)
+//                 {
+//                     found = true;
+//                 }
+//             }
 
-            if (token.rfind("Count ", 0) == 0)
-            {
-                ProductCount = token.substr(6);
-                if (ProductCount < cancelCount)
-                {
-                    cout << "You cannot cancel more than you ordered";
-                    goto cancel;
-                }
-                else
-                {
-                    cout << "Canceled " << ProductCount << " products successfully";
-                }
-            }
+//             if (token.rfind("Count ", 0) == 0 && found)
+//             {
+//                 ProductCount = token.substr(6);
+//                 if (ProductCount < cancelCount)
+//                 {
+//                     cout << "You cannot cancel more than you ordered\n";
+//                     goto cancel;
+//                 }
+//                 else
+//                 {
+//                     cout << "Canceled " << cancelCount << " products successfully\n";
+//                 }
+//             }
 
-            line4.erase(0, pos + delimiter.length());
-        }
-    }
-    orders.close();
-    ofstream temp("temp.txt", ios::out | ios::app);
-    ifstream in2("products.txt", ios::in);
-    bool idfound = false;
-    while (std::getline(in2, line))
-    {
-        std::string delimiter = ";";
-        size_t pos = 0;
-        idfound = false;
-        std::string originalLine = line;
-        std::string token;
-        while ((pos = line.find(delimiter)) != std::string::npos)
-        {
-            token = line.substr(0, pos);
+//             line4.erase(0, pos + delimiter.length());
+//         }
+//     }
+//     orders.close();
+//     ofstream temp("temp.txt", ios::out | ios::app);
+//     ifstream in2("products.txt", ios::in);
+//     bool idfound = false;
+//     while (std::getline(in2, line))
+//     {
+//         std::string delimiter = ";";
+//         size_t pos = 0;
+//         idfound = false;
+//         std::string originalLine = line;
+//         std::string token;
+//         while ((pos = line.find(delimiter)) != std::string::npos)
+//         {
+//             token = line.substr(0, pos);
 
-            if (token.rfind("Name ", 0) == 0)
-            {
-                std::string Pname = token.substr(5);
-                if (Pname == CancelProduct)
-                {
-                    idfound = true;
-                }
-            }
-            if (token.rfind("Count ", 0) == 0 && idfound)
-            {
-                Val = token.substr(6);
-            }
+//             if (token.rfind("Name ", 0) == 0)
+//             {
+//                 std::string Pname = token.substr(5);
+//                 if (Pname == CancelProduct)
+//                 {
+//                     idfound = true;
+//                 }
+//             }
+//             if (token.rfind("Count ", 0) == 0 && idfound)
+//             {
+//                 Val = token.substr(6);
+//             }
 
-            line.erase(0, pos + delimiter.length());
-        }
-    }
-    in2.close();
-    int TempCount;
-    int ProductC;
+//             line.erase(0, pos + delimiter.length());
+//         }
+//     }
+//     in2.close();
+//     int TempCount;
+//     int ProductC;
 
-    TempCount = stoi(cancelCount);
-    ProductC = stoi(Val);
-    ifstream in3("products.txt", ios::in);
-    std::string line3, ProductType;
-    while (std::getline(in3, line3))
-    {
-        std::string delimiter = ";";
-        size_t pos = 0;
-        idfound = false;
-        std::string originalLine = line3;
-        std::string token;
-        while ((pos = line3.find(delimiter)) != std::string::npos)
-        {
-            token = line3.substr(0, pos);
-            if (token.rfind("Name ", 0) == 0)
-            {
-                std::string ChecK_name = token.substr(5);
-                if (CancelProduct == ChecK_name)
-                {
-                    idfound = true;
-                }
-            }
-            if (token.rfind("ProductID ", 0) == 0)
-            {
-                ProductID = token.substr(10);
-            }
-            if (token.rfind("Type ", 0) == 0)
-            {
-                ProductType = token.substr(5);
-            }
-            line3.erase(0, pos + delimiter.length());
-        }
-        if (idfound)
-        {
-            temp << "ProductID " << ProductID;
-            temp << ";Name " << name;
-            temp << ";Type " << ProductType;
-            temp << ";Count " << ProductC + TempCount << ";" << endl;
-        }
+//     TempCount = stoi(cancelCount);
+//     ProductC = stoi(Val);
+//     ifstream in3("products.txt", ios::in);
+//     std::string line3, ProductType;
+//     while (std::getline(in3, line3))
+//     {
+//         std::string delimiter = ";";
+//         size_t pos = 0;
+//         idfound = false;
+//         std::string originalLine = line3;
+//         std::string token;
+//         while ((pos = line3.find(delimiter)) != std::string::npos)
+//         {
+//             token = line3.substr(0, pos);
+//             if (token.rfind("Name ", 0) == 0)
+//             {
+//                 std::string ChecK_name = token.substr(5);
+//                 if (CancelProduct == ChecK_name)
+//                 {
+//                     idfound = true;
+//                 }
+//             }
+//             if (token.rfind("ProductID ", 0) == 0)
+//             {
+//                 ProductID = token.substr(10);
+//             }
+//             if (token.rfind("Type ", 0) == 0)
+//             {
+//                 ProductType = token.substr(5);
+//             }
+//             line3.erase(0, pos + delimiter.length());
+//         }
+//         if (idfound)
+//         {
+//             temp << "ProductID " << ProductID;
+//             temp << ";Name " << CancelProduct;
+//             temp << ";Type " << ProductType;
+//             temp << ";Count " << ProductC + TempCount << ";" << endl;
+//         }
 
-        else
-        {
+//         else
+//         {
 
-            temp << originalLine << endl;
-        }
-    }
-    temp.close();
-    in3.close();
-    // remove("products.txt");
-    // rename("temp.txt", "products.txt");
-    /*Updating Orders */
-    //     std::string line5, Val1;
-    //     ofstream temp1("temp1.txt", ios::out | ios::app);
-    //     ifstream orderinput("orders.txt", ios::in);
-    //     bool isfound = false;
-    //     while (std::getline(orderinput, line5))
-    //     {
-    //         std::string delimiter = ";";
-    //         size_t pos = 0;
-    //         idfound = false;
-    //         std::string originalLine = line5;
-    //         std::string token;
-    //         while ((pos = line5.find(delimiter)) != std::string::npos)
-    //         {
-    //             token = line5.substr(0, pos);
+//             temp << originalLine << endl;
+//         }
+//     }
+//     temp.close();
+//     in3.close();
+//     remove("products.txt");
+//     rename("temp.txt", "products.txt");
+//     /*Updating Orders */
+//     std::string line5, Val1;
+//     ofstream temp1("temp1.txt", ios::out | ios::app);
+//     ifstream orderinput("orders.txt", ios::in);
+//     bool isfound = false;
+//     while (std::getline(orderinput, line5))
+//     {
+//         std::string delimiter = ";";
+//         size_t pos = 0;
+//         idfound = false;
+//         std::string originalLine = line5;
+//         std::string token;
+//         while ((pos = line5.find(delimiter)) != std::string::npos)
+//         {
+//             token = line5.substr(0, pos);
 
-    //             if (token.rfind("Name ", 0) == 0)
-    //             {
-    //                 std::string Pname = token.substr(5);
-    //                 if (Pname == CancelProduct)
-    //                 {
-    //                     idfound = true;
-    //                 }
-    //             }
-    //             if (token.rfind("Count ", 0) == 0 && idfound)
-    //             {
-    //                 Val1 = token.substr(6);
-    //                 cout << Val1 << "value1 ";
-    //             }
+//             if (token.rfind("Name ", 0) == 0)
+//             {
+//                 std::string Pname = token.substr(5);
+//                 if (Pname == CancelProduct)
+//                 {
+//                     idfound = true;
+//                 }
+//             }
+//             if (token.rfind("Count ", 0) == 0 && idfound)
+//             {
+//                 Val1 = token.substr(6);
+//                 cout << Val1 << "value1 ";
+//             }
 
-    //             line5.erase(0, pos + delimiter.length());
-    //         }
-    //     }
-    //     orderinput.close();
-    //     int TempCountCancel;
-    //     int ProductCancel;
+//             line5.erase(0, pos + delimiter.length());
+//         }
+//     }
+//     orderinput.close();
+//     int TempCountCancel;
+//     int ProductCancel;
 
-    //     TempCountCancel = stoi(Val1);
-    //     ProductCancel = stoi(cancelCount);
-    //     ifstream in4("orders.txt", ios::in);
-    //     std::string line8, ProductType1;
-    //     while (std::getline(in4, line8))
-    //     {
-    //         std::string delimiter = ";";
-    //         size_t pos = 0;
-    //         idfound = false;
-    //         std::string originalLine = line8;
-    //         std::string token;
-    //         while ((pos = line8.find(delimiter)) != std::string::npos)
-    //         {
-    //             token = line8.substr(0, pos);
-    //             if (token.rfind("Name ", 0) == 0)
-    //             {
-    //                 std::string ChecK_name = token.substr(5);
-    //                 if (CancelProduct == ChecK_name)
-    //                 {
-    //                     idfound = true;
-    //                 }
-    //             }
-    //             if (token.rfind("ProductID ", 0) == 0)
-    //             {
-    //                 ProductID = token.substr(10);
-    //             }
-    //             if (token.rfind("Type ", 0) == 0)
-    //             {
-    //                 ProductType = token.substr(5);
-    //             }
-    //             line8.erase(0, pos + delimiter.length());
-    //         }
-    //         if (idfound)
-    //         {
-    //             temp << "ProductID " << ProductID;
-    //             temp << ";Name " << name;
-    //             temp << ";Type " << ProductType1;
-    //             temp << ";Count " << ProductC - TempCount << ";" << endl;
-    //         }
+//     TempCountCancel = stoi(Val1);
+//     ProductCancel = stoi(cancelCount);
+//     cout << TempCountCancel << "TempCount";
+//     ifstream in4("orders.txt", ios::in);
+//     std::string line8, ProductType1;
+//     while (std::getline(in4, line8))
+//     {
+//         std::string delimiter = ";";
+//         size_t pos = 0;
+//         idfound = false;
+//         std::string originalLine = line8;
+//         std::string token;
+//         while ((pos = line8.find(delimiter)) != std::string::npos)
+//         {
+//             token = line8.substr(0, pos);
+//             if (token.rfind("Name ", 0) == 0)
+//             {
+//                 std::string ChecK_name = token.substr(5);
+//                 if (CancelProduct == ChecK_name)
+//                 {
+//                     idfound = true;
+//                 }
+//             }
+//             if (token.rfind("OrderID ", 0) == 0&&idfound)
+//             {
+//                 OrderID = token.substr(8);
+//             }
+//             if (token.rfind("ProductID ", 0) == 0&&idfound)
+//             {
+//                 ProductID = token.substr(10);
+//             }
+//             if (token.rfind("Type ", 0) == 0&&idfound)
+//             {
+//                 ProductType = token.substr(5);
+//             }
+//             if (token.rfind("Status ", 0) == 0&&idfound)
+//             {
+//                 Status = token.substr(7);
+//             }
+//             line8.erase(0, pos + delimiter.length());
+//         }
+//         if (idfound)
+//         {
+//             temp1 << "OrderID " << OrderID;
+//             temp1 << ";ProductID " << ProductID;
+//             temp1 << ";Name " << CancelProduct;
+//             temp1 << ";Type " << ProductType;
+//             temp1 << ";Count " << ProductC - TempCount << ";" ;
+//             temp1 << "Status "<<"Cancelled"<< endl;
+//         }
 
-    //         else
-    //         {
+//         else
+//         {
 
-    //             temp << originalLine << endl;
-    //         }
-    //     }
-    //     temp.close();
-    //     in3.close();
+//             temp1 << originalLine << endl;
+//         }
+//     }
+//     remove("orders.txt");
+//     rename("temp1.txt","orders.txt");
+//     temp.close();
+//     in3.close();
 }
 
 //////////////////////

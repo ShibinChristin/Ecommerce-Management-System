@@ -131,14 +131,21 @@ sgain:
                 sleep(4);
                 goto mopt;
             }
-            if (merchoice == 5)
+             if (merchoice == 5)
+            {
+                system("clear");
+                Mer.CancelledProducts();
+                sleep(4);
+                goto mopt;
+            }
+            if (merchoice == 6)
             {
                 system("clear");
                 Mer.AssignCourier();
                 sleep(4);
                 goto mopt;
             }
-            if (merchoice == 6)
+            if (merchoice == 7)
             {
                 goto mgain;
             }
@@ -213,7 +220,7 @@ sgain:
             //     break;
         }
     default:
-        cout << "Hello";
+        cout << "Thank you for visiting.............\n";
         break;
     }
     //     //default:
