@@ -113,15 +113,16 @@ void Courier::StatusUpdate()
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
     while (std::getline(courier, line))
-        std::string location , choice;
-    cout << "********************* Status Updater *********************\n";
+        cout << "********************* Status Updater *********************\n";
     cout << "1.Kochi\n2.Ernakulam\n ";
 ch:
+    std::string location,choice;
+
     cout << "Enter choice :";
     getline(cin >> ws, choice);
     if (choice == "1")
     {
-    location = "Kochi";
+        location = "Kochi";
     }
     else if (choice == "2")
     {
@@ -179,7 +180,6 @@ ch:
                  << "Delivered"
                  << ";" << endl;
             flag = false;
-            break;
         }
         else
         {
