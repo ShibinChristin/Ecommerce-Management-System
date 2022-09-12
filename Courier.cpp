@@ -2,7 +2,6 @@
 std::string choice;
 void Courier::courierOptions()
 {
-    int crChoice;
     std::cout << "\n\n*********WELCOME TO COURIER PORTAL********\n\n";
     std::cout << "\t1. View assigned orders \n";
     std::cout << "\t2. Update status of orders \n";
@@ -74,7 +73,7 @@ ch:
                  << "Name " << Name << " | "
                  << "Type " << Type << " | "
                  << "Count " << Count << endl;
-                 found=false;
+            found = false;
             break;
         }
     }
@@ -95,95 +94,136 @@ void Courier::StatusUpdate()
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
     std::string OrderID, ProductID, Name, Type, Count, Status;
-    while (std::getline(courier, line)){
-    size_t pos = 0;
-    std::string token, OriginalLine = line;
-    while ((pos = line.find(delimiter)) != std::string::npos)
+    while (std::getline(courier, line))
     {
-        token = line.substr(0, pos);
-        if (token.rfind("OrderID ", 0) == 0)
+        size_t pos = 0;
+        std::string token, OriginalLine = line;
+        while ((pos = line.find(delimiter)) != std::string::npos)
         {
-            OrderID = token.substr(8);
-            if (OrderID == Orderid)
+            token = line.substr(0, pos);
+            if (token.rfind("OrderID ", 0) == 0)
             {
-                flag = true;
-            }
-        }
-        if (token.rfind("ProductID ", 0) == 0 && flag)
-        {
-            ProductID = token.substr(9);
-        }
-        if (token.rfind("Name ", 0) == 0 && flag)
-        {
-            Name = token.substr(5);
-        }
-        if (token.rfind("Type ", 0) == 0 && flag)
-        {
-            Type = token.substr(5);
-        }
-        if (token.rfind("Count ", 0) == 0 && flag)
-        {
-            Count = token.substr(6);
-        }
-        if (token.rfind("Status ", 0) == 0 && flag)
-        {
-            Status = token.substr(7);
-        }
-        line.erase(0, pos + delimiter.length());
-    }
-    switch (stoi(choice))
+                OrderID = token.substr(8);
+                if (OrderID == Orderid)
                 {
-                case 1:
-                        if (flag)
-                        {
-                                cout<<"Updated Successfully......"<<endl;
-                                temp << "OrderID " << OrderID << ";"
-                                     << "ProductID " << ProductID << ";"
-                                     << "Name " << Name << ";"
-                                     << "Type " << Type << ";"
-                                     << "Count " << Count << ";"
-                                     << "Courier "
-                                     << "Kochi"
-                                     << ";"
-                                     << "Status "
-                                     << "Delivered"
-                                     << ";" << endl;
-                                flag = false;
-                                break;
-                        }
-                        else
-                        {
-                                temp << OriginalLine << endl;
-                        }
-                        break;
-                case 2:
-                        if (flag)
-                        {
-                                temp << "OrderID " << OrderID << ";"
-                                     << "ProductID " << ProductID << ";"
-                                     << "Name " << Name << ";"
-                                     << "Type " << Type << ";"
-                                     << "Count " << Count << ";"
-                                     << "Courier "
-                                     << "Ernakulam"
-                                     << ";"
-                                     << "Status "
-                                     << "Delivered"
-                                     << ";" << endl;
-                                flag = false;
-                                break;
-                        }
-                        else
-                        {
-                                temp << OriginalLine << endl;
-                        }
-                        break;
-                default:
-                        cout << "Not Valid...." << endl;
+                    flag = true;
                 }
+            }
+            if (token.rfind("ProductID ", 0) == 0 && flag)
+            {
+                ProductID = token.substr(9);
+            }
+            if (token.rfind("Name ", 0) == 0 && flag)
+            {
+                Name = token.substr(5);
+            }
+            if (token.rfind("Type ", 0) == 0 && flag)
+            {
+                Type = token.substr(5);
+            }
+            if (token.rfind("Count ", 0) == 0 && flag)
+            {
+                Count = token.substr(6);
+            }
+            if (token.rfind("Status ", 0) == 0 && flag)
+            {
+                Status = token.substr(7);
+            }
+            line.erase(0, pos + delimiter.length());
         }
-        courier.close();
-        temp.close();
-        // remove("orders.txt");
-        // rename("Temp.txt","orders.txt");
+        switch (stoi(choice))
+        {
+        case 1:
+            if (flag)
+            {
+                cout << "Updated Successfully......" << endl;
+                temp << "OrderID " << OrderID << ";"
+                     << "ProductID " << ProductID << ";"
+                     << "Name " << Name << ";"
+                     << "Type " << Type << ";"
+                     << "Count " << Count << ";"
+                     << "Courier "
+                     << "Kochi"
+                     << ";"
+                     << "Status "
+                     << "Delivered"
+                     << ";" << endl;
+                flag = false;
+                break;
+            }
+            else
+            {
+                temp << OriginalLine << endl;
+            }
+            break;
+        case 2:
+            if (flag)
+            {
+                temp << "OrderID " << OrderID << ";"
+                     << "ProductID " << ProductID << ";"
+                     << "Name " << Name << ";"
+                     << "Type " << Type << ";"
+                     << "Count " << Count << ";"
+                     << "Courier "
+                     << "Ernakulam"
+                     << ";"
+                     << "Status "
+                     << "Delivered"
+                     << ";" << endl;
+                flag = false;
+                break;
+            }
+            else
+            {
+                temp << OriginalLine << endl;
+            }
+            break;
+        default:
+            cout << "Not Valid...." << endl;
+        }
+    }
+    courier.close();
+    temp.close();
+    remove("orders.txt");
+    rename("Temp.txt","orders.txt");
+}
+
+void Courier::PendingAndDelivered()
+{
+    ifstream in("orders.txt", ios::in);
+    std::string delimiter = ";";
+    std::string OrderID, Name, Type, Count, Status;
+    std::string line;
+    while (std::getline(in, line))
+    {
+        size_t pos = 0;
+        std::string token;
+
+        while ((pos = line.find(delimiter)) != std::string::npos)
+        {
+            token = line.substr(0, pos);
+            if (token.rfind("OrderID ", 0) == 0)
+            {
+                OrderID = token.substr(8);
+            }
+            if (token.rfind("Name ", 0) == 0)
+            {
+                Name = token.substr(5);
+            }
+            if (token.rfind("Type ", 0) == 0)
+            {
+                Type = token.substr(5);
+            }
+            if (token.rfind("Count ", 0) == 0)
+            {
+                Count = token.substr(6);
+            }
+            if (token.rfind("Status ", 0) == 0)
+            {
+                Status = token.substr(7);
+            }
+            line.erase(0, pos + delimiter.length());
+        }
+        cout << "Order ID " << OrderID<<" | "<<"Name "<<Name<<" | "<<"Type "<<Type<<" | "<<"Status :"<<Status<<endl;
+    }
 }

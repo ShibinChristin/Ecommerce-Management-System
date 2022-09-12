@@ -54,5 +54,5 @@ public:
 void listOfOrders();
 void courierOptions();
 void StatusUpdate();
-//void listOfCompletedandPending();
+void PendingAndDelivered();
 };

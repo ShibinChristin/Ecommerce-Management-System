@@ -1,3 +1,3 @@
-OrderID 44;ProductID  20;Name 12;Type Electronics;Count 5;Courier Ernakulam;Status Shipping;
+OrderID 44;ProductID  20;Name 12;Type Electronics;Count 5;Courier Ernakulam;Status Pending;
 OrderID 39;ProductID  11;Name AC;Type Fashion;Count 3;Courier Ernakulam;Status Shipping;
-OrderID 63;ProductID  10;Name AA;Type Electronics;Count 2;Courier Kochi;Status Shipping;
+OrderID 63;ProductID  10;Name AA;Type Electronics;Count 2;Courier Kochi;Status Delivered;

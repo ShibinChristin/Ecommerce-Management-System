@@ -30,6 +30,7 @@ sgain:
         cout << "*******************        MENU        ********************************\n\n";
         cout << "1.Login\n";
         cout << "2.Register\n";
+        cout << "3.Previous Menu\n";
         cout << "Enter choice : ";
         cin >> CustomerChoice;
         if (CustomerChoice == 1)
@@ -77,105 +78,198 @@ sgain:
             goto Coptions;
             break;
         }
+        if (CustomerChoice == 3)
+        {
+            goto sgain;
+            break;
+        }
         break;
     case 2:
-        int MerchantChoice;
+        int MerchantChoice, merchoice;
     mgain:
         cout << "***********************************************************************\n\n";
         cout << "                      Welcome to Merchant Portal                             \n\n";
-        system("clear");
-        auth.MerchantLogin();
-        sleep(1);
-        system("clear");
-    mopt:
-        Mer.merchantOptions();
-        cout << "Enter your choice :";
+        cout << "1.Login\n";
+        cout << "2.Register\n";
+        cout << "3.Previous Menu\n";
+        cout << "Enter choice : ";
         cin >> MerchantChoice;
-        if (MerchantChoice == 1)
+        system("clear");
+        switch (MerchantChoice)
         {
+        case 1:
+            auth.MerchantLogin();
+            sleep(1);
             system("clear");
-            Mer.addProduct();
-            goto mopt;
-        }
-        if (MerchantChoice == 2)
-        {
-            system("clear");
-            Mer.searchProducts();
-            goto mopt;
-        }
-        if (MerchantChoice == 3)
-        {
-            system("clear");
-            Mer.OrderStatusView();
-            sleep(4);
-            goto mopt;
-        }
-            if (MerchantChoice == 4)
+        mopt:
+            Mer.merchantOptions();
+            cout << "Enter your choice :";
+            cin >> merchoice;
+            if (merchoice == 1)
+            {
+                system("clear");
+                Mer.addProduct();
+                goto mopt;
+            }
+            if (merchoice == 2)
+            {
+                system("clear");
+                Mer.searchProducts();
+                goto mopt;
+            }
+            if (merchoice == 3)
+            {
+                system("clear");
+                Mer.OrderStatusView();
+                sleep(4);
+                goto mopt;
+            }
+            if (merchoice == 4)
             {
                 system("clear");
                 Mer.displayOutofStock();
                 sleep(4);
                 goto mopt;
             }
-             if (MerchantChoice == 5)
+            if (merchoice == 5)
             {
                 system("clear");
                 Mer.AssignCourier();
                 sleep(4);
                 goto mopt;
             }
-            if (MerchantChoice == 6)
+            if (merchoice == 6)
             {
-                goto sgain;
+                goto mgain;
             }
-            else{
-                cout<<"Invalid Choice......Try again\n";
+            else
+            {
+                cout << "Invalid Choice......Try again\n";
                 sleep(2);
                 goto mopt;
             }
             break;
-        case 3:
+        // case 2:
+        //     auth.MerchantRegistration();
+        //     goto mopt;
+        //     break;
+        default:
+            goto sgain;
+            break;
+        }
+        break;
+    case 3:
         int courierChoice;
-            cout << "***********************************************************************\n\n";
-            cout << "                      Welcome to Courier Portal                             \n\n";
-            system("clear");
+        cout << "***********************************************************************\n\n";
+        cout << "                      Welcome to Courier Portal                             \n\n";
+        // system("clear");
+        int CourierChoice;
+    dopt:
+        cout << "1.Login\n";
+        cout << "2.Register\n";
+        cout << "3.Previous Menu\n";
+        cout << "Enter choice : ";
+        cin >> CourierChoice;
+        switch (CourierChoice)
+        {
+        case 1:
             auth.CourierLogin();
             sleep(1);
-            copt:
+
+        copt:
+
             C.courierOptions();
-            cout<<"Enter your choice: ";
-            cin>>courierChoice;
-            switch(courierChoice)
+
+            cout << "Enter your choice: ";
+
+            cin >> courierChoice;
+
+            switch (courierChoice)
+
             {
-                case 1 :
+
+            case 1:
+
                 system("clear");
+
                 C.listOfOrders();
+
                 sleep(4);
+
                 goto copt;
+
                 break;
-                case 2:
+
+            case 2:
+
                 C.StatusUpdate();
+
+                sleep(3);
+
+                goto copt;
+
+                break;
+
+            case 3:
+                system("clear");
+                C.PendingAndDelivered();
                 sleep(3);
                 goto copt;
                 break;
-                //case 3 :
-                //system("clear");
-                //C.listOfCompletedandPending();
-                //break;
-                case 4 :
+
+            case 4:
+
                 goto sgain;
+
                 break;
+
             default:
-            cout<<"Invalid choice.......Try again\n";
-            goto copt;
+
+                cout << "Invalid choice.......Try again\n";
+
+                goto copt;
             }
+            break;
+            // dopt:
+
+            // case 2:
+            //     auth.CourierRegistration();
+            //     goto dopt;
+            //     break;
+
         default:
-            // std::string choice1 = to_string(choice);
-            //   regex e("^[^4]+$");
-            // if (!(regex_match(e, choice1))){
-            //     cout<<"Not Valid number....\n";
-            //   }
-            exit(0);
-            return 0;
+            goto sgain;
+            break;
         }
     }
+
+    //     break;
+
+    // default:
+    //     cout << "Invalid Choice....." << endl;
+    //     goto sgain;
+    //         auth.CourierLogin();
+    //         sleep(1);
+    //         cout<<"Enter your choice: ";
+    //         cin>>courierChoice;
+    //         switch(courierChoice)
+    //         {
+    //             case 1 :
+    //             system("clear");
+    //             C.listOfOrders();
+    //             break;
+    //             case 2:
+    //             C.StatusUpdate();
+    //         break;
+    //         }
+
+    //     //default:
+    //         // std::string choice1 = to_string(choice);
+    //         //   regex e("^[^4]+$");
+    //         // if (!(regex_match(e, choice1))){
+    //         //     cout<<"Not Valid number....\n";
+    //         //   }
+    //         break;
+    // }
+    return 0;
+}
