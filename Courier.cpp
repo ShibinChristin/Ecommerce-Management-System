@@ -20,6 +20,7 @@ ch:
         std::cout << "       ===Not a valid choice !! Please retry.......===\n";
         goto ch;
     }
+
     std::string line, Location;
     bool found = false;
     std::string delimiter = ";";
@@ -69,7 +70,36 @@ ch:
 
     in.close();
 }
-
+void Courier::courierOptions()
+{
+    int crChoice;
+B:
+    std::cout << "\n\n*********WELCOME TO COURIER PORTAL********\n\n";
+    std::cout << "\t1. View assigned orders \n";
+    std::cout << "\t2. Update status of orders \n";
+    std::cout << "\t3. List of pending and completed delivery \n";
+    std::cout << "\t4. LOGOUT\n\n";
+    std::cout << "Enter your choice:";
+    std::cin >> crChoice;
+    switch (crChoice)
+    {
+    case 1:
+        listOfOrders();
+        break;
+    case 2:
+        StatusUpdate();
+        break;
+    // case 3: listOfCompletedandPending();
+    // break;
+    case 4:
+        std::cout << "-------------- LOGGING OUT -------------- \n";
+        break;
+    default:
+        std::cout << "Please enter a valid value\n";
+        goto B;
+        break;
+    }
+}
 void Courier::StatusUpdate()
 {
     std::string Orderid;
@@ -83,6 +113,21 @@ void Courier::StatusUpdate()
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
     while (std::getline(courier, line))
+        std::string location , choice;
+    cout << "********************* Status Updater *********************\n";
+    cout << "1.Kochi\n2.Ernakulam\n ";
+ch:
+    cout << "Enter choice :";
+    getline(cin >> ws, choice);
+    if (choice == "1")
+    {
+    location = "Kochi";
+    }
+    else if (choice == "2")
+    {
+        location = "Ernakulam";
+    }
+    else
     {
         std::string OrderID, ProductID, Name, Type, Count, Status;
         size_t pos = 0;
@@ -136,8 +181,9 @@ void Courier::StatusUpdate()
             flag = false;
             break;
         }
-        else{
-            temp<<OriginalLine<<endl;
+        else
+        {
+            temp << OriginalLine << endl;
         }
     }
 }
