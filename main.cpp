@@ -141,15 +141,27 @@ sgain:
             system("clear");
             auth.CourierLogin();
             sleep(1);
+            C.courierOptions();
+        A:
             cout<<"Enter your choice: ";
             cin>>courierChoice;
-            switch(courierChoice){
+            switch(courierChoice)
+            {
                 case 1 :
                 system("clear");
                 C.listOfOrders();
                 break;
                 case 2:
                 C.StatusUpdate();
+                break;
+                //case 3 :
+                //system("clear");
+                //C.listOfCompletedandPending();
+                //break;
+                case 4 :
+                system("clear");
+                cout<<"Invalid Choice......Try again\n";
+                goto A;
             }
 
             break;

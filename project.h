@@ -48,8 +48,11 @@ public:
     void AssignCourier();
 };
 
-class Courier{
+class Courier
+{
 public:
 void listOfOrders();
+void courierOptions();
 void StatusUpdate();
+//void listOfCompletedandPending();
 };
