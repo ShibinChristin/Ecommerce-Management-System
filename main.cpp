@@ -63,7 +63,7 @@ sgain:
                 goto Coptions;
             case 4:
                 cust.CancelOrder();
-                sleep(5);
+                sleep(1);
                 goto Coptions;
                 break;
             default:
@@ -105,54 +105,69 @@ sgain:
             Mer.merchantOptions();
             cout << "Enter your choice :";
             cin >> merchoice;
-            if (merchoice == 1)
-            {
+            switch(merchoice){
+            case 1:
+            // if (merchoice == 1)
+            // {
                 system("clear");
                 Mer.addProducts();
                 goto mopt;
-            }
-            if (merchoice == 2)
-            {
+                break;
+            // }
+            // else if (merchoice == 2)
+            // {
+                case 2:
                 system("clear");
                 Mer.searchProducts();
                 goto mopt;
-            }
-            if (merchoice == 3)
-            {
+                break;
+            // }
+        //    else if (merchoice == 3)
+        //     {
+            case 3:
                 system("clear");
                 Mer.OrderStatusView();
                 sleep(4);
                 goto mopt;
-            }
-            if (merchoice == 4)
-            {
+                break;
+            // }
+        //    else if (merchoice == 4)
+        //     {
+            case 4:
                 system("clear");
                 Mer.displayOutofStock();
                 sleep(4);
                 goto mopt;
-            }
-             if (merchoice == 5)
-            {
+                break;
+            // }
+            // else if (merchoice == 5)
+            // {
+                case 5:
                 system("clear");
                 Mer.CancelledProducts();
                 sleep(4);
                 goto mopt;
-            }
-            if (merchoice == 6)
-            {
+                break;
+        //     // }
+        //    else if (merchoice == 6)
+        //     {
+            case 6 :
                 system("clear");
                 Mer.AssignCourier();
                 sleep(4);
                 goto mopt;
-            }
-            if (merchoice == 7)
-            {
+                break;
+            // }
+        //    else if (merchoice == 7)
+        //     {
+            case 7:
                 goto mgain;
-            }
-            else
-            {
-                cout << "Invalid Choice......Try again\n";
-                sleep(2);
+                break;
+            // }
+            // else
+            // {
+                default:
+                cout << "\nInvalid Choice......Try again";
                 goto mopt;
             }
             break;

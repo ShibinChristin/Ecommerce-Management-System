@@ -46,7 +46,7 @@ void Authentication::CustomerLogin()
 	system("clear");
 	cout << "So Glad to see you back......." << endl;
 user:
-	cout << "please enter the following details" << endl;
+	cout << "Please enter the following details" << endl;
 	cout << "\e[1m"
 			 << "USERNAME :";
 	cin >> username;
@@ -86,7 +86,7 @@ void Authentication::MerchantLogin()
 	system("clear");
 	cout << "Hello Merchant..........So Glad to see you back......." << endl;
 merchant:
-	cout << "please enter the following details" << endl;
+	cout << "Please enter the following details" << endl;
 	cout << "\e[1m"
 			 << "USERNAME :";
 	cin >> username;
@@ -128,7 +128,7 @@ void Authentication::CourierLogin()
 	system("clear");
 	cout << "So Glad to see you back......." << endl;
 courier:
-	cout << "please enter the following details" << endl;
+	cout << "Please enter the following details" << endl;
 	cout << "\e[1m"
 			 << "USERNAME :";
 	cin >> username;

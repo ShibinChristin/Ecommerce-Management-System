@@ -41,21 +41,13 @@ ch:
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
-            if (token.rfind("Courier ", 0) == 0)
+            if (token.rfind("OrderID ", 0) == 0)
             {
-                Location = token.substr(8);
-                if (location == Location)
-                {
-                    found = true;
-                }
+                OrderID = token.substr(8);
             }
             if (token.rfind("Name ", 0) == 0)
             {
                 Name = token.substr(5);
-            }
-            if (token.rfind("OrderID ", 0) == 0)
-            {
-                OrderID = token.substr(8);
             }
             if (token.rfind("Type ", 0) == 0)
             {
@@ -64,6 +56,14 @@ ch:
             if (token.rfind("Count ", 0) == 0)
             {
                 Count = token.substr(5);
+            }
+            if (token.rfind("Courier ", 0) == 0)
+            {
+                Location = token.substr(8);
+                if (location == Location)
+                {
+                    found = true;
+                }
             }
             line.erase(0, pos + delimiter.length());
         }
@@ -74,7 +74,7 @@ ch:
                  << "Type " << Type << " | "
                  << "Count " << Count << endl;
             found = false;
-            break;
+            // break;
         }
     }
 
@@ -185,7 +185,7 @@ void Courier::StatusUpdate()
     courier.close();
     temp.close();
     remove("orders.txt");
-    rename("Temp.txt","orders.txt");
+    rename("Temp.txt", "orders.txt");
 }
 
 void Courier::PendingAndDelivered()
@@ -224,6 +224,9 @@ void Courier::PendingAndDelivered()
             }
             line.erase(0, pos + delimiter.length());
         }
-        cout << "Order ID " << OrderID<<" | "<<"Name "<<Name<<" | "<<"Type "<<Type<<" | "<<"Status :"<<Status<<endl;
+        cout << "Order ID " << OrderID << " | "
+             << "Name " << Name << " | "
+             << "Type " << Type << " | "
+             << "Status :" << Status << endl;
     }
 }
