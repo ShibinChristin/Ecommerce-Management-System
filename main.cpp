@@ -265,26 +265,29 @@ sgain:
             goto copt;
             break;
 
-        // default:
-        //     cout << "Invalid choice.......Try again"<<endl;
-        //     break;
-        //     goto dopt;
-        // }
-        case 4:
-        cout<<"Thank you for shopping"<<endl;
+            // default:
+            //     cout << "Invalid choice.......Try again"<<endl;
+            //     break;
+            //     goto dopt;
+            // }
+        default:
+            cout << "Invalid Choice....Please try again\n";
+            goto sgain;
+            break;
+        }
+        //     //default:
+        //         // std::string choice1 = to_string(choice);
+        //         //   regex e("^[^4]+$");
+        //         // if (!(regex_match(e, choice1))){
+        //         //     cout<<"Not Valid number....\n";
+        //         //   }
+        //         break;
+    case 4:
+        cout << "Thank you for shopping" << endl;
         exit(0);
     default:
-        cout << "Invalid Choice....Please try again\n";
+        cout << "Invalid choice " << endl;
         goto sgain;
-        break;
     }
-    //     //default:
-    //         // std::string choice1 = to_string(choice);
-    //         //   regex e("^[^4]+$");
-    //         // if (!(regex_match(e, choice1))){
-    //         //     cout<<"Not Valid number....\n";
-    //         //   }
-    //         break;
-     }
     return 0;
 }

@@ -26,7 +26,6 @@ void Customer::CustomerChoiceDisplay()
 }
 void Customer::showProducts()
 {
-    // ifstream customer("products.txt", ios::in);
     std::string line1, name, price;
     std::string delimiter = ";";
     ifstream in("products.txt", ios::in);
@@ -223,7 +222,6 @@ void Customer::orderStatus()
     std::string line1, name, price;
     std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
-    // ofstream out("OrderStatus.txt", ios::out | ios::app);
     while (std::getline(in, line1))
     {
         std::string ProductS, nameS, PriceS, TypeS, Status, countS;
@@ -234,12 +232,10 @@ void Customer::orderStatus()
             token = line1.substr(0, pos);
             if (token.rfind("ProductID ", 0) == 0)
             {
-                // std::cout << "ProductID : " << token.substr(9);
                 ProductS = token.substr(9);
             }
             if (token.rfind("Name ", 0) == 0)
             {
-                // std::cout << "Name : " << token.substr(5);
                 nameS = token.substr(5);
             }
             if (token.rfind("Type ", 0) == 0)
@@ -267,12 +263,10 @@ void Customer::orderStatus()
              << endl;
     }
     in.close();
-    // out.close();
 }
 void Customer::CancelOrder()
 {
     cout << "***********************      Orders     ********************************\n";
-    ////////////////////////////////////////////////////////////////////////////
     std::string line1, defstatus = "Pending", status, Order, Name, Type;
     std::string delimiter = ";";
     ifstream view("orders.txt", ios::in);
