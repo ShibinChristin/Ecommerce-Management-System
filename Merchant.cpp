@@ -146,9 +146,11 @@ void Products::merchantOptions()
 void Products::displayOutofStock()
 {
         std::cout << "*******************      Out of Stock Products      ********************************\n\n";
+
         std::string line, name, ProductID, outCount, ProductType;
+        // int CountVal;
         bool found = false;
-        ifstream file;
+        std::ifstream file;
         file.open("products.txt", std::ios::in);
         std::string delimiter = ";";
         while (std::getline(file, line))
@@ -158,18 +160,9 @@ void Products::displayOutofStock()
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
-                        if (token.rfind("Count ", 0) == 0)
+                        if (token.rfind("Product ID ", 0) == 0)
                         {
-                                outCount = token.substr(6); // out of stock count
-                                int CountVal = stoi(outCount);
-                                if (CountVal <= 5)
-                                {
-                                        found = true;
-                                }
-                        }
-                        if (token.rfind("ProductID ", 0) == 0)
-                        {
-                                ProductID = token.substr(10);
+                                ProductID = token.substr(11);
                         }
                         if (token.rfind("Name ", 0) == 0)
                         {
@@ -179,6 +172,15 @@ void Products::displayOutofStock()
                         {
                                 ProductType = token.substr(5);
                         }
+                        if (token.rfind("Count ", 0) == 0)
+                        {
+                                outCount = token.substr(6); // out of stock count
+                                int CountVal = stoi(outCount);
+                                if (CountVal <= 5)
+                                {
+                                        found = true;
+                                }
+                        }
                         line.erase(0, pos + delimiter.length());
                 }
                 if (found)
@@ -186,6 +188,7 @@ void Products::displayOutofStock()
                         std::cout << "Product ID: " << ProductID << " | "
                                   << "Name: " << name << " | "
                                   << "Type: " << ProductType << std::endl;
+                        found = false;
                 }
         }
         file.close();
@@ -302,7 +305,6 @@ void Products::AssignCourier()
         remove("orders.txt");
         rename("Temp.txt", "orders.txt");
 }
-////////////////////////////////////////////////////////////
 void Products::searchProducts()
 {
         std::string choice;
