@@ -190,25 +190,54 @@ void Courier::StatusUpdate()
 
 void Courier::PendingAndDelivered()
 {
-    ifstream in("orders.txt", ios::in);
+    std::string stats;
+    std::string Name, OrderID, ProductID, Count, Type;
+    int choice;
+W:
+    std::cout << "\n1.List of Pending\n2.List of Delivered\n";
+    std::cout << "Enter your choice :";
+    cin >> choice;
+
+    switch (choice)
+    {
+    case 1:
+        std::cout << "\n!!Pending List\n\n";
+        stats = "Pending";
+        break;
+
+    case 2:
+        std::cout << "\nDelivered List\n\n";
+        stats = "Delivered";
+        break;
+
+    default:
+        std::cout << "\n...Not a valid choice !! Please retry...\n";
+        goto W;
+    }
+
+    std::string line, Stats;
+    bool found = false;
     std::string delimiter = ";";
-    std::string OrderID, Name, Type, Count, Status;
-    std::string line;
-    while (std::getline(in, line))
+    ifstream temp("orders.txt", ios::in);
+    while (std::getline(temp, line))
     {
         size_t pos = 0;
         std::string token;
-
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
-            if (token.rfind("OrderID ", 0) == 0)
-            {
-                OrderID = token.substr(8);
-            }
+
             if (token.rfind("Name ", 0) == 0)
             {
                 Name = token.substr(5);
+            }
+            if (token.rfind("ProductID ", 0) == 0)
+            {
+                ProductID = token.substr(9);
+            }
+            if (token.rfind("OrderID ", 0) == 0)
+            {
+                OrderID = token.substr(8);
             }
             if (token.rfind("Type ", 0) == 0)
             {
@@ -216,17 +245,23 @@ void Courier::PendingAndDelivered()
             }
             if (token.rfind("Count ", 0) == 0)
             {
-                Count = token.substr(6);
+                Count = token.substr(5);
             }
-            if (token.rfind("Status ", 0) == 0)
+            if (token.rfind("Status", 0) == 0)
             {
-                Status = token.substr(7);
+                Stats = token.substr(7);
+                if (stats == Stats)
+                {
+                    found = true;
+                    std::cout << "OrderID " << OrderID << "|"
+                              << " ProductID " << ProductID << "|"
+                              << " Name " << Name << "|"
+                              << " Type " << Type << "|"
+                              << " Count " << Count << std::endl;
+                }
             }
             line.erase(0, pos + delimiter.length());
         }
-        cout << "Order ID " << OrderID << " | "
-             << "Name " << Name << " | "
-             << "Type " << Type << " | "
-             << "Status :" << Status << endl;
     }
+    temp.close();
 }

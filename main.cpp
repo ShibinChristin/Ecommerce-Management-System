@@ -2,13 +2,16 @@
 
 int main()
 {
-    int choice;
+    string choice, options, CustChoice;
+    string MerchantChoice, merchoice;
+    string CourierChoice, courierChoice;
     Authentication auth;
     Customer cust;
     Products Mer;
     Courier C;
-    std::regex m("^[1-3]$");
+    std::regex m("^[1-9]$");
 sgain:
+    cout << endl;
     cout << "***********************************************************************\n\n";
     cout << "                      Welcome to ShopTronics                               \n\n";
     cout << "*******************        MENU        ********************************\n\n";
@@ -18,13 +21,18 @@ sgain:
     cout << "4.Exit\n";
     cout << "\nEnter your choice : ";
     cin >> choice;
-
+    if (!(regex_match(choice, m)))
+    {
+        cout << "Invalid Choice .....Please try again\n";
+        goto sgain;
+    }
+    int Choice = stoi(choice);
     cout << endl;
-    switch (choice)
+    switch (Choice)
     {
     case 1:
-        int CustomerChoice;
-        system("clear");
+    C:
+        // system("clear");
         cout << "***********************************************************************\n\n";
         cout << "                      Welcome to Customer Portal                             \n\n";
         cout << "*******************        MENU        ********************************\n\n";
@@ -32,15 +40,22 @@ sgain:
         cout << "2.Register\n";
         cout << "3.Previous Menu\n";
         cout << "Enter choice : ";
-        cin >> CustomerChoice;
-        if (CustomerChoice == 1)
+        cin >> CustChoice;
+        if (!(regex_match(CustChoice, m)))
         {
+            cout << "Invalid Choice .....Please try again\n";
+            goto C;
+        }
+
+        switch (stoi(CustChoice))
+        {
+        case 1:
             auth.CustomerLogin();
             sleep(1);
-            system("clear");
+            // system("clear");
         Coptions:
             cust.CustomerChoiceDisplay();
-            std::string options;
+
             cout << "Enter choice : ";
             cin >> options;
             switch (stoi(options))
@@ -63,29 +78,34 @@ sgain:
                 goto Coptions;
             case 4:
                 cust.CancelOrder();
-                sleep(1);
+                sleep(5);
                 goto Coptions;
                 break;
-            default:
-                //    if(stoi(options)==5){
+            case 5:
                 goto sgain;
-                //    }
+                break;
+            default:
+                cout << "Invalid Choice.... PLease try again\n";
+                goto Coptions;
             }
-        }
-        if (CustomerChoice == 2)
-        {
+
+        case 2:
             auth.CustomerRegistration();
             goto Coptions;
             break;
-        }
-        if (CustomerChoice == 3)
-        {
+
+        case 3:
+            goto sgain;
+            break;
+
+        default:
+            cout << "Invalid choice...please try again\n";
+            cout << "\n";
             goto sgain;
             break;
         }
-        break;
     case 2:
-        int MerchantChoice, merchoice;
+
     mgain:
         cout << "***********************************************************************\n\n";
         cout << "                      Welcome to Merchant Portal                             \n\n";
@@ -94,81 +114,78 @@ sgain:
         cout << "3.Previous Menu\n";
         cout << "Enter choice : ";
         cin >> MerchantChoice;
-        system("clear");
-        switch (MerchantChoice)
+        // system("clear");
+        if (!(regex_match(MerchantChoice, m)))
+        {
+            cout << "Invalid Choice .....Please try again\n";
+            goto mgain;
+        }
+        switch (stoi(MerchantChoice))
         {
         case 1:
             auth.MerchantLogin();
             sleep(1);
-            system("clear");
+            // system("clear");
         mopt:
             Mer.merchantOptions();
             cout << "Enter your choice :";
             cin >> merchoice;
-            switch(merchoice){
+            if (!(regex_match(merchoice, m)))
+            {
+                cout << "Invalid Choice .....Please try again\n";
+                goto mopt;
+            }
+            switch (stoi(merchoice))
+            {
             case 1:
-            // if (merchoice == 1)
-            // {
                 system("clear");
                 Mer.addProducts();
                 goto mopt;
                 break;
-            // }
-            // else if (merchoice == 2)
-            // {
-                case 2:
+
+            case 2:
                 system("clear");
                 Mer.searchProducts();
                 goto mopt;
                 break;
-            // }
-        //    else if (merchoice == 3)
-        //     {
+
             case 3:
                 system("clear");
                 Mer.OrderStatusView();
                 sleep(4);
                 goto mopt;
                 break;
-            // }
-        //    else if (merchoice == 4)
-        //     {
+
             case 4:
                 system("clear");
                 Mer.displayOutofStock();
                 sleep(4);
                 goto mopt;
                 break;
-            // }
-            // else if (merchoice == 5)
-            // {
-                case 5:
+
+            case 5:
                 system("clear");
                 Mer.CancelledProducts();
                 sleep(4);
                 goto mopt;
                 break;
-        //     // }
-        //    else if (merchoice == 6)
-        //     {
-            case 6 :
+
+            case 6:
                 system("clear");
                 Mer.AssignCourier();
                 sleep(4);
                 goto mopt;
                 break;
-            // }
-        //    else if (merchoice == 7)
-        //     {
+
             case 7:
                 goto mgain;
                 break;
-            // }
-            // else
-            // {
-                default:
-                cout << "\nInvalid Choice......Try again";
+
+            default:
+                cout << "Invalid Choice......Try again\n";
+                sleep(2);
                 goto mopt;
+                break;
             }
             break;
         // case 2:
@@ -181,18 +198,23 @@ sgain:
         }
         break;
     case 3:
-        int courierChoice;
+
         cout << "***********************************************************************\n\n";
         cout << "                      Welcome to Courier Portal                             \n\n";
         // system("clear");
-        int CourierChoice;
+
     dopt:
         cout << "1.Login\n";
         cout << "2.Register\n";
         cout << "3.Previous Menu\n";
-        cout << "Enter choice : ";
+        cout << "Enter choice : \n";
         cin >> CourierChoice;
-        switch (CourierChoice)
+        if (!(regex_match(CourierChoice, m)))
+        {
+            cout << "Invalid Choice .....Please try again\n";
+            goto dopt;
+        }
+        switch (stoi(CourierChoice))
         {
         case 1:
             auth.CourierLogin();
@@ -201,7 +223,12 @@ sgain:
             C.courierOptions();
             cout << "Enter your choice: ";
             cin >> courierChoice;
-            switch (courierChoice)
+            if (!(regex_match(courierChoice, m)))
+            {
+                cout << "Invalid Choice .....Please try again\n";
+                goto copt;
+            }
+            switch (stoi(courierChoice))
             {
             case 1:
                 system("clear");
@@ -231,11 +258,24 @@ sgain:
             break;
             // case 2:
             //     auth.CourierRegistration();
-            //     goto dopt;
+            //     goto copt;
             //     break;
-        }
+
+        case 3:
+            goto copt;
+            break;
+
+        // default:
+        //     cout << "Invalid choice.......Try again"<<endl;
+        //     break;
+        //     goto dopt;
+        // }
+        case 4:
+        cout<<"Thank you for shopping"<<endl;
+        exit(0);
     default:
-        cout << "Thank you for visiting.............\n";
+        cout << "Invalid Choice....Please try again\n";
+        goto sgain;
         break;
     }
     //     //default:
@@ -245,6 +285,6 @@ sgain:
     //         //     cout<<"Not Valid number....\n";
     //         //   }
     //         break;
-    // }
+     }
     return 0;
 }
