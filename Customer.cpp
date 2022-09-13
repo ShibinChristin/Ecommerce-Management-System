@@ -64,7 +64,7 @@ void Customer::CustomerBuy()
 {
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[0-5]$");
-    std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType, Val; /// cProduct   --- Customer Product
+    std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
     bool found = false;
     ofstream buy("orders.txt", ios::out | ios::app);
     showProducts();
@@ -185,12 +185,17 @@ gotobuy:
             {
                 ProductID = token.substr(10);
             }
+            if (token.rfind("Price ", 0) == 0)
+            {
+                Price = token.substr(6);
+            }
             line3.erase(0, pos + delimiter.length());
         }
         if (idfound)
         {
             temp << "ProductID " << ProductID;
             temp << ";Name " << name;
+            temp << ";Price " << Price;
             temp << ";Type " << ProductType;
             temp << ";Count " << ProductC - TempCount << ";" << endl;
             if (ProductC - TempCount <= 0)
@@ -313,10 +318,11 @@ void Customer::CancelOrder()
                  << endl;
             st = false;
         }
-        // else{
-        //     cout<<"No Products to Cancel....\n";
-        //     break;
-        // }
+// else{
+//     cout<<"No Products exists to cancel"<<endl;
+//     break;
+//     exit(0);
+// }
     }
     view.close();
     ////////////////////////////////////////////////////////////////////////////
@@ -325,6 +331,7 @@ void Customer::CancelOrder()
     ofstream temp1("temp.txt", ios::out);
     std::regex obj("^[0-9]*$");
     bool found = false;
+    bool cond = false;
 cancel:
     cout << "Enter the Product ID you want to cancel :";
     getline(std::cin >> std::ws, CancelId);
@@ -364,6 +371,7 @@ cancel:
         }
         if (found)
         {
+            cout<<"Cancelled Succesfully"<<endl;
             temp1 << "OrderID " << id;
             temp1 << ";ProductID " << Pid;
             temp1 << ";Name " << Name1;
@@ -413,8 +421,6 @@ cancel:
             idfound1 = false;
         }
     }
-    cout << "Product Count" << ProductCount << endl;
-    cout << "Total COunt " << TempCount + ProductCount;
     in.close();
     //////////////////////////////////////////////////////////////////////////
     ifstream updation("products.txt", ios::in);
@@ -423,7 +429,7 @@ cancel:
     bool isfound = false;
     while (std::getline(updation, line4))
     {
-        std::string originalLine1;
+        std::string originalLine1 = line4;
         size_t pos = 0;
         std::string token;
         while ((pos = line4.find(delimiter)) != std::string::npos)
@@ -458,6 +464,7 @@ cancel:
             Temp << ";Price " << Price;
             Temp << ";Type " << Type2;
             Temp << ";Count " << TempCount + ProductCount << ";" << endl;
+            isfound=false;
         }
         else
         {
@@ -466,6 +473,6 @@ cancel:
     }
     in.close();
     Temp.close();
-    // remove("products.txt");
-    // rename("temp2.txt","products.txt");
+    remove("products.txt");
+    rename("temp2.txt", "products.txt");
 }
