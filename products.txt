@@ -11,4 +11,4 @@ ProductID 18151;Name Kurtha;Price 25000;Type Fashion;Count 20;
 ProductID 18285;Name Redmi note 11;Type Electronics;Count 10;
 ProductID 18426;Name Men shirt;Price 1820;Type Fashion;Count 11;
 ProductID 18491;Name AB;Price 1820;Type Electronics;Count 3;
-
+ProductID 69;Name shirt;Price 700;Type Fashion;Count 3;

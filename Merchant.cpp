@@ -137,10 +137,11 @@ Type:
                 system("clear");
                 addProducts();
         }
-        else
-        {
-                merchantOptions();
-        }
+        // else
+        // {
+        //         // merchantOptions();
+                
+        // }
 }
 void Products::merchantOptions()
 {
@@ -462,7 +463,6 @@ void Products::searchProducts()
                 cout << "Invalid Choice .....Please try again\n";
                 goto ch;
             }
-
                 switch (stoi(choice))
                 {
                 case 1:
