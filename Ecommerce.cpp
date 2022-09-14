@@ -18,23 +18,21 @@ user1:
 	}
 	// Validatecustomer(username1);
 	ifstream in1;
+	bool found = false;
 	in1.open("CustomerAuthentication.txt", ios::in);
-	while (!in1.eof())
-	{
-		//in1.seekg(0, ios::beg);
 		while (std::getline(in1, line1))
 		{
 			if (line1.find(username1) != string::npos)
 			{
-				count1++;
+				// count1++; 
+				found = true;
 			}
 		}
 		
-	}
-	if (count1 > 0)
+	if (found)
 		{
-			count1 = 0;
 			cout << "Username already exists" << endl;
+			found=false;
 			 goto user1;
 			//CustomerRegistration();
 		}
@@ -57,7 +55,7 @@ passwordStart1:
 	{
 		cout << "Awesome....Your Registration is successful......" << endl;
 	}
-	cout << "Your USERID :"
+	cout << "Your USERNAME :"
 		 << "\e[1m" << username1 << endl;
 	file1 << username1 << " " << password1 << endl;
 	file1.close();

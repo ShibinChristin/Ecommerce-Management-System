@@ -22,7 +22,7 @@ void Customer::CustomerChoiceDisplay()
 }
 void Customer::showProducts()
 {
-    
+
     ifstream in("products.txt", ios::in);
     while (std::getline(in, line1))
     {
@@ -57,7 +57,7 @@ void Customer::showProducts()
 void Customer::CustomerBuy()
 {
     ifstream customer1("products.txt", ios::in);
-    std::regex obj("^[0-5]$");
+    std::regex obj("^[1-5]$");
     std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
     bool found = false;
     int i = 0;
@@ -106,7 +106,7 @@ gotobuy:
             line.erase(0, pos + delimiter.length());
         }
     }
-     if (j == 0)
+    if (j == 0)
     {
         cout << "Product not found " << endl;
         return;
@@ -276,7 +276,7 @@ void Customer::CancelOrder()
 {
     ifstream view("orders.txt", ios::in);
     cout << "***********************      Orders     ********************************\n";
-    std::string line1, defstatus = "Pending", status, Order, Name, Type;
+    std::string line1, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type;
     std::string delimiter = ";";
     bool st = false;
     int count2 = 0;
@@ -303,7 +303,7 @@ void Customer::CancelOrder()
             {
 
                 status = token.substr(7);
-                if (defstatus == status)
+                if (defstatus == status || status == defstatus1)
                 {
                     st = true;
                     count2++;

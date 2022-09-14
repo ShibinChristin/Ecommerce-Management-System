@@ -73,17 +73,17 @@ sgain:
             case 2:
                 system("clear");
                 cust.showProducts();
-                sleep(3);
+                // sleep(3);
                 goto Coptions;
                 break;
             case 3:
                 system("clear");
                 cust.orderStatus();
-                sleep(3);
+                // sleep(3);
                 goto Coptions;
             case 4:
                 cust.CancelOrder();
-                sleep(5);
+                // sleep(5);
                 goto Coptions;
                 break;
             case 5:
@@ -131,7 +131,7 @@ sgain:
         {
         case 1:
             auth.MerchantLogin();
-            sleep(1);
+            // sleep(1);
             // system("clear");
         mopt:
             Mer.merchantOptions();
