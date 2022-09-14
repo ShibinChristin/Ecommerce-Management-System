@@ -1,5 +1,8 @@
 OrderID 3;ProductID 18367;Name Chair;Type Furniture;Count 1;Status Cancelled;
-OrderID 40;ProductID 18367;Name Chair;Type Furniture;Count 1;Status Pending;
+OrderID 40;ProductID   18367;Name Chair;Type Furniture;Count 1;Courier Kochi;Status Shipping;
 OrderID 19;ProductID  18151;Name Kurtha;Type Fashion;Count 2;Courier Kochi;Status Shipping;
-OrderID 37;ProductID  17031;Name Sofa;Type Furniture;Count 2;Courier Ernakulam;Status Shipping;
+OrderID 37;ProductID  17031;Name Sofa;Type Furniture;Count 2;Status Cancelled;
 OrderID 46;ProductID  18367;Name Chair;Type Furniture;Count 2;Courier Ernakulam;Status Shipping;
+OrderID 55;ProductID 18367;Name Chair;Type Furniture;Count 2;Status Cancelled;
+OrderID 32;ProductID 18426;Name Men shirt;Type Fashion;Count 2;Status Cancelled;
+OrderID 11;ProductID 17031;Name Sofa;Type Furniture;Count 2;Status Cancelled;

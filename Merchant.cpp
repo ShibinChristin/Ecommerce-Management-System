@@ -205,57 +205,65 @@ void Products::AssignCourier()
         // OrderStatusView();
         //////////////////////////////////////////////////////////////////////
         cout << "***********************      Orders     ********************************\n";
-    std::string line1, defstatus = "Pending", status, Order, Name, Type;
-//     std::string delimiter = ";";
-    ifstream view1("orders.txt", ios::in);
-    bool st = false;
-    while (std::getline(view1, line1))
-    {
-        size_t pos = 0;
-        std::string token;
-        while ((pos = line1.find(delimiter)) != std::string::npos)
+        std::string line1, defstatus = "Pending", status, Order, Name, Type;
+        //     std::string delimiter = ";";
+        ifstream view1("orders.txt", ios::in);
+        bool st = false;
+        int count = 0;
+        while (std::getline(view1, line1))
         {
-            token = line1.substr(0, pos);
-            if (token.rfind("OrderID ", 0) == 0)
-            {
-                Order = token.substr(8);
-            }
-            if (token.rfind("Name ", 0) == 0)
-            {
-                Name = token.substr(5);
-            }
-            if (token.rfind("Type ", 0) == 0)
-            {
-                Type = token.substr(5);
-            }
-            if (token.rfind("Status ", 0) == 0)
-            {
-
-                status = token.substr(7);
-                if (defstatus == status)
+                size_t pos = 0;
+                std::string token;
+                while ((pos = line1.find(delimiter)) != std::string::npos)
                 {
-                    st = true;
+                        token = line1.substr(0, pos);
+                        if (token.rfind("OrderID ", 0) == 0)
+                        {
+                                Order = token.substr(8);
+                        }
+                        if (token.rfind("Name ", 0) == 0)
+                        {
+                                Name = token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0)
+                        {
+                                Type = token.substr(5);
+                        }
+                        if (token.rfind("Status ", 0) == 0)
+                        {
+
+                                status = token.substr(7);
+                                if (defstatus == status)
+                                {
+                                        st = true;
+                                        count++;
+                                }
+                        }
+                        line1.erase(0, pos + delimiter.length());
                 }
-            }
-            line1.erase(0, pos + delimiter.length());
+                if (st)
+                {
+                        cout << "Order ID " << Order << "|"
+                             << "Name " << Name << "|"
+                             << "Type "
+                             << Type << "|"
+                             << "Status "
+                             << status
+                             << endl;
+                        st = false;
+                }
         }
-        if (st)
+        if (count == 0)
         {
-            cout << "Order ID " << Order << "|"
-                 << "Name " << Name << "|"
-                 << "Type "
-                 << Type << "|"
-                 << "Status "
-                 << status
-                 << endl;
-            st = false;
+                cout << "No Such Order ID exists......." << endl;
+                return;
         }
-    }
         cout << "Enter the order ID to be assigned to Courier \n";
         getline(cin >> ws, OrderId);
         cout << "Enter Courier Person to be assigned :\n";
         cout << "1.Kochi\n2.Ernakulam\n";
         cin >> CourierChoice;
+        int count1 = 0;
         while (std::getline(courier, line))
         {
                 std::string OrderID, ProductID, Name, Type, Count, Status;
@@ -270,6 +278,7 @@ void Products::AssignCourier()
                                 if (OrderID == OrderId)
                                 {
                                         iffound = true;
+                                        count1++;
                                 }
                         }
                         if (token.rfind("ProductID ", 0) == 0 && iffound)
@@ -295,6 +304,7 @@ void Products::AssignCourier()
                         }
                         line.erase(0, pos + delimiter.length());
                 }
+                
 
                 switch (CourierChoice)
                 {
@@ -348,6 +358,11 @@ void Products::AssignCourier()
                         cout << "Not Valid...." << endl;
                 }
         }
+        if (count1 == 0)
+                {
+                        cout << "No Such Order ID exists......." << endl;
+                        return;
+                }
         courier.close();
         temp.close();
         remove("orders.txt");

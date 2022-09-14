@@ -266,11 +266,12 @@ void Customer::orderStatus()
 }
 void Customer::CancelOrder()
 {
+    ifstream view("orders.txt", ios::in);
     cout << "***********************      Orders     ********************************\n";
     std::string line1, defstatus = "Pending", status, Order, Name, Type;
     std::string delimiter = ";";
-    ifstream view("orders.txt", ios::in);
     bool st = false;
+    int count2=0;
     while (std::getline(view, line1))
     {
         size_t pos = 0;
@@ -297,6 +298,7 @@ void Customer::CancelOrder()
                 if (defstatus == status)
                 {
                     st = true;
+                    count2++;
                 }
             }
             line1.erase(0, pos + delimiter.length());
@@ -312,11 +314,10 @@ void Customer::CancelOrder()
                  << endl;
             st = false;
         }
-// else{
-//     cout<<"No Products exists to cancel"<<endl;
-//     break;
-// //     exit(0);
-// }
+    }
+    if(count2==0){
+        cout<<"No orders to cancel.....\n";
+        return;
     }
     view.close();
     ////////////////////////////////////////////////////////////////////////////
@@ -324,10 +325,10 @@ void Customer::CancelOrder()
     ifstream orders("orders.txt", ios::in);
     ofstream temp1("temp.txt", ios::out);
     std::regex obj("^[0-9]*$");
+    int count = 0;
     bool found = false;
-    bool cond = false;
 cancel:
-    cout << "Enter the Product ID you want to cancel :";
+    cout << "Enter the Order ID you want to cancel :";
     getline(std::cin >> std::ws, CancelId);
     while (std::getline(orders, line2))
     {
@@ -343,6 +344,7 @@ cancel:
                 if (CancelId == id)
                 {
                     found = true;
+                    count++;
                 }
             }
             if (token.rfind("ProductID ", 0) == 0 && found)
@@ -365,7 +367,7 @@ cancel:
         }
         if (found)
         {
-            cout<<"Cancelled Succesfully"<<endl;
+            cout << "Cancelled Succesfully" << endl;
             temp1 << "OrderID " << id;
             temp1 << ";ProductID " << Pid;
             temp1 << ";Name " << Name1;
@@ -380,6 +382,11 @@ cancel:
             temp1 << OriginalLine << endl;
         }
     }
+    if (count == 0)
+    {
+        cout << "No Such Order ID exists......." << endl;
+        return;
+    }
     remove("orders.txt");
     rename("temp.txt", "orders.txt");
     int TempCount = stoi(Count1);
@@ -392,6 +399,7 @@ cancel:
     {
         size_t pos = 0;
         std::string token;
+        idfound1 = false;
         while ((pos = line3.find(delimiter)) != std::string::npos)
         {
             token = line3.substr(0, pos);
@@ -458,7 +466,7 @@ cancel:
             Temp << ";Price " << Price;
             Temp << ";Type " << Type2;
             Temp << ";Count " << TempCount + ProductCount << ";" << endl;
-            isfound=false;
+            isfound = false;
         }
         else
         {
