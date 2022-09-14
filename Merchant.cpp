@@ -396,6 +396,7 @@ void Products::searchProducts()
 
                 std::string delimiter = ";";
                 ifstream pName;
+                int k =0;
                 pName.open("products.txt", std::ios::in);
                 while (std::getline(pName, line))
                 {
@@ -415,6 +416,7 @@ void Products::searchProducts()
                                         if (search == Name)
                                         {
                                                 found = true;
+                                                k++;
                                         }
                                 }
                                 if (token.rfind("Price ", 0) == 0)
@@ -441,13 +443,16 @@ void Products::searchProducts()
                                 found = false;
                                 break;
                         }
-                        else
-                        {
-                                // continue;
-                                cout << "product not found" << endl;
-                        }
+                        // else
+                        // {
+                        //         // continue;
+                        //         cout << "product not found" << endl;
+                        // }
                 }
                 pName.close();
+                if(k==0){
+                        cout<<"Product not found"<<endl;
+                }
         }
         else if (choice == "2")
         {
