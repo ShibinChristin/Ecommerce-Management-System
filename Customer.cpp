@@ -22,8 +22,7 @@ void Customer::CustomerChoiceDisplay()
 }
 void Customer::showProducts()
 {
-    std::string line1, name, price;
-    std::string delimiter = ";";
+    
     ifstream in("products.txt", ios::in);
     while (std::getline(in, line1))
     {

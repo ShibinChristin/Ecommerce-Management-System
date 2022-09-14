@@ -9,6 +9,8 @@ using namespace std;
 class Authentication
 {
     string username1 ,password1,password_confirm1 , pass1 ,user;
+    string username2, password2, password_confirm2;
+    string username3, password3, password_confirm3;
 public:
 int count1 , count2,count3;
 string line1 , line2 , line3; 
@@ -21,11 +23,13 @@ string line1 , line2 , line3;
 };
 class Customer
 {
+    std::string line1, name, price;
+    std::string delimiter = ";";
 public:
     int customerChoice;
     std::string line;
     int ProductBuy;
-    string subString; // added on 31/august/2022
+    //string subString; 
     void CustomerBuy();
     void CustomerChoiceDisplay();
     void showProducts();

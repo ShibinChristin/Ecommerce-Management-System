@@ -72,9 +72,9 @@ void Authentication::CustomerLogin()
 
 	// string line, username, password, user, pass, condition;
 	system("clear");
-	cout << "So Glad to see you back......." << endl;
+	cout << "Hello Customer...\nSo Glad to see you back......." << endl;
 usera:
-	cout << "please enter the following details" << endl;
+	cout << "Please enter the following details" << endl;
 	cout << "\e[1m"
 		 << "USERNAME :";
 	cin >> username1;
@@ -96,7 +96,7 @@ retry:
 	input.close();
 	if (count1 == 1)
 	{
-		cout << "\nLOGIN SUCESS\nWe're glad that you're here.\nThanks for logging in\n";
+		cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
 	}
 	else
 	{
@@ -175,7 +175,7 @@ void Authentication::MerchantLogin()
 	system("clear");
 	cout << "Hello Merchant..........So Glad to see you back......." << endl;
 merchant:
-	cout << "please enter the following details" << endl;
+	cout << "Please enter the following details" << endl;
 	cout << "\e[1m"
 		 << "USERNAME :";
 	cin >> username2;
@@ -197,7 +197,7 @@ retry:
 	input.close();
 	if (count == 1)
 	{
-		cout << "\nLOGIN SUCESS\nWe're glad that you're here.\n";
+		cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in.\n";
 	}
 	else
 	{
@@ -212,7 +212,7 @@ retry:
 
 void Authentication::CourierRegistration()
 {
-	string username3, password3, password_confirm3;
+	
 	count3 = 0;
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 user3:
@@ -238,7 +238,7 @@ user3:
 	if (count3 > 0)
 	{
 		count3 = 0;
-		cout << "Username already exists" << endl;
+		cout << "Username already exists...!" << endl;
 		goto user3;
 		// CourierRegistration();
 	}
@@ -271,7 +271,7 @@ void Authentication::CourierLogin()
 	int count;
 	string username3, password3, u, p;
 	system("clear");
-	cout << "So Glad to see you back......." << endl;
+	cout << "Hello Courier........So Glad to see you back......." << endl;
 courier:
 	cout << "Please enter the following details" << endl;
 	cout << "\e[1m"
@@ -294,7 +294,7 @@ retry:
 	input.close();
 	if (count == 1)
 	{
-		cout << "\nLOGIN SUCESS\nThanks for being a partner with us \n";
+		cout << "\nLOGIN SUCCESSFUL...\nThanks for being a partner with us\nThanks for logging in.\n";
 	}
 	else
 	{

@@ -146,7 +146,7 @@ Type:
 void Products::merchantOptions()
 {
 
-        std::cout << "*******************        MENU        ********************************\n\n";
+        std::cout << "\n\n*******************        MENU        ********************************\n\n";
         std::cout << "1.Add Products\n";
         std::cout << "2.Search Products\n";
         std::cout << "3.Orders List\n";
@@ -267,7 +267,7 @@ void Products::AssignCourier()
         }
         if (count == 0)
         {
-                cout << "No Such Order ID exists......." << endl;
+                cout << "No Products to assign......." << endl;
                 return;
         }
         cout << "Enter the order ID to be assigned to Courier \n";
@@ -366,7 +366,9 @@ void Products::AssignCourier()
                         }
                         break;
                 default:
-                        cout << "Not Valid...." << endl;
+                        // cout << "Not Valid...." << endl;
+                        continue;
+                        break;
                 }
         }
         if (count1 == 0)
@@ -443,11 +445,7 @@ void Products::searchProducts()
                                 found = false;
                                 break;
                         }
-                        // else
-                        // {
-                        //         // continue;
-                        //         cout << "product not found" << endl;
-                        // }
+                        
                 }
                 pName.close();
                 if(k==0){
