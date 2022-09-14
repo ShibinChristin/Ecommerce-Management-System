@@ -324,7 +324,7 @@ void Products::AssignCourier()
                         {
                                 cout << "Updated Successfully......" << endl;
                                 temp << "OrderID " << OrderID << ";"
-                                     << "ProductID " << ProductID << ";"
+                                     << "ProductID "<< ProductID << ";"
                                      << "Name " << Name << ";"
                                      << "Type " << Type << ";"
                                      << "Count " << Count << ";"
@@ -346,7 +346,7 @@ void Products::AssignCourier()
                         if (iffound)
                         {
                                 temp << "OrderID " << OrderID << ";"
-                                     << "ProductID " << ProductID << ";"
+                                     << "ProductID "<<ProductID<< ";"
                                      << "Name " << Name << ";"
                                      << "Type " << Type << ";"
                                      << "Count " << Count << ";"
@@ -433,7 +433,7 @@ void Products::searchProducts()
                         }
                         if (found)
                         {
-                                std::cout << "ProductID " << Id << " | "
+                                std::cout << "ProductID "<< Id << " | "
                                           << "Name " << Name << " | "
                                           << "Price " << price1 << " | "
                                           << "Type " << Type1 << " | "

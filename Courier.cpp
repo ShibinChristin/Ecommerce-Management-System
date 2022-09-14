@@ -32,13 +32,15 @@ ch:
 
     std::string line, Location, Status1, defStatus = "Shipping";
     bool found = false, flag1 = false;
-    int c = 0 , d=0;
+    int c = 0, d = 0;
     std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line))
     {
         size_t pos = 0;
+        std::string originalLine = line;
         std::string token;
+        found = false;
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
@@ -64,32 +66,22 @@ ch:
                 if (location == Location)
                 {
                     found = true;
-                    c++;
                 }
             }
-            if (token.rfind("Status ", 0) == 0)
+            if (token.rfind("Status ", 0) == 0 && found)
             {
                 Status1 = token.substr(7);
                 if (Status1 == defStatus)
                 {
                     flag1 = true;
-                    d++;
+                    cout << "Order ID " << OrderID << " | "
+                         << "Name " << Name << " | "
+                         << "Type " << Type << " | "
+                         << "Count " << Count << endl;
+                    c++;
                 }
             }
             line.erase(0, pos + delimiter.length());
-        }
-        if (found)
-        {
-            if(flag1){
-            cout << "Order ID " << OrderID << " | "
-                 << "Name " << Name << " | "
-                 << "Type " << Type << " | "
-                 << "Count " << Count << endl;
-            found = false;
-            flag1=false;
-            // flag1 = false;
-            // break;
-        }
         }
     }
     if (c == 0)
@@ -97,11 +89,6 @@ ch:
         cout << "No Products have been assigned to deliver" << endl;
         return;
     }
-    else if(d==0){
-cout << "No Products have been assigned to deliver" << endl;
-        return;
-    }
-
     in.close();
 }
 
@@ -247,7 +234,7 @@ W:
 
     std::string line, Stats;
     bool found = false;
-    int i =0;
+    int i = 0;
     std::string delimiter = ";";
     ifstream temp("orders.txt", ios::in);
     while (std::getline(temp, line))
@@ -299,8 +286,9 @@ W:
             found = false;
         }
     }
-    if(i==0){
-        cout<<"No orders present...."<<endl;
+    if (i == 0)
+    {
+        cout << "No orders present...." << endl;
     }
     temp.close();
 }
