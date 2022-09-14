@@ -105,7 +105,7 @@ sgain:
         default:
             cout << "Invalid choice...please try again\n";
             cout << "\n";
-            goto sgain;
+            goto C;
             break;
         }
     case 2:
@@ -237,7 +237,7 @@ sgain:
             case 1:
                 system("clear");
                 C.listOfOrders();
-                sleep(4);
+                sleep(2);
                 goto copt;
                 break;
             case 2:
@@ -266,7 +266,7 @@ sgain:
                 break;
 
         case 3:
-            goto copt;
+            goto sgain;
             break;
 
             // default:

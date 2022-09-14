@@ -32,6 +32,7 @@ ch:
 
     std::string line, Location;
     bool found = false;
+    int c=0;
     std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line))
@@ -63,6 +64,7 @@ ch:
                 if (location == Location)
                 {
                     found = true;
+                    c++;
                 }
             }
             line.erase(0, pos + delimiter.length());
@@ -76,6 +78,10 @@ ch:
             found = false;
             // break;
         }
+    }
+    if(c==0){
+        cout<<"No Products have been assigned to deliver"<<endl;
+        return;
     }
 
     in.close();

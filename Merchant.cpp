@@ -33,7 +33,11 @@ void Products::OrderStatusView()
                         }
                         if (token.rfind("Count ", 0) == 0)
                         {
-                                cout << " | Count :" << token.substr(5) << endl;
+                                cout << " | Count :" << token.substr(5);
+                        }
+                        if (token.rfind("Status ", 0) == 0)
+                        {
+                                cout << " | Status :" << token.substr(7) << endl;
                         }
                         line2.erase(0, pos + delimiter.length());
                 }
@@ -160,9 +164,9 @@ void Products::displayOutofStock()
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
-                        if (token.rfind("Product ID ", 0) == 0)
+                        if (token.rfind("ProductID ", 0) == 0)
                         {
-                                ProductID = token.substr(11);
+                                ProductID = token.substr(10);
                         }
                         if (token.rfind("Name ", 0) == 0)
                         {
@@ -202,7 +206,6 @@ void Products::AssignCourier()
         std::string delimiter = ";";
         ifstream courier("orders.txt", ios::in);
         ofstream temp("Temp.txt", ios::out);
-        // OrderStatusView();
         //////////////////////////////////////////////////////////////////////
         cout << "***********************      Orders     ********************************\n";
         std::string line1, defstatus = "Pending", status, Order, Name, Type;
@@ -304,7 +307,6 @@ void Products::AssignCourier()
                         }
                         line.erase(0, pos + delimiter.length());
                 }
-                
 
                 switch (CourierChoice)
                 {
@@ -359,10 +361,10 @@ void Products::AssignCourier()
                 }
         }
         if (count1 == 0)
-                {
-                        cout << "No Such Order ID exists......." << endl;
-                        return;
-                }
+        {
+                cout << "No Such Order ID exists......." << endl;
+                return;
+        }
         courier.close();
         temp.close();
         remove("orders.txt");
