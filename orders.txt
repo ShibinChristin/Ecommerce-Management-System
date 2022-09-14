@@ -2,6 +2,6 @@ OrderID 97;ProductID 18491;Name AB;Type Electronics;Count 3;Status Pending;
 OrderID 95;ProductID 17031;Name Sofa;Type Furniture;Count 5;Status Cancelled;
 OrderID 30;ProductID 17031;Name Sofa;Type Furniture;Count 3;Status Cancelled;
 OrderID 94;ProductID 18491;Name AB;Type Electronics;Count 3;Status Cancelled;
-OrderID 80;ProductID  18426;Name Men shirt;Type Fashion;Count 2;Courier Kochi;Status Shipping;
+OrderID 80;ProductID  18426;Name Men shirt;Type Fashion;Count 2;Courier Kochi;Status Delivered;
 OrderID 8;ProductID   18426;Name Men shirt;Type Fashion;Count 2;Courier Ernakulam;Status Delivered;
 

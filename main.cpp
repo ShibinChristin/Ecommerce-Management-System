@@ -54,13 +54,12 @@ sgain:
             sleep(1);
         Coptions:
             cust.CustomerChoiceDisplay();
-
             cout << "Enter choice : ";
             cin >> options;
             if (!(regex_match(options, m)))
             {
                 cout << "Invalid Choice .....Please try again\n";
-                goto C;
+                goto Coptions;
             }
             switch (stoi(options))
             {
