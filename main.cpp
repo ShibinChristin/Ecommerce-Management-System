@@ -192,10 +192,10 @@ sgain:
                 break;
             }
             break;
-        // case 2:
-        //     auth.MerchantRegistration();
-        //     goto mopt;
-        //     break;
+        case 2:
+            auth.MerchantRegistration();
+            goto mopt;
+            break;
         default:
             goto sgain;
             break;
@@ -260,10 +260,10 @@ sgain:
                 break;
             }
             break;
-            // case 2:
-            //     auth.CourierRegistration();
-            //     goto copt;
-            //     break;
+            case 2:
+                auth.CourierRegistration();
+                goto copt;
+                break;
 
         case 3:
             goto copt;

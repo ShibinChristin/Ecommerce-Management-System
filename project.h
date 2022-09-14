@@ -8,13 +8,16 @@
 using namespace std;
 class Authentication
 {
+    string username1 ,password1,password_confirm1 , pass1 ,user;
 public:
+int count1 , count2,count3;
+string line1 , line2 , line3; 
     void CustomerLogin();
     void CustomerRegistration();
-    void forgotPassword();
     void MerchantLogin();
+    void MerchantRegistration();
     void CourierLogin();
-    void Validate(string user);
+    void CourierRegistration();
 };
 class Customer
 {
