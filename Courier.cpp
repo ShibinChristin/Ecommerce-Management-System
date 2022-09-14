@@ -70,28 +70,35 @@ ch:
             if (token.rfind("Status ", 0) == 0)
             {
                 Status1 = token.substr(7);
-                // if (Status1 == defStatus)
-                // {
-                //     flag1 = true;
-                //     d++;
-                // }
+                if (Status1 == defStatus)
+                {
+                    flag1 = true;
+                    d++;
+                }
             }
             line.erase(0, pos + delimiter.length());
         }
         if (found)
         {
+            if(flag1){
             cout << "Order ID " << OrderID << " | "
                  << "Name " << Name << " | "
                  << "Type " << Type << " | "
                  << "Count " << Count << endl;
             found = false;
+            flag1=false;
             // flag1 = false;
             // break;
+        }
         }
     }
     if (c == 0)
     {
         cout << "No Products have been assigned to deliver" << endl;
+        return;
+    }
+    else if(d==0){
+cout << "No Products have been assigned to deliver" << endl;
         return;
     }
 

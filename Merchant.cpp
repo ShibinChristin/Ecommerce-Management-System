@@ -55,7 +55,7 @@ int Products::idGeneration()
 void Products::addProducts()
 {
         std::string line;
-        int productChoice;
+        std::string productChoice;
         std::fstream writeData;
         writeData.open("products.txt", std::ios::in | std::ios::out);
 
@@ -68,23 +68,31 @@ void Products::addProducts()
 
 choice:
         std ::cout << "\nEnter the Type of the Product \n1.Electronics\n2.Furniture\n3.Fashion\nEnter choice :";
-        std ::cin >> productChoice;
-        if (productChoice == 1)
+        // std ::cin >> productChoice;
+        getline(cin>>ws,productChoice);
+        std::regex l("^[1-3]$");
+        if (!(regex_match(productChoice, l)))
+            {
+                cout << "Invalid Choice .....Please try again\n";
+                goto choice;
+            }
+        switch(stoi(productChoice))
         {
+        case 1:
                 productType = "Electronics";
-        }
-        else if (productChoice == 2)
-        {
+                break;
+        
+        case 2:
                 productType = "Furniture";
-        }
-        else if (productChoice == 3)
-        {
+                break;
+        
+        case 3:
                 productType = "Fashion";
-        }
-        else
-        {
+                break;
+        default:
                 std::cout << "Wrong choice....Enter Again!!";
                 goto choice;
+                break;
         }
 b:
         std ::cout << "\nEnter the Price of the Product : ";
@@ -443,13 +451,19 @@ void Products::searchProducts()
         else if (choice == "2")
         {
                 std::string pType;
-                int choice;
+                string choice;
                 std::cout << "\n1.Electronics\n2.Furniture\n3.Fashion" << std::endl;
         ch:
                 std::cout << "Enter your choice" << std::endl;
                 cin >> choice;
+                std::regex check("^[1-3]$");
+        if (!(regex_match(choice, check)))
+            {
+                cout << "Invalid Choice .....Please try again\n";
+                goto ch;
+            }
 
-                switch (choice)
+                switch (stoi(choice))
                 {
                 case 1:
                         pType = "Electronics";
