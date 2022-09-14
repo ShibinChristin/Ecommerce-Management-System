@@ -146,6 +146,10 @@ gotobuy:
             {
                 Price = token.substr(6);
             }
+            if (token.rfind("Type ", 0) == 0)
+            {
+                ProductType = token.substr(5);
+            }
             line3.erase(0, pos + delimiter.length());
         }
         if (idfound)
@@ -158,7 +162,7 @@ gotobuy:
             else
             {
                 temp << "ProductID " << ProductID;
-                temp << ";Name " << name;
+                temp << ";Name " << Cproduct;
                 temp << ";Price " << Price;
                 temp << ";Type " << ProductType;
                 temp << ";Count " << ProductC - TempCount << ";" << endl;
