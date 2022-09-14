@@ -536,6 +536,12 @@ void Products::searchProducts()
                 }
                 productFile.close();
         }
+        else
+        {
+                cout<<"Invalid Choice... Please try again\n";
+                cout<<"\n";
+                searchProducts();
+        }
 }
 
 void Products::CancelledProducts()
