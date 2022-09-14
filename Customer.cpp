@@ -315,7 +315,7 @@ void Customer::CancelOrder()
 // else{
 //     cout<<"No Products exists to cancel"<<endl;
 //     break;
-//     exit(0);
+// //     exit(0);
 // }
     }
     view.close();

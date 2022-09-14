@@ -202,7 +202,55 @@ void Products::AssignCourier()
         std::string delimiter = ";";
         ifstream courier("orders.txt", ios::in);
         ofstream temp("Temp.txt", ios::out);
-        OrderStatusView();
+        // OrderStatusView();
+        //////////////////////////////////////////////////////////////////////
+        cout << "***********************      Orders     ********************************\n";
+    std::string line1, defstatus = "Pending", status, Order, Name, Type;
+//     std::string delimiter = ";";
+    ifstream view1("orders.txt", ios::in);
+    bool st = false;
+    while (std::getline(view1, line1))
+    {
+        size_t pos = 0;
+        std::string token;
+        while ((pos = line1.find(delimiter)) != std::string::npos)
+        {
+            token = line1.substr(0, pos);
+            if (token.rfind("OrderID ", 0) == 0)
+            {
+                Order = token.substr(8);
+            }
+            if (token.rfind("Name ", 0) == 0)
+            {
+                Name = token.substr(5);
+            }
+            if (token.rfind("Type ", 0) == 0)
+            {
+                Type = token.substr(5);
+            }
+            if (token.rfind("Status ", 0) == 0)
+            {
+
+                status = token.substr(7);
+                if (defstatus == status)
+                {
+                    st = true;
+                }
+            }
+            line1.erase(0, pos + delimiter.length());
+        }
+        if (st)
+        {
+            cout << "Order ID " << Order << "|"
+                 << "Name " << Name << "|"
+                 << "Type "
+                 << Type << "|"
+                 << "Status "
+                 << status
+                 << endl;
+            st = false;
+        }
+    }
         cout << "Enter the order ID to be assigned to Courier \n";
         getline(cin >> ws, OrderId);
         cout << "Enter Courier Person to be assigned :\n";
