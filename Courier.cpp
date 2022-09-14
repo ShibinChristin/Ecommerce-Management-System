@@ -30,9 +30,9 @@ ch:
         goto ch;
     }
 
-    std::string line, Location;
-    bool found = false;
-    int c=0;
+    std::string line, Location, Status1, defStatus = "Shipping";
+    bool found = false, flag1 = false;
+    int c = 0 , d=0;
     std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line))
@@ -67,6 +67,15 @@ ch:
                     c++;
                 }
             }
+            if (token.rfind("Status ", 0) == 0)
+            {
+                Status1 = token.substr(7);
+                // if (Status1 == defStatus)
+                // {
+                //     flag1 = true;
+                //     d++;
+                // }
+            }
             line.erase(0, pos + delimiter.length());
         }
         if (found)
@@ -76,11 +85,13 @@ ch:
                  << "Type " << Type << " | "
                  << "Count " << Count << endl;
             found = false;
+            // flag1 = false;
             // break;
         }
     }
-    if(c==0){
-        cout<<"No Products have been assigned to deliver"<<endl;
+    if (c == 0)
+    {
+        cout << "No Products have been assigned to deliver" << endl;
         return;
     }
 
@@ -95,7 +106,7 @@ void Courier::StatusUpdate()
     getline(cin >> ws, Orderid);
     std::string OrderId, line;
     bool flag = false;
-    int CourierChoice;
+    int CourierChoice, count = 0;
     std::string delimiter = ";";
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
@@ -113,6 +124,7 @@ void Courier::StatusUpdate()
                 if (OrderID == Orderid)
                 {
                     flag = true;
+                    count++;
                 }
             }
             if (token.rfind("ProductID ", 0) == 0 && flag)
@@ -188,6 +200,11 @@ void Courier::StatusUpdate()
             cout << "Not Valid...." << endl;
         }
     }
+    if (count == 0)
+    {
+        cout << "No Orders to be updated....." << endl;
+        return;
+    }
     courier.close();
     temp.close();
     remove("orders.txt");
@@ -207,12 +224,12 @@ W:
     switch (choice)
     {
     case 1:
-        std::cout << "\n!!Pending List\n\n";
-        stats = "Pending";
+        std::cout << "\nOrders Pending\n";
+        stats = "Shipping";
         break;
 
     case 2:
-        std::cout << "\nDelivered List\n\n";
+        std::cout << "\nOrders Delivered\n";
         stats = "Delivered";
         break;
 
@@ -223,6 +240,7 @@ W:
 
     std::string line, Stats;
     bool found = false;
+    int i =0;
     std::string delimiter = ";";
     ifstream temp("orders.txt", ios::in);
     while (std::getline(temp, line))
@@ -259,15 +277,23 @@ W:
                 if (stats == Stats)
                 {
                     found = true;
-                    std::cout << "OrderID " << OrderID << "|"
-                              << " ProductID " << ProductID << "|"
-                              << " Name " << Name << "|"
-                              << " Type " << Type << "|"
-                              << " Count " << Count << std::endl;
+                    i++;
                 }
             }
             line.erase(0, pos + delimiter.length());
         }
+        if (found)
+        {
+            std::cout << "OrderID " << OrderID << "|"
+                      << " ProductID " << ProductID << "|"
+                      << " Name " << Name << "|"
+                      << " Type " << Type << "|"
+                      << " Count " << Count << std::endl;
+            found = false;
+        }
+    }
+    if(i==0){
+        cout<<"No orders present...."<<endl;
     }
     temp.close();
 }
