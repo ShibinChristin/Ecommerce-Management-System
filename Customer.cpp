@@ -75,59 +75,10 @@ gotobuy:
         cout << "Invalid input or you cannot buy more than 5 products " << endl;
         goto gotobuy;
     }
-    while (std::getline(customer1, line2))
-    {
-        size_t pos = 0;
-        std::string token;
-        while ((pos = line2.find(delimiter)) != std::string::npos)
-        {
-            token = line2.substr(0, pos);
-            if (token.rfind("Name ", 0) == 0)
-            {
-                name = token.substr(5);
-
-                if (Cproduct == name)
-                {
-                    found = true;
-                    i++;
-                }
-            }
-            if (token.rfind("ProductID ", 0) == 0)
-            {
-                ProductID = token.substr(10);
-            }
-            if (token.rfind("Type ", 0) == 0)
-            {
-                ProductType = token.substr(5);
-            }
-
-            line2.erase(0, pos + delimiter.length());
-        }
-        if (found)
-        {
-            cout << "Order added to cart successfully......\n";
-            buy << "OrderID " << idGenerate() << ";"
-                << "ProductID " << ProductID << ";"
-                << "Name " << name << ";"
-                << "Type " << ProductType << ";"
-                << "Count " << count
-                << ";Status "
-                << "Pending"
-                << ";" << endl;
-                found=false;
-
-            break;
-        }
-    }
-    if (i == 0)
-    {
-        cout << "Product not found " << endl;
-        return;
-    }
-    buy.close();
     ofstream temp("temp.txt", ios::out | ios::app);
     ifstream in1("products.txt", ios::in);
     bool idfound = false;
+    int j = 0;
     while (std::getline(in1, line))
     {
         std::string delimiter = ";";
@@ -145,6 +96,7 @@ gotobuy:
                 if (Pname == Cproduct)
                 {
                     idfound = true;
+                    j++;
                 }
             }
             if (token.rfind("Count ", 0) == 0 && idfound)
@@ -154,6 +106,11 @@ gotobuy:
 
             line.erase(0, pos + delimiter.length());
         }
+    }
+     if (j == 0)
+    {
+        cout << "Product not found " << endl;
+        return;
     }
     in1.close();
     int TempCount;
@@ -218,7 +175,51 @@ gotobuy:
     in3.close();
     remove("products.txt");
     rename("temp.txt", "products.txt");
-    // }
+    while (std::getline(customer1, line2))
+    {
+        size_t pos = 0;
+        std::string token;
+        while ((pos = line2.find(delimiter)) != std::string::npos)
+        {
+            token = line2.substr(0, pos);
+            if (token.rfind("Name ", 0) == 0)
+            {
+                name = token.substr(5);
+
+                if (Cproduct == name)
+                {
+                    found = true;
+                    i++;
+                }
+            }
+            if (token.rfind("ProductID ", 0) == 0)
+            {
+                ProductID = token.substr(10);
+            }
+            if (token.rfind("Type ", 0) == 0)
+            {
+                ProductType = token.substr(5);
+            }
+
+            line2.erase(0, pos + delimiter.length());
+        }
+        if (found)
+        {
+            cout << "Order added to cart successfully......\n";
+            buy << "OrderID " << idGenerate() << ";"
+                << "ProductID " << ProductID << ";"
+                << "Name " << name << ";"
+                << "Type " << ProductType << ";"
+                << "Count " << count
+                << ";Status "
+                << "Pending"
+                << ";" << endl;
+            found = false;
+
+            break;
+        }
+    }
+    buy.close();
 }
 /*Code to check status of order*/
 void Customer::orderStatus()

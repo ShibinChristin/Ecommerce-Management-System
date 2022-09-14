@@ -52,12 +52,16 @@ sgain:
         case 1:
             auth.CustomerLogin();
             sleep(1);
-            // system("clear");
         Coptions:
             cust.CustomerChoiceDisplay();
 
             cout << "Enter choice : ";
             cin >> options;
+            if (!(regex_match(options, m)))
+            {
+                cout << "Invalid Choice .....Please try again\n";
+                goto C;
+            }
             switch (stoi(options))
             {
             case 1:
@@ -275,13 +279,6 @@ sgain:
             goto sgain;
             break;
         }
-        //     //default:
-        //         // std::string choice1 = to_string(choice);
-        //         //   regex e("^[^4]+$");
-        //         // if (!(regex_match(e, choice1))){
-        //         //     cout<<"Not Valid number....\n";
-        //         //   }
-        //         break;
     case 4:
         cout << "Thank you for shopping" << endl;
         exit(0);
