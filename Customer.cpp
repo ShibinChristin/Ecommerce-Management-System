@@ -12,10 +12,6 @@ int Customer::idGenerate()
 
 void Customer::CustomerChoiceDisplay()
 {
-    // ostream customerb("temp.txt");
-    // std::cout<<"What would you like to buy\n";
-    ///////////////////////////////////////////////////
-    // ifstream customer("products.txt", ios::in);
     cout << "***********************       MENU        ********************************\n\n";
     cout << "1.Buy Product\n";
     cout << "2.Show Product\n";
@@ -65,6 +61,7 @@ void Customer::CustomerBuy()
     std::regex obj("^[0-5]$");
     std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
     bool found = false;
+    int i = 0;
     ofstream buy("orders.txt", ios::out | ios::app);
     showProducts();
     cout << endl;
@@ -92,6 +89,7 @@ gotobuy:
                 if (Cproduct == name)
                 {
                     found = true;
+                    i++;
                 }
             }
             if (token.rfind("ProductID ", 0) == 0)
@@ -105,8 +103,9 @@ gotobuy:
 
             line2.erase(0, pos + delimiter.length());
         }
-        if (found == true)
+        if (found)
         {
+            cout << "Order added to cart successfully......\n";
             buy << "OrderID " << idGenerate() << ";"
                 << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
@@ -115,13 +114,15 @@ gotobuy:
                 << ";Status "
                 << "Pending"
                 << ";" << endl;
+                found=false;
 
             break;
         }
     }
-    if (found == false)
+    if (i == 0)
     {
         cout << "Product not found " << endl;
+        return;
     }
     buy.close();
     ofstream temp("temp.txt", ios::out | ios::app);
@@ -192,15 +193,18 @@ gotobuy:
         }
         if (idfound)
         {
-            temp << "ProductID " << ProductID;
-            temp << ";Name " << name;
-            temp << ";Price " << Price;
-            temp << ";Type " << ProductType;
-            temp << ";Count " << ProductC - TempCount << ";" << endl;
-            if (ProductC - TempCount <= 0)
+            if (ProductC - TempCount < 0)
             {
                 cout << "Product Out of stock......\nPlease try again later\n";
-                sleep(2);
+                return;
+            }
+            else
+            {
+                temp << "ProductID " << ProductID;
+                temp << ";Name " << name;
+                temp << ";Price " << Price;
+                temp << ";Type " << ProductType;
+                temp << ";Count " << ProductC - TempCount << ";" << endl;
             }
         }
 
@@ -271,7 +275,7 @@ void Customer::CancelOrder()
     std::string line1, defstatus = "Pending", status, Order, Name, Type;
     std::string delimiter = ";";
     bool st = false;
-    int count2=0;
+    int count2 = 0;
     while (std::getline(view, line1))
     {
         size_t pos = 0;
@@ -315,8 +319,9 @@ void Customer::CancelOrder()
             st = false;
         }
     }
-    if(count2==0){
-        cout<<"No orders to cancel.....\n";
+    if (count2 == 0)
+    {
+        cout << "No orders to cancel.....\n";
         return;
     }
     view.close();

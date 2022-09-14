@@ -1,7 +1,3 @@
-ProductID 18367;Name Chair;Price ;Type Furniture;Count 17;
-OrderID 40;ProductID   18367;Name Chair;Type Furniture;Count 1;Courier Kochi;Status Shipping;
-OrderID 19;ProductID  18151;Name Kurtha;Type Fashion;Count 2;Courier Kochi;Status Shipping;
-OrderID 46;ProductID  18367;Name Chair;Type Furniture;Count 2;Courier Ernakulam;Status Shipping;
 ProductID 28301;Name iPhone 13;Price 79900;Type Electronics;Count 5;
 ProductID 733;Name Oppo A9;Price 79900;Type Electronics;Count 5;
 ProductID 16558;Name Canon 1500D;Price 39900;Type Electronics;Count 12;
@@ -11,8 +7,8 @@ ProductID 17031;Name Sofa;Price 17845;Type Furniture;Count 8;
 ProductID 17443;Name Flare dress;Price 1120;Type Fashion;Count 18;
 ProductID 17538;Name iPhone 14;Price 1120;Type Electronics;Count 5;
 ProductID 18050;Name Wardrobe;Price 25000;Type Furniture;Count 15;
-ProductID 18151;Name Kurtha;Price 25000;Type Fashion;Count 10;
+ProductID 18151;Name Kurtha;Price 25000;Type Fashion;Count 20;
 ProductID 18285;Name Redmi note 11;Type Electronics;Count 10;
-ProductID 18367;Name Chair;Price 1000;Type Furniture;Count 17;
-ProductID 18426;Name Men shirt;Price 1820;Type Fashion;Count 14;
-ProductID 18491;Name iMee TV;Price 1820;Type Electronics;Count 14;
+ProductID 18426;Name Men shirt;Price 1820;Type Fashion;Count 11;
+ProductID 18491;Name AB;Price 1820;Type Electronics;Count 3;
+
