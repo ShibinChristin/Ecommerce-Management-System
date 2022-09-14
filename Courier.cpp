@@ -95,7 +95,87 @@ ch:
 void Courier::StatusUpdate()
 {
     std::string Orderid;
-    listOfOrders();
+    // listOfOrders();
+////////////////////////////////////////////////////////////////
+    std::string location;
+    std::string Name1, OrderID1, Count1, Courier1, Type1;
+    cout << "1.Kochi\n2.Ernakulam\n";
+ch:
+    cout << "Enter choice :";
+    getline(cin >> ws, choice);
+    if (choice == "1")
+    {
+        location = "Kochi";
+    }
+    else if (choice == "2")
+    {
+        location = "Ernakulam";
+    }
+    else
+    {
+        std::cout << "       ===Not a valid choice !! Please retry.......===\n";
+        goto ch;
+    }
+
+    std::string line1, Location, Status1, defStatus = "Shipping";
+    bool found = false, flag1 = false;
+    int c = 0, d = 0;
+    ifstream in("orders.txt", ios::in);
+    while (std::getline(in, line1))
+    {
+        size_t pos = 0;
+        std::string originalLine = line1;
+        std::string delimiter=";";
+        std::string token;
+        found = false;
+        while ((pos = line1.find(delimiter)) != std::string::npos)
+        {
+            token = line1.substr(0, pos);
+            if (token.rfind("OrderID ", 0) == 0)
+            {
+                OrderID1 = token.substr(8);
+            }
+            if (token.rfind("Name ", 0) == 0)
+            {
+                Name1 = token.substr(5);
+            }
+            if (token.rfind("Type ", 0) == 0)
+            {
+                Type1 = token.substr(5);
+            }
+            if (token.rfind("Count ", 0) == 0)
+            {
+                Count1 = token.substr(5);
+            }
+            if (token.rfind("Courier ", 0) == 0)
+            {
+                Location = token.substr(8);
+                if (location == Location)
+                {
+                    found = true;
+                }
+            }
+            if (token.rfind("Status ", 0) == 0 && found)
+            {
+                Status1 = token.substr(7);
+                if (Status1 == defStatus)
+                {
+                    flag1 = true;
+                    cout << "Order ID " << OrderID1 << " | "
+                         << "Name " << Name1 << " | "
+                         << "Type " << Type1 << " | "
+                         << "Count " << Count1 << endl;
+                    c++;
+                }
+            }
+            line1.erase(0, pos + delimiter.length());
+        }
+    }
+    if(c==0){
+        cout<<"No Prducts to update"<<endl;
+        return;
+    }
+///////////////////////////////////////
     cout << "Enter Order ID to be updated : ";
     getline(cin >> ws, Orderid);
     std::string OrderId, line;

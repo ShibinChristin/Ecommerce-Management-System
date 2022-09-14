@@ -155,28 +155,28 @@ sgain:
             case 3:
                 system("clear");
                 Mer.OrderStatusView();
-                sleep(4);
+                sleep(3);
                 goto mopt;
                 break;
 
             case 4:
                 system("clear");
                 Mer.displayOutofStock();
-                sleep(4);
+                sleep(2);
                 goto mopt;
                 break;
 
             case 5:
                 system("clear");
                 Mer.CancelledProducts();
-                sleep(4);
+                sleep(3);
                 goto mopt;
                 break;
 
             case 6:
                 system("clear");
                 Mer.AssignCourier();
-                sleep(4);
+                sleep(2);
                 goto mopt;
                 break;
 
