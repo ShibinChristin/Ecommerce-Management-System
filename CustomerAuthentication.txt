@@ -1,7 +1,5 @@
 Shibin 123456
 Asha 123456
-Dev 1235
-sda 123
-anu 122
-dev 123
-dk 12
+Dev 1235 
+sda 123 
+cus 123
