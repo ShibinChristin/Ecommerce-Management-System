@@ -25,11 +25,11 @@ class Customer
 {
     std::string line1, name, price;
     std::string delimiter = ";";
+    std::string token;
 public:
     int customerChoice;
     std::string line;
     int ProductBuy;
-    //string subString; 
     void CustomerBuy();
     void CustomerChoiceDisplay();
     void showProducts();
@@ -49,7 +49,6 @@ public:
     void merchantOptions();
     void displayProducts();
     void searchProducts();
-    // void MerchantCondition(std::string sub);
     void OrderStatusView();
     void displayOutofStock();
     void AssignCourier();

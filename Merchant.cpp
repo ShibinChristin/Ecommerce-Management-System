@@ -4,6 +4,9 @@ void Products::OrderStatusView()
 
         ifstream customer1("orders.txt", ios::in);
         std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
+        std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending";
+        bool status = false;
+        int NoStatus = 0;
         cout << "***********************************************************************\n\n";
         cout << "                      Order Status                             \n\n";
         cout << "***********************************************************************\n\n";
@@ -17,30 +20,50 @@ void Products::OrderStatusView()
                         token = line2.substr(0, pos);
                         if (token.rfind("OrderID ", 0) == 0)
                         {
-                                cout << "OrderID :" << token.substr(8);
+                                OrderId = token.substr(8);
                         }
                         if (token.rfind("ProductID ", 0) == 0)
                         {
-                                cout << " | ProductID :" << token.substr(10);
+                                ProductstatusID = token.substr(10);
                         }
                         if (token.rfind("Name ", 0) == 0)
                         {
-                                cout << " | Name :" << token.substr(5);
+                                OrderName = token.substr(5);
                         }
                         if (token.rfind("Type ", 0) == 0)
                         {
-                                cout << " | Type :" << token.substr(4);
+                                StatusType = token.substr(4);
                         }
                         if (token.rfind("Count ", 0) == 0)
                         {
-                                cout << " | Count :" << token.substr(5);
+                                OrderCount = token.substr(5);
                         }
                         if (token.rfind("Status ", 0) == 0)
                         {
-                                cout << " | Status :" << token.substr(7) << endl;
+                                OrderStatus = token.substr(7);
+                                if (OrderStatus == defStatus)
+                                {
+                                        status = true;
+                                        NoStatus++;
+                                }
                         }
                         line2.erase(0, pos + delimiter.length());
                 }
+                if (status)
+                {
+                        std::cout << "Order ID " << OrderId << " | "
+                                                               "Product ID "
+                                  << ProductstatusID << " | "
+                                  << "Name " << OrderName << " | "
+                                  << "Type " << StatusType << " | "
+                                  << "Count " << OrderCount << " | "
+                                  << "Status " << OrderStatus << std::endl;
+                        status = false;
+                }
+        }
+        if (NoStatus == 0)
+        {
+                cout << "\nNo orders Present......" << endl;
         }
 }
 
@@ -61,31 +84,29 @@ void Products::addProducts()
 
         std ::cout << "<---------------------- ADD PRODUCTS----------------------->" << std ::endl;
 
-        productId = idGeneration();
-
         std ::cout << "\nEnter the Product Name : ";
         std ::getline(std::cin >> std::ws, productName);
 
 choice:
         std ::cout << "\nEnter the Type of the Product \n1.Electronics\n2.Furniture\n3.Fashion\nEnter choice :";
         // std ::cin >> productChoice;
-        getline(cin>>ws,productChoice);
+        getline(cin >> ws, productChoice);
         std::regex l("^[1-3]$");
         if (!(regex_match(productChoice, l)))
-            {
+        {
                 cout << "Invalid Choice .....Please try again\n";
                 goto choice;
-            }
-        switch(stoi(productChoice))
+        }
+        switch (stoi(productChoice))
         {
         case 1:
                 productType = "Electronics";
                 break;
-        
+
         case 2:
                 productType = "Furniture";
                 break;
-        
+
         case 3:
                 productType = "Fashion";
                 break;
@@ -140,7 +161,7 @@ Type:
         // else
         // {
         //         // merchantOptions();
-                
+
         // }
 }
 void Products::merchantOptions()
@@ -161,7 +182,7 @@ void Products::displayOutofStock()
         std::cout << "*******************      Out of Stock Products      ********************************\n\n";
 
         std::string line, name, ProductID, outCount, ProductType;
-        // int CountVal;
+        int Stock = 0;
         bool found = false;
         std::ifstream file;
         file.open("products.txt", std::ios::in);
@@ -189,9 +210,10 @@ void Products::displayOutofStock()
                         {
                                 outCount = token.substr(6); // out of stock count
                                 int CountVal = stoi(outCount);
-                                if (CountVal <= 5)
+                                if (CountVal <= 0)
                                 {
                                         found = true;
+                                        Stock++;
                                 }
                         }
                         line.erase(0, pos + delimiter.length());
@@ -204,6 +226,11 @@ void Products::displayOutofStock()
                         found = false;
                 }
         }
+        if (Stock == 0)
+        {
+                cout << "\nNo Products are out of stock...." << endl;
+        }
+
         file.close();
 }
 
@@ -324,7 +351,7 @@ void Products::AssignCourier()
                         {
                                 cout << "Updated Successfully......" << endl;
                                 temp << "OrderID " << OrderID << ";"
-                                     << "ProductID "<< ProductID << ";"
+                                     << "ProductID " << ProductID << ";"
                                      << "Name " << Name << ";"
                                      << "Type " << Type << ";"
                                      << "Count " << Count << ";"
@@ -346,7 +373,7 @@ void Products::AssignCourier()
                         if (iffound)
                         {
                                 temp << "OrderID " << OrderID << ";"
-                                     << "ProductID "<<ProductID<< ";"
+                                     << "ProductID " << ProductID << ";"
                                      << "Name " << Name << ";"
                                      << "Type " << Type << ";"
                                      << "Count " << Count << ";"
@@ -398,7 +425,7 @@ void Products::searchProducts()
 
                 std::string delimiter = ";";
                 ifstream pName;
-                int k =0;
+                int k = 0;
                 pName.open("products.txt", std::ios::in);
                 while (std::getline(pName, line))
                 {
@@ -437,7 +464,7 @@ void Products::searchProducts()
                         }
                         if (found)
                         {
-                                std::cout << "ProductID "<< Id << " | "
+                                std::cout << "ProductID " << Id << " | "
                                           << "Name " << Name << " | "
                                           << "Price " << price1 << " | "
                                           << "Type " << Type1 << " | "
@@ -445,11 +472,11 @@ void Products::searchProducts()
                                 found = false;
                                 break;
                         }
-                        
                 }
                 pName.close();
-                if(k==0){
-                        cout<<"Product not found"<<endl;
+                if (k == 0)
+                {
+                        cout << "Product not found" << endl;
                 }
         }
         else if (choice == "2")
@@ -461,11 +488,11 @@ void Products::searchProducts()
                 std::cout << "Enter your choice" << std::endl;
                 cin >> choice;
                 std::regex check("^[1-3]$");
-        if (!(regex_match(choice, check)))
-            {
-                cout << "Invalid Choice .....Please try again\n";
-                goto ch;
-            }
+                if (!(regex_match(choice, check)))
+                {
+                        cout << "Invalid Choice .....Please try again\n";
+                        goto ch;
+                }
                 switch (stoi(choice))
                 {
                 case 1:
@@ -541,8 +568,8 @@ void Products::searchProducts()
         }
         else
         {
-                cout<<"Invalid Choice... Please try again\n";
-                cout<<"\n";
+                cout << "Invalid Choice... Please try again\n";
+                cout << "\n";
                 searchProducts();
         }
 }
@@ -552,6 +579,7 @@ void Products::CancelledProducts()
         std::string line, orderId, pId, pName, Price, pType, pCount, pStatus;
         std::string status = "Cancelled";
         bool found = false;
+        int cancelled = 0;
         std::cout << "<--------------------------List of Cancelled Orders----------------------------->" << std::endl;
         std::ifstream orderList;
         orderList.open("orders.txt", std::ios::in);
@@ -589,6 +617,7 @@ void Products::CancelledProducts()
                                 if (status == pStatus)
                                 {
                                         found = true;
+                                        cancelled++;
                                 }
                         }
                         line.erase(0, pos + delimiter.length());
@@ -608,6 +637,10 @@ void Products::CancelledProducts()
                 {
                         continue;
                 }
+        }
+        if (cancelled == 0)
+        {
+                cout << "\nNo Products have been cancelled by user......" << endl;
         }
         orderList.close();
 }

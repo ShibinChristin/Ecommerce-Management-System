@@ -157,7 +157,7 @@ user2:
 		{
 			cout << "Awesome....Your Registration is successful......" << endl;
 		}
-		cout << "Your USERID :"
+		cout << "Your USERNAME :"
 			 << "\e[1m" << username2 << endl;
 		file2 << username2 << " " << password2 << endl;
 		file2.close();
@@ -257,7 +257,7 @@ user3:
 		{
 			cout << "Awesome....Your Registration is successful......" << endl;
 		}
-		cout << "Your USERID :"
+		cout << "Your USERNAME :"
 			 << "\e[1m" << username3 << endl;
 		file3 << username3 << " " << password3 << endl;
 		file3.close();

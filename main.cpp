@@ -34,7 +34,7 @@ sgain:
     {
     case 1:
     C:
-        //system("clear");
+        // system("clear");
         cout << "********************************************************************************\n\n";
         cout << "                          Welcome to Customer Portal                             \n\n";
         cout << "****************************        MENU        ********************************\n\n";
@@ -73,17 +73,14 @@ sgain:
             case 2:
                 system("clear");
                 cust.showProducts();
-                // sleep(3);
                 goto Coptions;
                 break;
             case 3:
                 system("clear");
                 cust.orderStatus();
-                // sleep(3);
                 goto Coptions;
             case 4:
                 cust.CancelOrder();
-                // sleep(5);
                 goto Coptions;
                 break;
             case 5:
@@ -96,7 +93,7 @@ sgain:
 
         case 2:
             auth.CustomerRegistration();
-            goto Coptions;
+            goto C;
             break;
 
         case 3:
@@ -112,7 +109,7 @@ sgain:
     case 2:
 
     mgain:
-        system("clear");
+        // system("clear");
         cout << "*****************************************************************************\n\n";
         cout << "                      Welcome to Merchant Portal                             \n\n";
         cout << "*****************************************************************************\n\n";
@@ -131,8 +128,6 @@ sgain:
         {
         case 1:
             auth.MerchantLogin();
-            // sleep(1);
-            // system("clear");
         mopt:
             Mer.merchantOptions();
             cout << "\nEnter your choice :";
@@ -159,7 +154,6 @@ sgain:
             case 3:
                 system("clear");
                 Mer.OrderStatusView();
-                //sleep(3);
                 goto mopt;
                 break;
 
@@ -173,14 +167,12 @@ sgain:
             case 5:
                 system("clear");
                 Mer.CancelledProducts();
-                //sleep(3);
                 goto mopt;
                 break;
 
             case 6:
                 system("clear");
                 Mer.AssignCourier();
-                //sleep(2);
                 goto mopt;
                 break;
 
@@ -190,14 +182,13 @@ sgain:
 
             default:
                 cout << "Invalid Choice......!! Please Try again\n";
-                //sleep(2);
                 goto mopt;
                 break;
             }
             break;
         case 2:
             auth.MerchantRegistration();
-            goto mopt;
+            goto mgain;
             break;
         default:
             goto sgain;
@@ -205,7 +196,7 @@ sgain:
         }
         break;
     case 3:
-        system("clear");
+        // system("clear");
         cout << "******************************************************************************\n\n";
         cout << "                        Welcome to Courier Portal                             \n\n";
         cout << "******************************************************************************\n\n";
@@ -224,7 +215,6 @@ sgain:
         {
         case 1:
             auth.CourierLogin();
-            //sleep(1);
         copt:
             C.courierOptions();
             cout << "\nEnter your choice: ";
@@ -239,18 +229,15 @@ sgain:
             case 1:
                 system("clear");
                 C.listOfOrders();
-                //sleep(2);
                 goto copt;
                 break;
             case 2:
                 C.StatusUpdate();
-                //sleep(3);
                 goto copt;
                 break;
             case 3:
                 system("clear");
                 C.PendingAndDelivered();
-                //sleep(3);
                 goto copt;
                 break;
             case 4:
@@ -264,7 +251,7 @@ sgain:
             break;
         case 2:
             auth.CourierRegistration();
-            goto copt;
+            goto dopt;
             break;
 
         case 3:

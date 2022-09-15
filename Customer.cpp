@@ -27,7 +27,7 @@ void Customer::showProducts()
     while (std::getline(in, line1))
     {
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
@@ -58,7 +58,7 @@ void Customer::CustomerBuy()
 {
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[1-5]$");
-    std::string Cproduct, line2, delimiter = ";", name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
+    std::string Cproduct, line2, name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
     bool found = false;
     int i = 0;
     ofstream buy("orders.txt", ios::out | ios::app);
@@ -80,11 +80,11 @@ gotobuy:
     int j = 0;
     while (std::getline(in1, line))
     {
-        std::string delimiter = ";";
+        // std::string delimiter = ";";
         size_t pos = 0;
         idfound = false;
         std::string originalLine = line;
-        std::string token;
+        // std::string token;
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
@@ -121,11 +121,11 @@ gotobuy:
     std::string line3;
     while (std::getline(in3, line3))
     {
-        std::string delimiter = ";";
+        // std::string delimiter = ";";
         size_t pos = 0;
         idfound = false;
         std::string originalLine = line3;
-        std::string token;
+        // std::string token;
         while ((pos = line3.find(delimiter)) != std::string::npos)
         {
             token = line3.substr(0, pos);
@@ -181,7 +181,7 @@ gotobuy:
     while (std::getline(customer1, line2))
     {
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         while ((pos = line2.find(delimiter)) != std::string::npos)
         {
             token = line2.substr(0, pos);
@@ -228,13 +228,13 @@ gotobuy:
 void Customer::orderStatus()
 {
     std::string line1, name, price;
-    std::string delimiter = ";";
+    // std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line1))
     {
         std::string ProductS, nameS, PriceS, TypeS, Status, countS;
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
@@ -277,13 +277,13 @@ void Customer::CancelOrder()
     ifstream view("orders.txt", ios::in);
     cout << "***********************      Orders     ********************************\n";
     std::string line1, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type;
-    std::string delimiter = ";";
+    // std::string delimiter = ";";
     bool st = false;
     int count2 = 0;
     while (std::getline(view, line1))
     {
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
@@ -343,7 +343,7 @@ cancel:
     {
         std::string OriginalLine = line2;
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         while ((pos = line2.find(delimiter)) != std::string::npos)
         {
             token = line2.substr(0, pos);
@@ -407,7 +407,7 @@ cancel:
     while (std::getline(in, line3))
     {
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         idfound1 = false;
         while ((pos = line3.find(delimiter)) != std::string::npos)
         {
@@ -442,7 +442,7 @@ cancel:
     {
         std::string originalLine1 = line4;
         size_t pos = 0;
-        std::string token;
+        // std::string token;
         while ((pos = line4.find(delimiter)) != std::string::npos)
         {
             token = line4.substr(0, pos);
