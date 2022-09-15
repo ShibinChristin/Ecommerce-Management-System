@@ -1,5 +1,2 @@
-Shibin 123456
-Asha 123456
-Dev 1235 
-sda 123 
-cus 123
+Username Shibin;Password 123456;CustomerID 12;
+Username sda;Password 1234;CustomerID 2;

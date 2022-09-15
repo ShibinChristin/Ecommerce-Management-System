@@ -1,7 +1,5 @@
 #include "project.h"
-
 ifstream customer("products.txt", ios::in);
-
 int Customer::idGenerate()
 {
     int id;
@@ -12,6 +10,7 @@ int Customer::idGenerate()
 
 void Customer::CustomerChoiceDisplay()
 {
+    // cout<<"Customer ID "<<Customer123<<endl;
     cout << "***********************       MENU        ********************************\n\n";
     cout << "1.Buy Product\n";
     cout << "2.Show Product\n";
@@ -22,12 +21,10 @@ void Customer::CustomerChoiceDisplay()
 }
 void Customer::showProducts()
 {
-
     ifstream in("products.txt", ios::in);
     while (std::getline(in, line1))
     {
         size_t pos = 0;
-        // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);

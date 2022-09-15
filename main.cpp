@@ -1,5 +1,4 @@
 #include "project.h"
-
 int main()
 {
     string choice, options, CustChoice;
@@ -19,9 +18,9 @@ sgain:
     cout << "2.Merchant\n";
     cout << "3.Courier\n";
     cout << "4.Exit\n";
-    cout<<"\n";
+    cout << "\n";
     cout << "\nEnter your choice : ";
-    cout<<"\n";
+    cout << "\n";
     cin >> choice;
     if (!(regex_match(choice, m)))
     {
@@ -53,7 +52,6 @@ sgain:
         {
         case 1:
             auth.CustomerLogin();
-            sleep(1);
         Coptions:
             cust.CustomerChoiceDisplay();
             cout << "Enter choice : ";
@@ -160,7 +158,7 @@ sgain:
             case 4:
                 system("clear");
                 Mer.displayOutofStock();
-                
+
                 goto mopt;
                 break;
 
@@ -258,7 +256,6 @@ sgain:
             goto sgain;
             break;
 
-            
         default:
             cout << "Invalid Choice !!...Please try again\n";
             goto sgain;
