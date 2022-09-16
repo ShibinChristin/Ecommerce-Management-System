@@ -1,4 +1,9 @@
-ProductID 1;MerchantID 65;Name sda;Price 20000;Type Electronics;Count 2;
-ProductID 3;MerchantID 24;Name dsa;Price 1200;Type Electronics;Count 3;
-ProductID 69;MerchantID 39;Name iphone 13;Price 2000;Type Fashion;Count 20;
-ProductID 29;MerchantID 24;Name AB;Price 20000;Type Electronics;Count 10;
+ProductID 10;MerchantID 65;Name sda;Price 20000;Type Electronics;Count 0;
+ProductID 33;MerchantID 24;Name dsa;Price 1200;Type Electronics;Count 3;
+ProductID 56;MerchantID 65;Name AC;Price 2000;Type Fashion;Count 20;
+ProductID 78;MerchantID 24;Name chair;Price 3000;Type Furniture;Count 14;
+ProductID 44;MerchantID 65;Name iphone 13;Price 1000;Type Electronics;Count 16;
+ProductID 98;MerchantID 65;Name oppo;Price 2200;Type Fashion;Count 15;
+ProductID 12;MerchantID 24;Name vivo;Price 2000;Type Electronics;Count 18;
+ProductID 74;MerchantID 39;Name shirt;Price 2000;Type Fashion;Count 12;
+ProductID 23;MerchantID 24;Name AB;Price 20000;Type Electronics;Count 10;

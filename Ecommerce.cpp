@@ -80,7 +80,7 @@ passwordStart1:
 void Authentication::CustomerLogin()
 {
 	int cAuthenticate = 0;
-	bool ifound = false;
+	bool ifound = false, flag = false;
 	std::string line5, token, CustomerID, pass;
 	std::string ChecK_name;
 	std::string delimiter = ";";
@@ -98,7 +98,7 @@ retry:
 	cin >> password1;
 
 	ifstream input("CustomerAuthentication.txt", ios::in);
-	ofstream cId("customerId.txt",ios::out);
+	ofstream cId("customerId.txt", ios::out);
 	while (getline(input, line5))
 	{
 
@@ -109,15 +109,20 @@ retry:
 			if (token.rfind("Username ", 0) == 0)
 			{
 				ChecK_name = token.substr(9);
+				// cout<<"User name "<<ChecK_name;
 				if (username1 == ChecK_name)
 				{
 					ifound = true;
-					cAuthenticate++;
 				}
 			}
 			if (token.rfind("Password ", 0) == 0 && ifound)
 			{
 				pass = token.substr(9);
+				if (pass == password1)
+				{
+					flag = true;
+					cAuthenticate++;
+				}
 			}
 			if (token.rfind("CustomerID ", 0) == 0 && ifound)
 			{
@@ -126,14 +131,16 @@ retry:
 			// }
 			line5.erase(0, pos + delimiter.length());
 		}
-		if (ifound)
+		if (flag)
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
-			ifound = false;
-			cId<<CustomerID<<endl;
+			flag = false;
+			cId << CustomerID << endl;
 		}
+			ifound=false;
+
 	}
-	if (cAuthenticate == 0) 
+	if (cAuthenticate == 0)
 	{
 		std::cout << "\n";
 		std::cout << "       ===Invalid name! Please try again.===\n";
@@ -236,7 +243,7 @@ retry:
 	cin >> password2;
 
 	ifstream merchantFile("merchantAuthentication.txt");
-	ofstream mer("merchantId.txt",ios::out);
+	ofstream mer("merchantId.txt", ios::out);
 	while (getline(merchantFile, line6))
 	{
 
@@ -267,7 +274,7 @@ retry:
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
 			ifound = false;
-			mer<<MerchantID<<endl;
+			mer << MerchantID << endl;
 		}
 	}
 	if (mAuthenticate == 0)

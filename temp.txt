@@ -1,3 +1,0 @@
-CustomerID 12;MerchantID 2;OrderID 19;ProductID 3;Name dsa;Type Electronics;Count 3;Status Cancelled;
-CustomerID 12;MerchantID 24;OrderID 46;ProductID   3;Name dsa;Type Electronics;Count 5;Status Pending;
-CustomerID 12;MerchantID 65;OrderID 47;ProductID  3;Name dsa;Type Electronics;Count 2;Courier Kochi;Status Shipping;

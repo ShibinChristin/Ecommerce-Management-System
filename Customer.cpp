@@ -306,22 +306,26 @@ void Customer::orderStatus()
 }
 void Customer::CancelOrder()
 {
+    ifstream Customerid("customerId.txt", ios::in);
+    ifstream MerchantId("merchantId.txt", ios::in);
     ifstream view("orders.txt", ios::in);
     cout << "***********************      Orders     ********************************\n";
     std::string line1, Cid, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type, iDCustomer, id1, id2;
     // std::string delimiter = ";";
-    bool idCustomer = false, st = false;
     int count2 = 0;
     while (std::getline(Customerid, id1))
     {
         customer_id = id1;
     }
+    Customerid.close();
     while (std::getline(MerchantId, id2))
     {
         merchant_id = id2;
     }
+    MerchantId.close();
     while (std::getline(view, line1))
     {
+        bool idCustomer = false, st = false;
         size_t pos = 0;
         // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
@@ -351,7 +355,7 @@ void Customer::CancelOrder()
             {
 
                 status = token.substr(7);
-                if (defstatus == status || status == defstatus1)
+                if (status ==defstatus || status == defstatus1)
                 {
                     st = true;
                     count2++;
@@ -359,26 +363,27 @@ void Customer::CancelOrder()
             }
             line1.erase(0, pos + delimiter.length());
         }
-        if (idCustomer)
+        // if (idCustomer)
+        // {
+        if (st)
         {
-            if (st)
-            {
-                cout << "Order ID " << Order << "|"
-                     << "Name " << Name << "|"
-                     << "Type "
-                     << Type << "|"
-                     << "Status "
-                     << status
-                     << endl;
-                st = false;
-                idCustomer = false;
-            }
+            cout << "Order ID " << Order << "|"
+                 << "Name " << Name << "|"
+                 << "Type "
+                 << Type << "|"
+                 << "Status "
+                 << status
+                 << endl;
+            st = false;
         }
-        else
-        {
-            continue;
-        }
+        // }
+        // else
+        // {
+        //     continue;
+        // }
+        idCustomer = false;
     }
+
     if (count2 == 0)
     {
         cout << "No orders to cancel.....\n";
