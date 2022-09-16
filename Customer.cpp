@@ -1,5 +1,7 @@
 #include "project.h"
 ifstream customer("products.txt", ios::in);
+ifstream Customerid("customerId.txt", ios::in);
+ifstream MerchantId("merchantId.txt", ios::in);
 int Customer::idGenerate()
 {
     int id;
@@ -10,7 +12,6 @@ int Customer::idGenerate()
 
 void Customer::CustomerChoiceDisplay()
 {
-    // cout<<"Customer ID "<<Customer123<<endl;
     cout << "***********************       MENU        ********************************\n\n";
     cout << "1.Buy Product\n";
     cout << "2.Show Product\n";
@@ -53,6 +54,7 @@ void Customer::showProducts()
 }
 void Customer::CustomerBuy()
 {
+
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[1-5]$");
     std::string Cproduct, line2, name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
@@ -75,6 +77,14 @@ gotobuy:
     ifstream in1("products.txt", ios::in);
     bool idfound = false;
     int j = 0;
+    while (std::getline(Customerid, id))
+    {
+        customer_id = id;
+    }
+    while (std::getline(MerchantId, merId))
+    {
+        merchant_id = merId;
+    }
     while (std::getline(in1, line))
     {
         // std::string delimiter = ";";
@@ -158,6 +168,7 @@ gotobuy:
             else
             {
                 temp << "ProductID " << ProductID;
+                temp << ";MerchantID " << merchant_id;
                 temp << ";Name " << Cproduct;
                 temp << ";Price " << Price;
                 temp << ";Type " << ProductType;
@@ -206,7 +217,9 @@ gotobuy:
         if (found)
         {
             cout << "Order added to cart successfully......\n";
-            buy << "OrderID " << idGenerate() << ";"
+            buy << "CustomerID " << customer_id << ";"
+                << "MerchantID " << merchant_id << ";"
+                << "OrderID " << idGenerate() << ";"
                 << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
                 << "Type " << ProductType << ";"
@@ -224,48 +237,70 @@ gotobuy:
 /*Code to check status of order*/
 void Customer::orderStatus()
 {
-    std::string line1, name, price;
-    // std::string delimiter = ";";
+    std::string line1, name, price, Customer_ID, file;
     ifstream in("orders.txt", ios::in);
+    ifstream cuID("customerId.txt", ios::in);
+    bool idCustomer = false;
+    int buy = 0;
+    while (std::getline(cuID, file))
+    {
+        Customer_ID = file;
+    }
     while (std::getline(in, line1))
     {
-        std::string ProductS, nameS, PriceS, TypeS, Status, countS;
+        std::string ProductS, nameS, PriceS, TypeS, Status, countS, CustomerIdS;
         size_t pos = 0;
-        // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
-            if (token.rfind("ProductID ", 0) == 0)
+            if (token.rfind("CustomerID ", 0) == 0)
+            {
+                CustomerIdS = token.substr(11);
+                if (CustomerIdS == Customer_ID)
+                {
+                    idCustomer = true;
+                    buy++;
+                }
+            }
+            if (token.rfind("ProductID ", 0) == 0 && idCustomer)
             {
                 ProductS = token.substr(9);
             }
-            if (token.rfind("Name ", 0) == 0)
+            if (token.rfind("Name ", 0) == 0 && idCustomer)
             {
                 nameS = token.substr(5);
             }
-            if (token.rfind("Type ", 0) == 0)
+            if (token.rfind("Type ", 0) == 0 && idCustomer)
             {
                 TypeS = token.substr(5);
             }
-            if (token.rfind("Count ", 0) == 0)
+            if (token.rfind("Count ", 0) == 0 && idCustomer)
             {
                 countS = token.substr(6);
             }
-            if (token.rfind("Status ", 0) == 0)
+            if (token.rfind("Status ", 0) == 0 && idCustomer)
             {
                 Status = token.substr(7);
             }
             line1.erase(0, pos + delimiter.length());
         }
-        cout << "ProductID " << ProductS << "|"
-             << "Name " << nameS << "|"
-             << "Type "
-             << TypeS << "|"
-             << "Count "
-             << countS << "|"
-             << "Status "
-             << Status
-             << endl;
+        if (idCustomer)
+        {
+            cout << "ProductID " << ProductS << "|"
+                 << "Name " << nameS << "|"
+                 << "Type "
+                 << TypeS << "|"
+                 << "Count "
+                 << countS << "|"
+                 << "Status "
+                 << Status
+                 << endl;
+            idCustomer = false;
+        }
+    }
+    if (buy == 0)
+    {
+        cout << "\nYou haven't made any orders...." << endl;
     }
     in.close();
 }
@@ -273,10 +308,18 @@ void Customer::CancelOrder()
 {
     ifstream view("orders.txt", ios::in);
     cout << "***********************      Orders     ********************************\n";
-    std::string line1, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type;
+    std::string line1, Cid, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type, iDCustomer, id1, id2;
     // std::string delimiter = ";";
-    bool st = false;
+    bool idCustomer = false;
     int count2 = 0;
+    while (std::getline(Customerid, id1))
+    {
+        customer_id = id1;
+    }
+    while (std::getline(MerchantId, id2))
+    {
+        merchant_id = id2;
+    }
     while (std::getline(view, line1))
     {
         size_t pos = 0;
@@ -284,32 +327,43 @@ void Customer::CancelOrder()
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
-            if (token.rfind("OrderID ", 0) == 0)
+            if (token.rfind("CustomerID ", 0) == 0)
             {
-                Order = token.substr(8);
-            }
-            if (token.rfind("Name ", 0) == 0)
-            {
-                Name = token.substr(5);
-            }
-            if (token.rfind("Type ", 0) == 0)
-            {
-                Type = token.substr(5);
-            }
-            if (token.rfind("Status ", 0) == 0)
-            {
-
-                status = token.substr(7);
-                if (defstatus == status || status == defstatus1)
+                Cid = token.substr(11);
+                if (Cid == customer_id)
                 {
-                    st = true;
+                    idCustomer = true;
                     count2++;
                 }
             }
+            if (token.rfind("OrderID ", 0) == 0 && idCustomer)
+            {
+                Order = token.substr(8);
+            }
+            if (token.rfind("Name ", 0) == 0 && idCustomer)
+            {
+                Name = token.substr(5);
+            }
+            if (token.rfind("Type ", 0) == 0 && idCustomer)
+            {
+                Type = token.substr(5);
+            }
+            if (token.rfind("Status ", 0) == 0 && idCustomer)
+            {
+
+                status = token.substr(7);
+                // if (defstatus == status || status == defstatus1)
+                // {
+                //     st = true;
+                //     count2++;
+                // }
+            }
             line1.erase(0, pos + delimiter.length());
         }
-        if (st)
+        if (idCustomer)
         {
+            // if (st)
+            // {
             cout << "Order ID " << Order << "|"
                  << "Name " << Name << "|"
                  << "Type "
@@ -317,7 +371,9 @@ void Customer::CancelOrder()
                  << "Status "
                  << status
                  << endl;
-            st = false;
+            // st = false;
+            // }
+            idCustomer = false;
         }
     }
     if (count2 == 0)
@@ -333,6 +389,14 @@ void Customer::CancelOrder()
     std::regex obj("^[0-9]*$");
     int count = 0;
     bool found = false;
+    while (std::getline(Customerid, id))
+    {
+        customer_id = id;
+    }
+    while (std::getline(MerchantId, merId))
+    {
+        merchant_id = merId;
+    }
 cancel:
     cout << "Enter the Order ID you want to cancel :";
     getline(std::cin >> std::ws, CancelId);
@@ -374,7 +438,9 @@ cancel:
         if (found)
         {
             cout << "Cancelled Succesfully" << endl;
-            temp1 << "OrderID " << id;
+            temp1 << "CustomerID " << customer_id;
+            temp1 << ";MerchantID " << merchant_id;
+            temp1 << ";OrderID " << id;
             temp1 << ";ProductID " << Pid;
             temp1 << ";Name " << Name1;
             temp1 << ";Type " << Type1;
@@ -468,6 +534,7 @@ cancel:
         if (isfound)
         {
             Temp << "ProductID " << PorderID;
+            Temp << ";MerchantID " << merchant_id;
             Temp << ";Name " << name;
             Temp << ";Price " << Price;
             Temp << ";Type " << Type2;

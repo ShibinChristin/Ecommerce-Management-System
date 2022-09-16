@@ -98,6 +98,7 @@ retry:
 	cin >> password1;
 
 	ifstream input("CustomerAuthentication.txt", ios::in);
+	ofstream cId("customerId.txt",ios::out);
 	while (getline(input, line5))
 	{
 
@@ -121,7 +122,6 @@ retry:
 			if (token.rfind("CustomerID ", 0) == 0 && ifound)
 			{
 				CustomerID = token.substr(11);
-				Customer123 = CustomerID;
 			}
 			// }
 			line5.erase(0, pos + delimiter.length());
@@ -130,7 +130,8 @@ retry:
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
 			ifound = false;
-			// cout<<Customer123<<"\tCustomer id "<<endl;
+			cout<<CustomerID<<"\tCustomer id "<<endl;
+			cId<<CustomerID<<endl;
 		}
 	}
 	if (cAuthenticate == 0) 
@@ -236,6 +237,7 @@ retry:
 	cin >> password2;
 
 	ifstream merchantFile("merchantAuthentication.txt");
+	ofstream mer("merchantId.txt",ios::out);
 	while (getline(merchantFile, line6))
 	{
 
@@ -265,6 +267,7 @@ retry:
 		if (ifound)
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
+			mer<<MerchantID<<endl;
 			ifound = false;
 		}
 	}

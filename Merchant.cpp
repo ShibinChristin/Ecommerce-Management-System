@@ -4,13 +4,18 @@ void Products::OrderStatusView()
 
         ifstream customer1("orders.txt", ios::in);
         std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
-        std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending";
+        std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending", merId, merchant_id, Merchant;
         bool status = false;
         int NoStatus = 0;
         cout << "***********************************************************************\n\n";
         cout << "                      Order Status                             \n\n";
         cout << "***********************************************************************\n\n";
-
+        ifstream merchantId1("merchantId.txt", ios::in);
+        while (std::getline(merchantId1, merId))
+        {
+                merchant_id = merId;
+        }
+        merchantId1.close();
         while (std::getline(customer1, line2))
         {
                 size_t pos = 0;
@@ -18,34 +23,43 @@ void Products::OrderStatusView()
                 while ((pos = line2.find(delimiter)) != std::string::npos)
                 {
                         token = line2.substr(0, pos);
-                        if (token.rfind("OrderID ", 0) == 0)
+                        if (token.rfind("MerchantID ", 0) == 0)
                         {
-                                OrderId = token.substr(8);
-                        }
-                        if (token.rfind("ProductID ", 0) == 0)
-                        {
-                                ProductstatusID = token.substr(10);
-                        }
-                        if (token.rfind("Name ", 0) == 0)
-                        {
-                                OrderName = token.substr(5);
-                        }
-                        if (token.rfind("Type ", 0) == 0)
-                        {
-                                StatusType = token.substr(4);
-                        }
-                        if (token.rfind("Count ", 0) == 0)
-                        {
-                                OrderCount = token.substr(5);
-                        }
-                        if (token.rfind("Status ", 0) == 0)
-                        {
-                                OrderStatus = token.substr(7);
-                                if (OrderStatus == defStatus)
+                                Merchant = token.substr(11);
+                                if (Merchant == merchant_id)
                                 {
                                         status = true;
                                         NoStatus++;
                                 }
+                        }
+                        if (token.rfind("OrderID ", 0) == 0 && status)
+                        {
+                                OrderId = token.substr(8);
+                        }
+                        if (token.rfind("ProductID ", 0) == 0 && status)
+                        {
+                                ProductstatusID = token.substr(10);
+                        }
+                        if (token.rfind("Name ", 0) == 0 && status)
+                        {
+                                OrderName = token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0 && status)
+                        {
+                                StatusType = token.substr(4);
+                        }
+                        if (token.rfind("Count ", 0) == 0 && status)
+                        {
+                                OrderCount = token.substr(5);
+                        }
+                        if (token.rfind("Status ", 0) == 0 && status)
+                        {
+                                OrderStatus = token.substr(7);
+                                // if (OrderStatus == defStatus)
+                                // {
+                                //         status = true;
+                                //         NoStatus++;
+                                // }
                         }
                         line2.erase(0, pos + delimiter.length());
                 }
@@ -64,6 +78,7 @@ void Products::OrderStatusView()
         if (NoStatus == 0)
         {
                 cout << "\nNo orders Present......" << endl;
+                return;
         }
 }
 
@@ -77,10 +92,16 @@ int Products::idGeneration()
 }
 void Products::addProducts()
 {
-        std::string line;
+        std::string line , Merchant_id ,MerId;
         std::string productChoice;
         std::fstream writeData;
         writeData.open("products.txt", std::ios::in | std::ios::out);
+        ifstream merchantId1("merchantId.txt", ios::in);
+        while (std::getline(merchantId1, MerId))
+        {
+                Merchant_id = MerId;
+        }
+        merchantId1.close();
 
         std ::cout << "<---------------------- ADD PRODUCTS----------------------->" << std ::endl;
 
@@ -143,7 +164,7 @@ Type:
         }
         std::fstream merchantFile;
         merchantFile.open("products.txt", std::ios::in | std::ios::out | std::ios::app);
-        merchantFile << "ProductID " << idGeneration() << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << std::endl;
+        merchantFile << "ProductID " << idGeneration() << ";MerchantID " << Merchant_id << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << std::endl;
         std::cout << "\n";
 
         writeData.close();

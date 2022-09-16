@@ -1,0 +1,2 @@
+Username Samsung;Password 123456;MerchantID 24;
+Username mer123;Password 123;MerchantID 65;

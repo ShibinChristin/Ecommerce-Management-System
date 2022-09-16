@@ -12,7 +12,6 @@ class Authentication
     string username3, password3, password_confirm3;
 
 public:
-    std::string Customer123 = "";
     int count1, count2, count3;
     string line1, line2, line3;
     void CustomerLogin();
@@ -23,11 +22,13 @@ public:
     void CourierRegistration();
     int idGeneration();
 };
-class Customer:public Authentication
+class Customer
 {
     std::string line1, name, price;
     std::string delimiter = ";";
     std::string token;
+    std::string id, customer_id;
+    std::string merchant_id, merId;
 
 public:
     int customerChoice;
