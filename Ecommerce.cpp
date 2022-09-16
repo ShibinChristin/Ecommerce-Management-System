@@ -130,7 +130,6 @@ retry:
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
 			ifound = false;
-			cout<<CustomerID<<"\tCustomer id "<<endl;
 			cId<<CustomerID<<endl;
 		}
 	}
@@ -267,8 +266,8 @@ retry:
 		if (ifound)
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
-			mer<<MerchantID<<endl;
 			ifound = false;
+			mer<<MerchantID<<endl;
 		}
 	}
 	if (mAuthenticate == 0)

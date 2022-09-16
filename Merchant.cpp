@@ -57,7 +57,7 @@ void Products::OrderStatusView()
                                 OrderStatus = token.substr(7);
                                 // if (OrderStatus == defStatus)
                                 // {
-                                //         status = true;
+                                //         // status = true;
                                 //         NoStatus++;
                                 // }
                         }
@@ -92,7 +92,7 @@ int Products::idGeneration()
 }
 void Products::addProducts()
 {
-        std::string line , Merchant_id ,MerId;
+        std::string line, Merchant_id, MerId;
         std::string productChoice;
         std::fstream writeData;
         writeData.open("products.txt", std::ios::in | std::ios::out);
@@ -202,12 +202,18 @@ void Products::displayOutofStock()
 {
         std::cout << "*******************      Out of Stock Products      ********************************\n\n";
 
-        std::string line, name, ProductID, outCount, ProductType;
+        std::string line, name, ProductID, outCount, ProductType, merId, merchant_id, Merchant;
         int Stock = 0;
-        bool found = false;
+        bool found = false, id = false;
         std::ifstream file;
         file.open("products.txt", std::ios::in);
         std::string delimiter = ";";
+        ifstream merchantId1("merchantId.txt", ios::in);
+        while (std::getline(merchantId1, merId))
+        {
+                merchant_id = merId;
+        }
+        merchantId1.close();
         while (std::getline(file, line))
         {
                 size_t pos = 0;
@@ -219,32 +225,45 @@ void Products::displayOutofStock()
                         {
                                 ProductID = token.substr(10);
                         }
-                        if (token.rfind("Name ", 0) == 0)
+                        if (token.rfind("MerchantID ", 0) == 0)
+                        {
+                                Merchant = token.substr(11);
+                                if (Merchant == merchant_id)
+                                {
+                                        id = true;
+                                        Stock++;
+                                }
+                        }
+                        if (token.rfind("Name ", 0) == 0 && id)
                         {
                                 name = token.substr(5);
                         }
-                        if (token.rfind("Type ", 0) == 0)
+                        if (token.rfind("Type ", 0) == 0 && id)
                         {
                                 ProductType = token.substr(5);
                         }
-                        if (token.rfind("Count ", 0) == 0)
+                        if (token.rfind("Count ", 0) == 0 && id)
                         {
                                 outCount = token.substr(6); // out of stock count
                                 int CountVal = stoi(outCount);
                                 if (CountVal <= 0)
                                 {
                                         found = true;
-                                        Stock++;
+                                        // Stock++;
                                 }
                         }
                         line.erase(0, pos + delimiter.length());
                 }
-                if (found)
+                if (id)
                 {
-                        std::cout << "Product ID: " << ProductID << " | "
-                                  << "Name: " << name << " | "
-                                  << "Type: " << ProductType << std::endl;
-                        found = false;
+                        if (found)
+                        {
+                                std::cout << "Product ID: " << ProductID << " | "
+                                          << "Name: " << name << " | "
+                                          << "Type: " << ProductType << std::endl;
+                                found = false;
+                        }
+                        id = false;
                 }
         }
         if (Stock == 0)
@@ -265,11 +284,21 @@ void Products::AssignCourier()
         ofstream temp("Temp.txt", ios::out);
         //////////////////////////////////////////////////////////////////////
         cout << "***********************      Orders     ********************************\n";
-        std::string line1, defstatus = "Pending", status, Order, Name, Type;
+        std::string line1, defstatus = "Pending", status, Order, Name, Type, customer_id, id, merchant_id, merId;
         //     std::string delimiter = ";";
         ifstream view1("orders.txt", ios::in);
         bool st = false;
         int count = 0;
+        ifstream Customerid("customerId.txt", ios::in);
+        ifstream MerchantId("merchantId.txt", ios::in);
+        while (std::getline(Customerid, id))
+        {
+                customer_id = id;
+        }
+        while (std::getline(MerchantId, merId))
+        {
+                merchant_id = merId;
+        }
         while (std::getline(view1, line1))
         {
                 size_t pos = 0;
@@ -371,7 +400,9 @@ void Products::AssignCourier()
                         if (iffound)
                         {
                                 cout << "Updated Successfully......" << endl;
-                                temp << "OrderID " << OrderID << ";"
+                                temp << "CustomerID " << customer_id << ";"
+                                     << "MerchantID " << merchant_id << ";"
+                                     << "OrderID " << OrderID << ";"
                                      << "ProductID " << ProductID << ";"
                                      << "Name " << Name << ";"
                                      << "Type " << Type << ";"
@@ -393,7 +424,9 @@ void Products::AssignCourier()
                 case 2:
                         if (iffound)
                         {
-                                temp << "OrderID " << OrderID << ";"
+                                temp << "CustomerID " << customer_id << ";"
+                                     << "MerchantID " << merchant_id << ";"
+                                     << "OrderID " << OrderID << ";"
                                      << "ProductID " << ProductID << ";"
                                      << "Name " << Name << ";"
                                      << "Type " << Type << ";"

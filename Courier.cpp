@@ -96,7 +96,7 @@ void Courier::StatusUpdate()
 {
     std::string Orderid;
     // listOfOrders();
-////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
     std::string location;
     std::string Name1, OrderID1, Count1, Courier1, Type1;
     cout << "1.Kochi\n2.Ernakulam\n";
@@ -125,7 +125,7 @@ ch:
     {
         size_t pos = 0;
         std::string originalLine = line1;
-        std::string delimiter=";";
+        std::string delimiter = ";";
         std::string token;
         found = false;
         while ((pos = line1.find(delimiter)) != std::string::npos)
@@ -171,11 +171,12 @@ ch:
             line1.erase(0, pos + delimiter.length());
         }
     }
-    if(c==0){
-        cout<<"No Prducts to update"<<endl;
+    if (c == 0)
+    {
+        cout << "No Prducts to update" << endl;
         return;
     }
-///////////////////////////////////////
+    ///////////////////////////////////////
     cout << "Enter Order ID to be updated : ";
     getline(cin >> ws, Orderid);
     std::string OrderId, line;
@@ -185,6 +186,17 @@ ch:
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
     std::string OrderID, ProductID, Name, Type, Count, Status;
+    std::string id, customer_id, merchant_id, merId;
+    ifstream Customerid("customerId.txt", ios::in);
+    ifstream MerchantId("merchantId.txt", ios::in);
+    while (std::getline(Customerid, id))
+    {
+        customer_id = id;
+    }
+    while (std::getline(MerchantId, merId))
+    {
+        merchant_id = merId;
+    }
     while (std::getline(courier, line))
     {
         size_t pos = 0;
@@ -229,7 +241,9 @@ ch:
             if (flag)
             {
                 cout << "Updated Successfully......" << endl;
-                temp << "OrderID " << OrderID << ";"
+                temp << "CustomerID " << customer_id << ";"
+                     << "MerchantID " << merchant_id << ";"
+                     << "OrderID " << OrderID << ";"
                      << "ProductID " << ProductID << ";"
                      << "Name " << Name << ";"
                      << "Type " << Type << ";"
@@ -251,7 +265,9 @@ ch:
         case 2:
             if (flag)
             {
-                temp << "OrderID " << OrderID << ";"
+                temp << "CustomerID " << customer_id << ";"
+                     << "MerchantID " << merchant_id << ";"
+                     << "OrderID " << OrderID << ";"
                      << "ProductID " << ProductID << ";"
                      << "Name " << Name << ";"
                      << "Type " << Type << ";"

@@ -73,7 +73,7 @@ gotobuy:
         cout << "Invalid input or you cannot buy more than 5 products " << endl;
         goto gotobuy;
     }
-    ofstream temp("temp.txt", ios::out | ios::app);
+    ofstream temp("temp10.txt", ios::out | ios::app);
     ifstream in1("products.txt", ios::in);
     bool idfound = false;
     int j = 0;
@@ -185,7 +185,7 @@ gotobuy:
     temp.close();
     in3.close();
     remove("products.txt");
-    rename("temp.txt", "products.txt");
+    rename("temp10.txt", "products.txt");
     while (std::getline(customer1, line2))
     {
         size_t pos = 0;
@@ -310,7 +310,7 @@ void Customer::CancelOrder()
     cout << "***********************      Orders     ********************************\n";
     std::string line1, Cid, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type, iDCustomer, id1, id2;
     // std::string delimiter = ";";
-    bool idCustomer = false;
+    bool idCustomer = false, st = false;
     int count2 = 0;
     while (std::getline(Customerid, id1))
     {
@@ -333,7 +333,6 @@ void Customer::CancelOrder()
                 if (Cid == customer_id)
                 {
                     idCustomer = true;
-                    count2++;
                 }
             }
             if (token.rfind("OrderID ", 0) == 0 && idCustomer)
@@ -352,18 +351,18 @@ void Customer::CancelOrder()
             {
 
                 status = token.substr(7);
-                // if (defstatus == status || status == defstatus1)
-                // {
-                //     st = true;
-                //     count2++;
-                // }
+                if (defstatus == status || status == defstatus1)
+                {
+                    st = true;
+                     count2++;
+                }
             }
             line1.erase(0, pos + delimiter.length());
         }
         if (idCustomer)
         {
-            // if (st)
-            // {
+            if (st)
+            {
             cout << "Order ID " << Order << "|"
                  << "Name " << Name << "|"
                  << "Type "
@@ -371,9 +370,13 @@ void Customer::CancelOrder()
                  << "Status "
                  << status
                  << endl;
-            // st = false;
-            // }
+            st = false;
             idCustomer = false;
+            }
+            
+        }
+        else{
+            continue;
         }
     }
     if (count2 == 0)
