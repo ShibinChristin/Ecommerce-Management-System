@@ -5,7 +5,7 @@ void Products::OrderStatusView()
         ifstream customer1("orders.txt", ios::in);
         std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
         std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending", merId, merchant_id, Merchant;
-        bool status = false;
+        bool status = false, status1 = false;
         int NoStatus = 0;
         cout << "***********************************************************************\n\n";
         cout << "                      Order Status                             \n\n";
@@ -55,24 +55,28 @@ void Products::OrderStatusView()
                         if (token.rfind("Status ", 0) == 0 && status)
                         {
                                 OrderStatus = token.substr(7);
-                                // if (OrderStatus == defStatus)
-                                // {
-                                //         // status = true;
-                                //         NoStatus++;
-                                // }
+                                if (OrderStatus == defStatus)
+                                {
+                                        status1 = true;
+                                        NoStatus++;
+                                }
                         }
                         line2.erase(0, pos + delimiter.length());
                 }
-                if (status)
+                if (status1)
                 {
-                        std::cout << "Order ID " << OrderId << " | "
-                                                               "Product ID "
-                                  << ProductstatusID << " | "
-                                  << "Name " << OrderName << " | "
-                                  << "Type " << StatusType << " | "
-                                  << "Count " << OrderCount << " | "
-                                  << "Status " << OrderStatus << std::endl;
-                        status = false;
+                        if (status)
+                        {
+                                std::cout << "Order ID " << OrderId << " | "
+                                                                       "Product ID "
+                                          << ProductstatusID << " | "
+                                          << "Name " << OrderName << " | "
+                                          << "Type " << StatusType << " | "
+                                          << "Count " << OrderCount << " | "
+                                          << "Status " << OrderStatus << std::endl;
+                                status = false;
+                        }
+                        status1 = false;
                 }
         }
         if (NoStatus == 0)

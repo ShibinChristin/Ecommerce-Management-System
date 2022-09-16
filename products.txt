@@ -1,3 +1,4 @@
 ProductID 1;MerchantID 65;Name sda;Price 20000;Type Electronics;Count 2;
 ProductID 3;MerchantID 24;Name dsa;Price 1200;Type Electronics;Count 2;
-ProductID 69;MerchantID 39;Name aa;Price 2000;Type Fashion;Count 20;
+ProductID 69;MerchantID 39;Name iphone 13;Price 2000;Type Fashion;Count 20;
+ProductID 29;MerchantID 24;Name AB;Price 20000;Type Electronics;Count 10;
