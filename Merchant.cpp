@@ -5,7 +5,7 @@ void Products::OrderStatusView()
         ifstream customer1("orders.txt", ios::in);
         std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
         std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending", merId, merchant_id, Merchant;
-        bool status = false, status1 = false;
+        bool status = false;
         int NoStatus = 0;
         cout << "***********************************************************************\n\n";
         cout << "                      Order Status                             \n\n";
@@ -57,26 +57,21 @@ void Products::OrderStatusView()
                                 OrderStatus = token.substr(7);
                                 if (OrderStatus == defStatus)
                                 {
-                                        status1 = true;
-                                        NoStatus++;
+                                        status = true;
                                 }
                         }
                         line2.erase(0, pos + delimiter.length());
                 }
-                if (status1)
+                if (status)
                 {
-                        if (status)
-                        {
-                                std::cout << "Order ID " << OrderId << " | "
-                                                                       "Product ID "
-                                          << ProductstatusID << " | "
-                                          << "Name " << OrderName << " | "
-                                          << "Type " << StatusType << " | "
-                                          << "Count " << OrderCount << " | "
-                                          << "Status " << OrderStatus << std::endl;
-                                status = false;
-                        }
-                        status1 = false;
+                        std::cout << "Order ID " << OrderId << " | "
+                                                               "Product ID "
+                                  << ProductstatusID << " | "
+                                  << "Name " << OrderName << " | "
+                                  << "Type " << StatusType << " | "
+                                  << "Count " << OrderCount << " | "
+                                  << "Status " << OrderStatus << std::endl;
+                        status = false;
                 }
         }
         if (NoStatus == 0)
@@ -183,11 +178,6 @@ Type:
                 system("clear");
                 addProducts();
         }
-        // else
-        // {
-        //         // merchantOptions();
-
-        // }
 }
 void Products::merchantOptions()
 {
@@ -235,7 +225,7 @@ void Products::displayOutofStock()
                                 if (Merchant == merchant_id)
                                 {
                                         id = true;
-                                        Stock++;
+                                        // Stock++;
                                 }
                         }
                         if (token.rfind("Name ", 0) == 0 && id)
@@ -253,22 +243,19 @@ void Products::displayOutofStock()
                                 if (CountVal <= 0)
                                 {
                                         found = true;
-                                        // Stock++;
+                                        Stock++;
                                 }
                         }
                         line.erase(0, pos + delimiter.length());
                 }
-                if (id)
+                if (found)
                 {
-                        if (found)
-                        {
-                                std::cout << "Product ID: " << ProductID << " | "
-                                          << "Name: " << name << " | "
-                                          << "Type: " << ProductType << std::endl;
-                                found = false;
-                        }
-                        id = false;
+                        std::cout << "Product ID: " << ProductID << " | "
+                                  << "Name: " << name << " | "
+                                  << "Type: " << ProductType << std::endl;
+                        found = false;
                 }
+                id = false;
         }
         if (Stock == 0)
         {
@@ -282,7 +269,7 @@ void Products::AssignCourier()
 {
         std::string OrderId, line;
         bool iffound = false;
-        int CourierChoice;
+        std::string CourierChoice;
         std::string delimiter = ";";
         ifstream courier("orders.txt", ios::in);
         ofstream temp("Temp.txt", ios::out);
@@ -353,9 +340,15 @@ void Products::AssignCourier()
         }
         cout << "Enter the order ID to be assigned to Courier \n";
         getline(cin >> ws, OrderId);
+        Cou:
         cout << "Enter Courier Person to be assigned :\n";
         cout << "1.Kochi\n2.Ernakulam\n";
         cin >> CourierChoice;
+        std::regex m("^[1-2]$");
+        if(!(regex_match(CourierChoice,m))){
+                cout<<"Invalid choice .....Please try again\n";
+                goto Cou;
+        }
         int count1 = 0;
         while (std::getline(courier, line))
         {
@@ -398,7 +391,7 @@ void Products::AssignCourier()
                         line.erase(0, pos + delimiter.length());
                 }
 
-                switch (CourierChoice)
+                switch (stoi(CourierChoice))
                 {
                 case 1:
                         if (iffound)
@@ -636,12 +629,18 @@ void Products::CancelledProducts()
 {
         std::string line, orderId, pId, pName, Price, pType, pCount, pStatus;
         std::string status = "Cancelled";
-        bool found = false;
+        bool found = false, id = false;
         int cancelled = 0;
         std::cout << "<--------------------------List of Cancelled Orders----------------------------->" << std::endl;
         std::ifstream orderList;
         orderList.open("orders.txt", std::ios::in);
-        std::string delimiter = ";";
+        std::string delimiter = ";", merchant_id, merId, Merchant;
+        ifstream merchantId1("merchantId.txt", ios::in);
+        while (std::getline(merchantId1, merId))
+        {
+                merchant_id = merId;
+        }
+        merchantId1.close();
         while (std::getline(orderList, line))
         {
                 size_t pos = 0;
@@ -649,27 +648,35 @@ void Products::CancelledProducts()
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
-                        if (token.rfind("OrderID ", 0) == 0)
+                        if (token.rfind("MerchantID ", 0) == 0)
+                        {
+                                Merchant = token.substr(11);
+                                if (Merchant == merchant_id)
+                                {
+                                        id = true;
+                                }
+                        }
+                        if (token.rfind("OrderID ", 0) == 0 && id)
                         {
                                 orderId = token.substr(8);
                         }
-                        if (token.rfind("ProductID ", 0) == 0)
+                        if (token.rfind("ProductID ", 0) == 0 && id)
                         {
                                 pId = token.substr(10);
                         }
-                        if (token.rfind("Name ", 0) == 0)
+                        if (token.rfind("Name ", 0) == 0 && id)
                         {
                                 pName = token.substr(5);
                         }
-                        if (token.rfind("Type ", 0) == 0)
+                        if (token.rfind("Type ", 0) == 0 && id)
                         {
                                 pType = token.substr(5);
                         }
-                        if (token.rfind("Count ", 0) == 0)
+                        if (token.rfind("Count ", 0) == 0 && id)
                         {
                                 pCount = token.substr(6);
                         }
-                        if (token.rfind("Status ", 0) == 0)
+                        if (token.rfind("Status ", 0) == 0 && id)
                         {
                                 pStatus = token.substr(7);
                                 if (status == pStatus)

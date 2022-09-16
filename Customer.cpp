@@ -354,7 +354,7 @@ void Customer::CancelOrder()
                 if (defstatus == status || status == defstatus1)
                 {
                     st = true;
-                     count2++;
+                    count2++;
                 }
             }
             line1.erase(0, pos + delimiter.length());
@@ -363,19 +363,19 @@ void Customer::CancelOrder()
         {
             if (st)
             {
-            cout << "Order ID " << Order << "|"
-                 << "Name " << Name << "|"
-                 << "Type "
-                 << Type << "|"
-                 << "Status "
-                 << status
-                 << endl;
-            st = false;
-            idCustomer = false;
+                cout << "Order ID " << Order << "|"
+                     << "Name " << Name << "|"
+                     << "Type "
+                     << Type << "|"
+                     << "Status "
+                     << status
+                     << endl;
+                st = false;
+                idCustomer = false;
             }
-            
         }
-        else{
+        else
+        {
             continue;
         }
     }
