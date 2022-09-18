@@ -137,8 +137,7 @@ retry:
 			flag = false;
 			cId << CustomerID << endl;
 		}
-			ifound=false;
-
+		ifound = false;
 	}
 	if (cAuthenticate == 0)
 	{
@@ -224,7 +223,7 @@ void Authentication::MerchantLogin()
 {
 	int count;
 	int mAuthenticate = 0;
-	bool ifound = false;
+	bool ifound = false, flag = false;
 	std::string line6, token, MerchantID, pass;
 	std::string Check_name;
 	std::string delimiter = ";";
@@ -257,12 +256,16 @@ retry:
 				if (username2 == Check_name)
 				{
 					ifound = true;
-					mAuthenticate++;
 				}
 			}
 			if (token.rfind("Password ", 0) == 0 && ifound)
 			{
 				pass = token.substr(9);
+				if (pass == password2)
+				{
+					flag = true;
+					mAuthenticate++;
+				}
 			}
 			if (token.rfind("MerchantID ", 0) == 0 && ifound)
 			{
@@ -270,13 +273,14 @@ retry:
 			}
 			line6.erase(0, pos + delimiter.length());
 		}
-		if (ifound)
+		if (flag)
 		{
 			cout << "\nLOGIN SUCCESSFUL...\nWe're glad that you're here.\nThanks for logging in\n";
-			ifound = false;
+			flag = false;
 			mer << MerchantID << endl;
 		}
 	}
+	ifound = false;
 	if (mAuthenticate == 0)
 	{
 		std::cout << "\n";

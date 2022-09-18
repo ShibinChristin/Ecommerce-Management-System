@@ -6,7 +6,7 @@ int Customer::idGenerate()
 {
     int id;
     srand(time(0));        // srand() initialize random number generators
-    id = rand() % 100 + 1; // generate random numbers
+    id = rand() % 100 + 10; // generate random numbers
     return id;
 }
 
@@ -216,7 +216,9 @@ gotobuy:
         }
         if (found)
         {
+            cout << "*******************************************************************************\n\n";
             cout << "Order added to cart successfully......\n";
+            cout << "*******************************************************************************\n\n";
             buy << "CustomerID " << customer_id << ";"
                 << "MerchantID " << merchant_id << ";"
                 << "OrderID " << idGenerate() << ";"
@@ -355,7 +357,7 @@ void Customer::CancelOrder()
             {
 
                 status = token.substr(7);
-                if (status ==defstatus || status == defstatus1)
+                if (status == defstatus || status == defstatus1)
                 {
                     st = true;
                     count2++;
