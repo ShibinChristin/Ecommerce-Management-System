@@ -1,7 +1,6 @@
 #include "project.h"
 void Merchant::merchantMenu()
 {
-        // while(true){
         Authentication auth;
         std::string merchantChoice;
         std::cout << "********************************************************************************\n\n";
@@ -35,11 +34,11 @@ void Merchant::merchantMenu()
                 break;
         }
 }
-void Merchant::OrderStatusView()
+void Merchant::OrderStatusView()   // View the  Orders made by the customer 
 {
 
         ifstream customer1("orders.txt", ios::in);
-        std::string Cproduct, line2, delimiter = ";"; /// cProduct   --- Customer Product
+        std::string Cproduct, line2, delimiter = ";"; 
         std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending", merId, merchant_id, Merchant;
         bool status = false, flag = false;
         int NoStatus = 0;
@@ -473,7 +472,6 @@ void Merchant::assignCourier()
                         }
                         if (token.rfind("Name ", 0) == 0 && iffound)
                         {
-                                // std::cout << "Name : " << token.substr(5);
                                 Name = token.substr(5);
                         }
                         if (token.rfind("Type ", 0) == 0 && iffound)

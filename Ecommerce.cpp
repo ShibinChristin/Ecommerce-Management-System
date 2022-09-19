@@ -7,7 +7,6 @@ void Authentication::mainMenu()
 	Merchant Mer;
 	Courier C;
 	std::string choice;
-	//while(true){
 	cout << "\n\n*******************************************************************************\n\n";
     cout << "                           Welcome to ShopTronics                               \n\n";
     cout << "****************************       MENU        ********************************\n\n";
@@ -56,8 +55,6 @@ int Authentication::idGeneration()
 }
 void Authentication::CustomerRegistration()
 {
-	//while(true){
-	count1 = 0;
 	size_t pos = 0;
 	std::string delimiter = ";";
 	std::regex s("^[a-zA-Z0-9\\s]+$");
@@ -81,7 +78,6 @@ void Authentication::CustomerRegistration()
 
 		if (line1.find(username1) != string::npos)
 		{
-			// count1++;
 			found = true;
 		}
 		line1.erase(0, pos + delimiter.length());
@@ -128,7 +124,6 @@ passwordStart1:
 
 void Authentication::CustomerLogin()
 {
-	//while(true){
 	int cAuthenticate = 0;
 	bool ifound = false, flag = false;
 	std::string line5, token, CustomerID, pass;
@@ -197,8 +192,6 @@ void Authentication::CustomerLogin()
 
 void Authentication::MerchantRegistration()
 {
-	//while(true){
-	count2 = 0;
 	string username2, password2, password_confirm2;
 	size_t pos = 0;
 	string delimiter = ";";
@@ -258,13 +251,10 @@ passwordStart2:
 	file2.close();
 	cout << "\n";
 	
-	//}
 }
 
 void Authentication::MerchantLogin()
 {
-	//while(true){
-	int count;
 	int mAuthenticate = 0;
 	bool ifound = false, flag = false;
 	std::string line6, token, MerchantID, pass;
@@ -330,14 +320,13 @@ void Authentication::MerchantLogin()
 	}
 	merchantFile.close();
 	}
-//}
 
 ///////////////////////////////////////////////////////////////////////
 
 void Authentication::CourierRegistration()
 {
 	
-	count3 = 0;
+	count = 0;
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 	cout << "Enter your desired username : ";
 	getline(cin >> ws, username3);
@@ -355,12 +344,12 @@ void Authentication::CourierRegistration()
 	{
 		if (line3.find(username3) != string::npos)
 		{
-			count3++;
+			count++;
 		}
 	}
-	if (count3 > 0)
+	if (count > 0)
 	{
-		count3 = 0;
+		count = 0;
 		cout << "Username already exists...!" << endl;
 		mainMenu();
 	}
@@ -390,7 +379,6 @@ passwordStart3:
 }
 void Authentication::CourierLogin()
 {
-	//while(true){
 	int count;
 	string username3, password3, u, p;
 	cout << "Hello Courier........So Glad to see you back......." << endl;
@@ -422,5 +410,4 @@ void Authentication::CourierLogin()
 		std::cout << "\n";
 		mainMenu();
 	}
-//}
 }

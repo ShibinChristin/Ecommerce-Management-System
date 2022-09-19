@@ -13,7 +13,7 @@ class Authentication
     string username2, password2, password_confirm2;
     string username3, password3, password_confirm3;
 public:
-int count1 , count2,count3;
+int count;
 string line1 , line2 , line3; 
     void CustomerLogin();
     void CustomerRegistration();
