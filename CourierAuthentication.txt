@@ -1,3 +1,2 @@
-Ekart 1234
-Bluedart 123456
-Ekat2 123
+Ekart 123
+Bluedart 456

@@ -2,24 +2,105 @@
 ifstream customer("products.txt", ios::in);
 ifstream Customerid("customerId.txt", ios::in);
 ifstream MerchantId("merchantId.txt", ios::in);
+void Customer::customerMenu()
+{
+    // while(true){
+    Authentication auth;
+    std::string CustChoice;
+    cout << "********************************************************************************\n\n";
+    cout << "                          Welcome to Customer Portal                             \n\n";
+    cout << "****************************        MENU        ********************************\n\n";
+    cout << "1.Login\n";
+    cout << "2.Register\n";
+    cout << "3.Previous Menu\n";
+    cout << "Enter choice : ";
+    cin >> CustChoice;
+    std::regex v("^[1-3]$");
+    if (!(regex_match(CustChoice, v)))
+    {
+        cout << "Invalid Choice .....Please try again\n";
+        customerMenu();
+    }
+    switch (stoi(CustChoice))
+    {
+    case 1:
+        auth.CustomerLogin();
+        CustomerChoiceDisplay();
+        break;
+    case 2:
+        auth.CustomerRegistration();
+        customerMenu();
+        CustomerChoiceDisplay();
+        break;
+
+    case 3:
+        auth.mainMenu();
+        break;
+    }
+}
+//}
+
 int Customer::idGenerate()
 {
     int id;
     srand(time(0));        // srand() initialize random number generators
-    id = rand() % 100 + 10; // generate random numbers
+    id = rand() % 100 + 1; // generate random numbers
     return id;
 }
 
 void Customer::CustomerChoiceDisplay()
 {
+    std::string options;
+    // while(true){
     cout << "***********************       MENU        ********************************\n\n";
     cout << "1.Buy Product\n";
     cout << "2.Show Product\n";
     cout << "3.Order Status\n";
     cout << "4.Cancel Order\n";
-    cout << "Press 5 to logout\n"
+    cout << "5.Press 5 to logout\n"
          << endl;
+    cout << "Enter choice : ";
+    cin >> options;
+    std::regex w("^[1-5]$");
+    if (!(regex_match(options, w)))
+    {
+        cout << "\nInvalid Choice .....Please try again\n";
+        CustomerChoiceDisplay();
+    }
+    switch (stoi(options))
+    {
+    case 1:
+    {
+        CustomerBuy();
+        CustomerChoiceDisplay();
+    }
+    break;
+    case 2:
+    {
+        showProducts();
+        CustomerChoiceDisplay();
+    }
+    break;
+    case 3:
+    {
+        orderStatus();
+        CustomerChoiceDisplay();
+    }
+    break;
+    case 4:
+    {
+        CancelOrder();
+        CustomerChoiceDisplay();
+    }
+    break;
+    case 5:
+    {
+        customerMenu();
+    }
+    break;
+    }
 }
+//}
 void Customer::showProducts()
 {
     ifstream in("products.txt", ios::in);
@@ -54,7 +135,8 @@ void Customer::showProducts()
 }
 void Customer::CustomerBuy()
 {
-
+    ifstream Customerid("customerId.txt", ios::in);
+    ifstream MerchantId("merchantId.txt", ios::in);
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[1-5]$");
     std::string Cproduct, line2, name, ProductID, count, ProductType, Val, Price; /// cProduct   --- Customer Product
@@ -81,10 +163,12 @@ gotobuy:
     {
         customer_id = id;
     }
+    Customerid.close();
     while (std::getline(MerchantId, merId))
     {
         merchant_id = merId;
     }
+    MerchantId.close();
     while (std::getline(in1, line))
     {
         // std::string delimiter = ";";
@@ -116,7 +200,7 @@ gotobuy:
     if (j == 0)
     {
         cout << "Product not found " << endl;
-        return;
+        CustomerChoiceDisplay();
     }
     in1.close();
     int TempCount;
@@ -163,7 +247,7 @@ gotobuy:
             if (ProductC - TempCount < 0)
             {
                 cout << "Product Out of stock......\nPlease try again later\n";
-                return;
+                CustomerChoiceDisplay();
             }
             else
             {
@@ -252,6 +336,7 @@ void Customer::orderStatus()
     {
         std::string ProductS, nameS, PriceS, TypeS, Status, countS, CustomerIdS;
         size_t pos = 0;
+        // std::string token;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
@@ -303,6 +388,7 @@ void Customer::orderStatus()
     if (buy == 0)
     {
         cout << "\nYou haven't made any orders...." << endl;
+        CustomerChoiceDisplay();
     }
     in.close();
 }
@@ -314,6 +400,7 @@ void Customer::CancelOrder()
     cout << "***********************      Orders     ********************************\n";
     std::string line1, Cid, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type, iDCustomer, id1, id2;
     // std::string delimiter = ";";
+    // bool st = false;
     int count2 = 0;
     while (std::getline(Customerid, id1))
     {
@@ -365,8 +452,6 @@ void Customer::CancelOrder()
             }
             line1.erase(0, pos + delimiter.length());
         }
-        // if (idCustomer)
-        // {
         if (st)
         {
             cout << "Order ID " << Order << "|"
@@ -378,18 +463,12 @@ void Customer::CancelOrder()
                  << endl;
             st = false;
         }
-        // }
-        // else
-        // {
-        //     continue;
-        // }
         idCustomer = false;
     }
-
     if (count2 == 0)
     {
         cout << "No orders to cancel.....\n";
-        return;
+        CustomerChoiceDisplay();
     }
     view.close();
     ////////////////////////////////////////////////////////////////////////////
@@ -403,10 +482,12 @@ void Customer::CancelOrder()
     {
         customer_id = id;
     }
+    Customerid.close();
     while (std::getline(MerchantId, merId))
     {
         merchant_id = merId;
     }
+    MerchantId.close();
 cancel:
     cout << "Enter the Order ID you want to cancel :";
     getline(std::cin >> std::ws, CancelId);
@@ -467,7 +548,7 @@ cancel:
     if (count == 0)
     {
         cout << "No Such Order ID exists......." << endl;
-        return;
+        CustomerChoiceDisplay();
     }
     remove("orders.txt");
     rename("temp.txt", "orders.txt");
@@ -515,7 +596,7 @@ cancel:
     {
         std::string originalLine1 = line4;
         size_t pos = 0;
-        // std::string token;
+
         while ((pos = line4.find(delimiter)) != std::string::npos)
         {
             token = line4.substr(0, pos);

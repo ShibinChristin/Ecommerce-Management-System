@@ -1,0 +1,6 @@
+OrderID 50;ProductID   87;Name Galaxy S22;Type Electronics;Count 2;Courier Kochi;Status Delivered;
+CustomerID 35;MerchantID 64;OrderID 56;ProductID  87;Name Galaxy S22;Type Electronics;Count 4;Courier Kochi;Status Shipping;
+CustomerID 35;MerchantID 64;OrderID 64;ProductID 88;Name Kurthi;Type Fashion;Count 4;Status Pending;
+CustomerID 35;MerchantID 32;OrderID 2;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Cancelled;
+CustomerID 35;MerchantID 32;OrderID 85;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Pending;
+CustomerID 23;MerchantID 21;OrderID 39;ProductID 39;Name Galaxy S21;Type Electronics;Count 4;Status Pending;

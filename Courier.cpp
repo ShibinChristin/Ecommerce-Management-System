@@ -1,21 +1,96 @@
 #include "project.h"
 std::string choice;
+void Courier::courierMenu()
+{
+    Authentication auth;
+    std::string CourierChoice;
+    std::cout << "******************************************************************************\n\n";
+    std::cout << "                        Welcome to Courier Portal                             \n\n";
+    std::cout << "******************************************************************************\n\n";
+    std::cout << "1.Login\n";
+    std::cout << "2.Register\n";
+    std::cout << "3.Previous Menu\n";
+    std::cout << "Enter choice : \n";
+    std::cin >> CourierChoice;
+    std::regex z("^[1-3]$");
+    if (!(regex_match(CourierChoice, z)))
+    {
+        std::cout << "Invalid Choice !!.....Please try again\n";
+        courierMenu();
+    }
+    switch (stoi(CourierChoice))
+    {
+    case 1:
+    {
+        auth.CourierLogin();
+        courierOptions();
+    }
+    break;
+    case 2:
+    {
+        auth.CourierRegistration();
+        courierMenu();
+        courierOptions();
+    }
+    break;
+    case 3:
+    {
+        auth.mainMenu();
+    }
+    break;
+    }
+}
 void Courier::courierOptions()
 {
+    std::string courierchoice;
     std::cout << "\n\n*********WELCOME TO COURIER PORTAL********\n\n";
     std::cout << "\t1. View assigned orders \n";
     std::cout << "\t2. Update status of orders \n";
     std::cout << "\t3. List of pending and completed delivery \n";
     std::cout << "\t4. LOGOUT\n\n";
+    std::cout << "\nEnter your choice: ";
+    std::cin >> courierchoice;
+    std::regex k("^[1-4]$");
+    if (!(regex_match(courierchoice, k)))
+    {
+        std::cout << "Invalid Choice !!.....Please try again\n";
+        courierOptions();
+    }
+    switch (stoi(courierchoice))
+    {
+    case 1:
+    {
+        listOfOrders();
+        courierOptions();
+    }
+    break;
+    case 2:
+    {
+        StatusUpdate();
+        courierOptions();
+    }
+    break;
+    case 3:
+    {
+        PendingAndDelivered();
+        courierOptions();
+    }
+    break;
+    case 4:
+    {
+        courierMenu();
+    }
+    break;
+    }
 }
 void Courier::listOfOrders()
 {
     std::string location;
     std::string Name, OrderID, Count, Courier, Type;
-    cout << "1.Kochi\n2.Ernakulam\n";
+    std::cout << "1.Kochi\n2.Ernakulam\n";
 ch:
-    cout << "Enter choice :";
-    getline(cin >> ws, choice);
+    std::cout << "Enter choice :";
+    std::getline(std::cin >> std::ws, choice);
     if (choice == "1")
     {
         location = "Kochi";
@@ -58,7 +133,7 @@ ch:
             }
             if (token.rfind("Count ", 0) == 0)
             {
-                Count = token.substr(5);
+                Count = token.substr(6);
             }
             if (token.rfind("Courier ", 0) == 0)
             {
@@ -74,10 +149,10 @@ ch:
                 if (Status1 == defStatus)
                 {
                     flag1 = true;
-                    cout << "Order ID " << OrderID << " | "
-                         << "Name " << Name << " | "
-                         << "Type " << Type << " | "
-                         << "Count " << Count << endl;
+                    std::cout << "Order ID " << OrderID << " | "
+                              << "Name " << Name << " | "
+                              << "Type " << Type << " | "
+                              << "Count " << Count << std::endl;
                     c++;
                 }
             }
@@ -86,7 +161,7 @@ ch:
     }
     if (c == 0)
     {
-        cout << "No Products have been assigned to deliver" << endl;
+        std::cout << "No Products have been assigned to deliver" << std::endl;
         return;
     }
     in.close();
@@ -99,10 +174,10 @@ void Courier::StatusUpdate()
     ////////////////////////////////////////////////////////////////
     std::string location;
     std::string Name1, OrderID1, Count1, Courier1, Type1;
-    cout << "1.Kochi\n2.Ernakulam\n";
+    std::cout << "1.Kochi\n2.Ernakulam\n";
 ch:
-    cout << "Enter choice :";
-    getline(cin >> ws, choice);
+    std::cout << "Enter choice :";
+    std::getline(std::cin >> std::ws, choice);
     if (choice == "1")
     {
         location = "Kochi";
@@ -117,10 +192,22 @@ ch:
         goto ch;
     }
 
-    std::string line1, Location, Status1, defStatus = "Shipping";
+    std::string line1, Location, Status1, defStatus = "Shipping", id, customer_id, merId, merchant_id;
     bool found = false, flag1 = false;
     int c = 0, d = 0;
     ifstream in("orders.txt", ios::in);
+    ifstream Customerid("customerId.txt", ios::in);
+    ifstream MerchantId("merchantId.txt", ios::in);
+    while (std::getline(Customerid, id))
+    {
+        customer_id = id;
+    }
+    Customerid.close();
+    while (std::getline(MerchantId, merId))
+    {
+        merchant_id = merId;
+    }
+    MerchantId.close();
     while (std::getline(in, line1))
     {
         size_t pos = 0;
@@ -145,7 +232,7 @@ ch:
             }
             if (token.rfind("Count ", 0) == 0)
             {
-                Count1 = token.substr(5);
+                Count1 = token.substr(6);
             }
             if (token.rfind("Courier ", 0) == 0)
             {
@@ -161,10 +248,10 @@ ch:
                 if (Status1 == defStatus)
                 {
                     flag1 = true;
-                    cout << "Order ID " << OrderID1 << " | "
-                         << "Name " << Name1 << " | "
-                         << "Type " << Type1 << " | "
-                         << "Count " << Count1 << endl;
+                    std::cout << "Order ID " << OrderID1 << " | "
+                              << "Name " << Name1 << " | "
+                              << "Type " << Type1 << " | "
+                              << "Count " << Count1 << std::endl;
                     c++;
                 }
             }
@@ -173,12 +260,12 @@ ch:
     }
     if (c == 0)
     {
-        cout << "No Prducts to update" << endl;
+        std::cout << "No Prducts to update" << std::endl;
         return;
     }
     ///////////////////////////////////////
-    cout << "Enter Order ID to be updated : ";
-    getline(cin >> ws, Orderid);
+    std::cout << "Enter Order ID to be updated : ";
+    std::getline(std::cin >> std::ws, Orderid);
     std::string OrderId, line;
     bool flag = false;
     int CourierChoice, count = 0;
@@ -186,17 +273,6 @@ ch:
     ifstream courier("orders.txt", ios::in);
     ofstream temp("Temp.txt", ios::out);
     std::string OrderID, ProductID, Name, Type, Count, Status;
-    std::string id, customer_id, merchant_id, merId;
-    ifstream Customerid("customerId.txt", ios::in);
-    ifstream MerchantId("merchantId.txt", ios::in);
-    while (std::getline(Customerid, id))
-    {
-        customer_id = id;
-    }
-    while (std::getline(MerchantId, merId))
-    {
-        merchant_id = merId;
-    }
     while (std::getline(courier, line))
     {
         size_t pos = 0;
@@ -215,7 +291,7 @@ ch:
             }
             if (token.rfind("ProductID ", 0) == 0 && flag)
             {
-                ProductID = token.substr(9);
+                ProductID = token.substr(10);
             }
             if (token.rfind("Name ", 0) == 0 && flag)
             {
@@ -240,7 +316,7 @@ ch:
         case 1:
             if (flag)
             {
-                cout << "Updated Successfully......" << endl;
+                std::cout << "Updated Successfully......" << std::endl;
                 temp << "CustomerID " << customer_id << ";"
                      << "MerchantID " << merchant_id << ";"
                      << "OrderID " << OrderID << ";"
@@ -253,13 +329,13 @@ ch:
                      << ";"
                      << "Status "
                      << "Delivered"
-                     << ";" << endl;
+                     << ";" << std::endl;
                 flag = false;
                 break;
             }
             else
             {
-                temp << OriginalLine << endl;
+                temp << OriginalLine << std::endl;
             }
             break;
         case 2:
@@ -277,7 +353,7 @@ ch:
                      << ";"
                      << "Status "
                      << "Delivered"
-                     << ";" << endl;
+                     << ";" << std::endl;
                 flag = false;
                 break;
             }
@@ -287,12 +363,12 @@ ch:
             }
             break;
         default:
-            cout << "Not Valid...." << endl;
+            std::cout << "Not Valid...." << std::endl;
         }
     }
     if (count == 0)
     {
-        cout << "No Orders to be updated....." << endl;
+        std::cout << "No Orders to be updated....." << std::endl;
         return;
     }
     courier.close();
@@ -309,7 +385,7 @@ void Courier::PendingAndDelivered()
 W:
     std::cout << "\n1.List of Pending\n2.List of Delivered\n";
     std::cout << "Enter your choice :";
-    cin >> choice;
+    std::cin >> choice;
 
     switch (choice)
     {
@@ -347,7 +423,7 @@ W:
             }
             if (token.rfind("ProductID ", 0) == 0)
             {
-                ProductID = token.substr(9);
+                ProductID = token.substr(10);
             }
             if (token.rfind("OrderID ", 0) == 0)
             {
@@ -359,9 +435,9 @@ W:
             }
             if (token.rfind("Count ", 0) == 0)
             {
-                Count = token.substr(5);
+                Count = token.substr(6);
             }
-            if (token.rfind("Status", 0) == 0)
+            if (token.rfind("Status ", 0) == 0)
             {
                 Stats = token.substr(7);
                 if (stats == Stats)
@@ -384,7 +460,7 @@ W:
     }
     if (i == 0)
     {
-        cout << "No orders present...." << endl;
+        std::cout << "No orders present...." << std::endl;
     }
     temp.close();
 }
