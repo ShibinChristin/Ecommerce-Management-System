@@ -1,7 +1,6 @@
 #include "project.h"
 ifstream customer("products.txt", ios::in);
 ifstream Customerid("customerId.txt", ios::in);
-ifstream MerchantId("merchantId.txt", ios::in);
 void Customer::customerMenu()
 {
     Authentication auth;
@@ -469,11 +468,6 @@ void Customer::CancelOrder()
         customer_id = id;
     }
     Customerid.close();
-    // while (std::getline(MerchantId, merId))
-    // {
-    //     merchant_id = merId;
-    // }
-    // MerchantId.close();
 cancel:
     cout << "Enter the Order ID you want to cancel :";
     getline(std::cin >> std::ws, CancelId);

@@ -40,7 +40,7 @@ void Authentication::mainMenu()
 		break;
 		
 		case 4:
-		cout<<"\n.....Thankyou for Shopping.....\n";
+		cout<<"\n.....Thank you for Shopping.....\n\n";
 		exit(0);
 
 	}

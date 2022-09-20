@@ -161,7 +161,7 @@ ch:
     }
     if (c == 0)
     {
-        std::cout << "No Products have been assigned to deliver" << std::endl;
+        std::cout << "\nNo Products have been assigned to deliver";
         return;
     }
     in.close();
@@ -196,24 +196,12 @@ ch:
     bool found = false, flag1 = false;
     int c = 0, d = 0;
     ifstream in("orders.txt", ios::in);
-    ifstream Customerid("customerId.txt", ios::in);
-    ifstream MerchantId("merchantId.txt", ios::in);
-    while (std::getline(Customerid, id))
-    {
-        customer_id = id;
-    }
-    Customerid.close();
-    while (std::getline(MerchantId, merId))
-    {
-        merchant_id = merId;
-    }
-    MerchantId.close();
     while (std::getline(in, line1))
     {
         size_t pos = 0;
         std::string originalLine = line1;
         std::string delimiter = ";";
-        std::string token;
+        std::string token , merchant_id , customer_id;
         found = false;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
@@ -260,7 +248,7 @@ ch:
     }
     if (c == 0)
     {
-        std::cout << "No Prducts to update" << std::endl;
+        std::cout << "\nNo Prducts to update" << std::endl;
         return;
     }
     ///////////////////////////////////////
@@ -280,6 +268,14 @@ ch:
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
+             if (token.rfind("CustomerID ", 0) == 0)
+            {
+                customer_id = token.substr(11);
+            }
+            if (token.rfind("MerchantID ", 0) == 0)
+            {
+                merchant_id = token.substr(11);
+            }
             if (token.rfind("OrderID ", 0) == 0)
             {
                 OrderID = token.substr(8);
@@ -368,7 +364,7 @@ ch:
     }
     if (count == 0)
     {
-        std::cout << "No Orders to be updated....." << std::endl;
+        std::cout << "\nNo Orders to be updated....." << std::endl;
         return;
     }
     courier.close();
@@ -406,7 +402,7 @@ W:
 
     std::string line, Stats;
     bool found = false;
-    int i = 0;
+    int NoCourierOrders = 0;
     std::string delimiter = ";";
     ifstream temp("orders.txt", ios::in);
     while (std::getline(temp, line))
@@ -443,7 +439,7 @@ W:
                 if (stats == Stats)
                 {
                     found = true;
-                    i++;
+                    NoCourierOrders++;
                 }
             }
             line.erase(0, pos + delimiter.length());
@@ -458,9 +454,9 @@ W:
             found = false;
         }
     }
-    if (i == 0)
+    if (NoCourierOrders == 0)
     {
-        std::cout << "No orders present...." << std::endl;
+        std::cout << "\nNo orders present...." << std::endl;
     }
     temp.close();
 }

@@ -363,17 +363,11 @@ void Merchant::assignCourier()
         ofstream temp("Temp.txt", ios::out);
         //////////////////////////////////////////////////////////////////////
         std::cout << "***********************      Orders     ********************************\n";
-        std::string line1, defstatus = "Pending", status, Order, Name, Type, customer_id, id, merchant_id, merId, Mer;
+        std::string line1, defstatus = "Pending", status, Order, Name, Type, customer_id, merchant_id, merId, Mer;
         ifstream view1("orders.txt", ios::in);
         bool st = false, flag = false;
         int count = 0;
-        ifstream Customerid("customerId.txt", ios::in);
         ifstream MerchantId("merchantId.txt", ios::in);
-        while (std::getline(Customerid, id))
-        {
-                customer_id = id;
-        }
-        Customerid.close();
         while (std::getline(MerchantId, merId))
         {
                 merchant_id = merId;
@@ -386,6 +380,10 @@ void Merchant::assignCourier()
                 while ((pos = line1.find(delimiter)) != std::string::npos)
                 {
                         token = line1.substr(0, pos);
+                        if (token.rfind("CustomerID ", 0) == 0)
+                        {
+                                customer_id = token.substr(11);
+                        }
                         if (token.rfind("MerchantID ", 0) == 0)
                         {
                                 Mer = token.substr(11);

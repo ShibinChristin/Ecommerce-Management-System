@@ -1,4 +1,1 @@
-CustomerID 23;MerchantID 32;OrderID 19;ProductID 62;Name Sofa;Type Furniture;Count 2;Status Cancelled;
-CustomerID 23;MerchantID 64;OrderID 32;ProductID 88;Name Kurthi;Type Fashion;Count 4;Courier Ernakulam;Status Delivered;
-CustomerID 49;MerchantID 21;OrderID 58;ProductID 87;Name Galaxy S22;Type Electronics;Count 1;Courier Kochi;Status Delivered;
-CustomerID 23;MerchantID 64;OrderID 87;ProductID 73;Name Mens shirt;Type Fashion;Count 4;Status Cancelled;
+CustomerID 23;MerchantID 32;OrderID 5;ProductID 62;Name Sofa;Type Furniture;Count 2;Courier Kochi;Status Shipping;
