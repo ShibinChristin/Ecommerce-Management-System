@@ -107,7 +107,7 @@ ch:
 
     std::string line, Location, Status1, defStatus = "Shipping";
     bool found = false, flag1 = false;
-    int c = 0, d = 0;
+    int noCourierAssign = 0;
     std::string delimiter = ";";
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line))
@@ -153,13 +153,13 @@ ch:
                               << "Name " << Name << " | "
                               << "Type " << Type << " | "
                               << "Count " << Count << std::endl;
-                    c++;
+                    noCourierAssign++;
                 }
             }
             line.erase(0, pos + delimiter.length());
         }
     }
-    if (c == 0)
+    if (noCourierAssign == 0)
     {
         std::cout << "\nNo Products have been assigned to deliver";
         return;
@@ -194,7 +194,7 @@ ch:
 
     std::string line1, Location, Status1, defStatus = "Shipping", id, customer_id, merId, merchant_id;
     bool found = false, flag1 = false;
-    int c = 0, d = 0;
+    int NoProducts = 0;
     ifstream in("orders.txt", ios::in);
     while (std::getline(in, line1))
     {
@@ -240,13 +240,13 @@ ch:
                               << "Name " << Name1 << " | "
                               << "Type " << Type1 << " | "
                               << "Count " << Count1 << std::endl;
-                    c++;
+                    NoProducts++;
                 }
             }
             line1.erase(0, pos + delimiter.length());
         }
     }
-    if (c == 0)
+    if (NoProducts == 0)
     {
         std::cout << "\nNo Prducts to update" << std::endl;
         return;
@@ -378,7 +378,7 @@ void Courier::PendingAndDelivered()
     std::string stats;
     std::string Name, OrderID, ProductID, Count, Type;
     int choice;
-W:
+CourierChoice:
     std::cout << "\n1.List of Pending\n2.List of Delivered\n";
     std::cout << "Enter your choice :";
     std::cin >> choice;
@@ -397,7 +397,7 @@ W:
 
     default:
         std::cout << "\n...Not a valid choice !! Please retry...\n";
-        goto W;
+        goto CourierChoice;
     }
 
     std::string line, Stats;
