@@ -97,6 +97,7 @@ void Customer::CustomerChoiceDisplay()
 }
 void Customer::showProducts() ////// To Display the Products
 {
+    std::string ProductID, ProductName, ProductPrice, ProductType;
     ifstream in("products.txt", ios::in);
     while (std::getline(in, line1))
     {
@@ -106,24 +107,29 @@ void Customer::showProducts() ////// To Display the Products
             token = line1.substr(0, pos);
             if (token.rfind("ProductID ", 0) == 0)
             {
-                std::cout << "Product ID: " << token.substr(9);
+                // std::cout << "Product ID: " << token.substr(9);
+                ProductID = token.substr(9);
             }
             if (token.rfind("Name ", 0) == 0)
             {
-                std::cout << " |Name : " << token.substr(5);
+                // std::cout << " |Name : " << token.substr(5);
+                ProductName = token.substr(5);
             }
             if (token.rfind("Price ", 0) == 0)
             {
-                cout << " |"
-                     << "Price : " << token.substr(6);
+                // cout << " |"
+                //  << "Price : " << token.substr(6);
+                ProductPrice = token.substr(6);
             }
             if (token.rfind("Type ", 0) == 0)
             {
-                cout << " |"
-                     << "Type : " << token.substr(5) << endl;
+                // cout << " |"
+                //  << "Type : " << token.substr(5) << endl;
+                ProductType = token.substr(5);
             }
             line1.erase(0, pos + delimiter.length());
         }
+        cout<<"Name : "<<ProductName<<"   "<<"Price : "<<ProductPrice<<endl;
     }
     in.close();
 }
