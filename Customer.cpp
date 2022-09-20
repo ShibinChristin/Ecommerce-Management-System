@@ -96,7 +96,7 @@ void Customer::CustomerChoiceDisplay()
     break;
     }
 }
-void Customer::showProducts()    ////// To Display the Products
+void Customer::showProducts() ////// To Display the Products
 {
     ifstream in("products.txt", ios::in);
     while (std::getline(in, line1))
@@ -128,13 +128,12 @@ void Customer::showProducts()    ////// To Display the Products
     }
     in.close();
 }
-void Customer::CustomerBuy()     
+void Customer::CustomerBuy()
 {
     ifstream Customerid("customerId.txt", ios::in);
-    ifstream MerchantId("merchantId.txt", ios::in);
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[1-5]$");
-    std::string Cproduct, line2, name, ProductID, count, ProductType, ProductPrice, Val, Price; /// cProduct   --- Customer Product
+    std::string Cproduct, line2, name, ProductID, count, ProductType, ProductPrice, Val, Price, merchant_id1, merchant_id2; /// cProduct   --- Customer Product
     bool found = false;
     ofstream buy("orders.txt", ios::out | ios::app);
     showProducts();
@@ -158,11 +157,6 @@ buy:
         customer_id = id;
     }
     Customerid.close();
-    while (std::getline(MerchantId, merId))
-    {
-        merchant_id = merId;
-    }
-    MerchantId.close();
     while (std::getline(in1, line))
     {
         size_t pos = 0;
@@ -222,6 +216,10 @@ buy:
             {
                 ProductID = token.substr(10);
             }
+            if (token.rfind("MerchantID ", 0) == 0)
+            {
+                merchant_id1 = token.substr(11);
+            }
             if (token.rfind("Price ", 0) == 0)
             {
                 Price = token.substr(6);
@@ -242,7 +240,7 @@ buy:
             else
             {
                 temp << "ProductID " << ProductID;
-                temp << ";MerchantID " << merchant_id;
+                temp << ";MerchantID " << merchant_id1;
                 temp << ";Name " << Cproduct;
                 temp << ";Price " << Price;
                 temp << ";Type " << ProductType;
@@ -279,6 +277,10 @@ buy:
             {
                 ProductID = token.substr(10);
             }
+            if (token.rfind("MerchantID ", 0) == 0)
+            {
+                merchant_id2 = token.substr(11);
+            }
             if (token.rfind("Price ", 0) == 0)
             {
                 ProductPrice = token.substr(6);
@@ -298,7 +300,7 @@ buy:
             cout << "Price : " << ProductPrice << endl;
             cout << "*******************************************************************************\n\n";
             buy << "CustomerID " << customer_id << ";"
-                << "MerchantID " << merchant_id << ";"
+                << "MerchantID " << merchant_id2 << ";"
                 << "OrderID " << idGenerate() << ";"
                 << "ProductID " << ProductID << ";"
                 << "Name " << name << ";"
@@ -388,7 +390,6 @@ void Customer::orderStatus()
 void Customer::CancelOrder()
 {
     ifstream Customerid("customerId.txt", ios::in);
-    ifstream MerchantId("merchantId.txt", ios::in);
     ifstream view("orders.txt", ios::in);
     cout << "***********************      Orders     ********************************\n";
     std::string line1, Cid, defstatus = "Pending", defstatus1 = "Shipping", status, Order, Name, Type, iDCustomer, id1, id2;
@@ -398,11 +399,6 @@ void Customer::CancelOrder()
         customer_id = id1;
     }
     Customerid.close();
-    while (std::getline(MerchantId, id2))
-    {
-        merchant_id = id2;
-    }
-    MerchantId.close();
     while (std::getline(view, line1))
     {
         bool idCustomer = false, st = false;
@@ -462,7 +458,7 @@ void Customer::CancelOrder()
     }
     view.close();
     ////////////////////////////////////////////////////////////////////////////
-    std::string line2, id, CancelId, Pid, Name1, Type1, Count1;
+    std::string line2, id, CancelId, Pid, Name1, Type1, Count1, merchant_id5;
     ifstream orders("orders.txt", ios::in);
     ofstream temp1("temp.txt", ios::out);
     std::regex obj("^[0-9]*$");
@@ -473,11 +469,11 @@ void Customer::CancelOrder()
         customer_id = id;
     }
     Customerid.close();
-    while (std::getline(MerchantId, merId))
-    {
-        merchant_id = merId;
-    }
-    MerchantId.close();
+    // while (std::getline(MerchantId, merId))
+    // {
+    //     merchant_id = merId;
+    // }
+    // MerchantId.close();
 cancel:
     cout << "Enter the Order ID you want to cancel :";
     getline(std::cin >> std::ws, CancelId);
@@ -488,6 +484,10 @@ cancel:
         while ((pos = line2.find(delimiter)) != std::string::npos)
         {
             token = line2.substr(0, pos);
+            if (token.rfind("MerchantID ", 0) == 0)
+            {
+                merchant_id5 = token.substr(11);
+            }
             if (token.rfind("OrderID ", 0) == 0)
             {
                 id = token.substr(8);
@@ -519,7 +519,7 @@ cancel:
         {
             cout << "Cancelled Succesfully" << endl;
             temp1 << "CustomerID " << customer_id;
-            temp1 << ";MerchantID " << merchant_id;
+            temp1 << ";MerchantID " << merchant_id5;
             temp1 << ";OrderID " << id;
             temp1 << ";ProductID " << Pid;
             temp1 << ";Name " << Name1;
@@ -578,7 +578,7 @@ cancel:
     //////////////////////////////////////////////////////////////////////////
     ifstream updation("products.txt", ios::in);
     ofstream Temp("temp2.txt", ios::out);
-    std::string line4, name, Price, Type2, Count;
+    std::string line4, name, Price, Type2, Count, merchant_id1;
     bool isfound = false;
     while (std::getline(updation, line4))
     {
@@ -595,6 +595,10 @@ cancel:
                 {
                     isfound = true;
                 }
+            }
+            if (token.rfind("MerchantID ", 0) == 0 && isfound)
+            {
+                merchant_id1 = token.substr(11);
             }
             if (token.rfind("Name ", 0) == 0 && isfound)
             {
@@ -613,7 +617,7 @@ cancel:
         if (isfound)
         {
             Temp << "ProductID " << PorderID;
-            Temp << ";MerchantID " << merchant_id;
+            Temp << ";MerchantID " << merchant_id1;
             Temp << ";Name " << name;
             Temp << ";Price " << Price;
             Temp << ";Type " << Type2;

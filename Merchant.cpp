@@ -34,11 +34,11 @@ void Merchant::merchantMenu()
                 break;
         }
 }
-void Merchant::OrderStatusView()   // View the  Orders made by the customer 
+void Merchant::OrderStatusView() // View the  Orders made by the customer
 {
 
         ifstream customer1("orders.txt", ios::in);
-        std::string Cproduct, line2, delimiter = ";"; 
+        std::string Cproduct, line2, delimiter = ";";
         std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending", merId, merchant_id, Merchant;
         bool status = false, flag = false;
         int NoStatus = 0;
@@ -123,7 +123,7 @@ int Merchant::idGeneration()
 {
         int productId;
         srand(time(0));
-        productId = rand() % 100 + 1;
+        productId = rand() % 100 + 10;
         return productId;
 }
 void Merchant::addProducts()
@@ -364,7 +364,6 @@ void Merchant::assignCourier()
         //////////////////////////////////////////////////////////////////////
         std::cout << "***********************      Orders     ********************************\n";
         std::string line1, defstatus = "Pending", status, Order, Name, Type, customer_id, id, merchant_id, merId, Mer;
-        //     std::string delimiter = ";";
         ifstream view1("orders.txt", ios::in);
         bool st = false, flag = false;
         int count = 0;
@@ -468,7 +467,7 @@ void Merchant::assignCourier()
                         }
                         if (token.rfind("ProductID ", 0) == 0 && iffound)
                         {
-                                ProductID = token.substr(9);
+                                ProductID = token.substr(10);
                         }
                         if (token.rfind("Name ", 0) == 0 && iffound)
                         {
@@ -826,11 +825,13 @@ void Merchant::cancelledProducts()
                         //<< "Status " << status << std::endl;
                         found = false;
                 }
-                else
-                {
-                        continue;
-                }
+                // else
+                // {
+                //         continue;
+                // }
+                id = false;
         }
+
         if (cancelled == 0)
         {
                 std::cout << "\nNo Products have been cancelled by user......" << std::endl;

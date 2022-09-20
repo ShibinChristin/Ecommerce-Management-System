@@ -180,7 +180,7 @@ void Authentication::CustomerLogin()
 	if (cAuthenticate == 0) 
 	{
 		std::cout << "\n";
-		std::cout << "       ===Invalid name! Please try again.===\n";
+		std::cout << "       ===Invalid Username or password! Please try again.===\n";
 		std::cout << "\n";
 		mainMenu();
 	}
@@ -313,7 +313,7 @@ void Authentication::MerchantLogin()
 	if (mAuthenticate == 0)
 	{
 		std::cout << "\n";
-		std::cout << "       ===Invalid name! Please try again.===\n";
+		std::cout << "       ===Invalid Username or password! Please try again.===\n";
 		std::cout << "\n";
 		mainMenu();
 		

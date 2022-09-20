@@ -1,11 +1,4 @@
-CustomerID 23;MerchantID 21;OrderID 50;ProductID 87;Name Galaxy S22;Type Electronics;Count 2;Courier Kochi;Status Delivered;
-CustomerID 22;MerchantID 21;OrderID 34;ProductID 87;Name Galaxy S22;Type Electronics;Count 1;Status Pending;
-CustomerID 23;MerchantID 21;OrderID 56;ProductID 87;Name Galaxy S22;Type Electronics;Count 4;Courier Kochi;Status Delivered;
-CustomerID 35;MerchantID 64;OrderID 64;ProductID 88;Name Kurthi;Type Fashion;Count 4;Status Pending;
-CustomerID 35;MerchantID 32;OrderID 2;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Cancelled;
-CustomerID 35;MerchantID 32;OrderID 85;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Pending;
-CustomerID 23;MerchantID 21;OrderID 45;ProductID 62;Name Sofa;Type Furniture;Count 2;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 13;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 63;ProductID 73;Name Mens shirt;Type Fashion;Count 3;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 3;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 90;ProductID 62;Name Sofa;Type Furniture;Count 1;Status Cancelled;
+CustomerID 23;MerchantID 32;OrderID 19;ProductID 62;Name Sofa;Type Furniture;Count 2;Status Cancelled;
+CustomerID 23;MerchantID 64;OrderID 32;ProductID 88;Name Kurthi;Type Fashion;Count 4;Courier Ernakulam;Status Delivered;
+CustomerID 49;MerchantID 21;OrderID 58;ProductID 87;Name Galaxy S22;Type Electronics;Count 1;Courier Kochi;Status Delivered;
+CustomerID 49;MerchantID 64;OrderID 87;ProductID 73;Name Mens shirt;Type Fashion;Count 4;Status Pending;
