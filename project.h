@@ -1,7 +1,7 @@
 #include <iostream>
 #include <istream>
 #include <fstream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <cstring>
 #include <regex>
