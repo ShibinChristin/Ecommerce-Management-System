@@ -366,7 +366,7 @@ passwordMatch:
 }
 void Authentication::courierLogin()
 {
-	int count;
+	int found;
 	string username3, password3, fileUsername, filePassword;
 	cout << "Hello Courier........So Glad to see you back......." << endl;
 
@@ -382,11 +382,11 @@ void Authentication::courierLogin()
 	{
 		if (fileUsername == username3 && filePassword == password3)
 		{
-			count = 1;
+			found = 1;
 		}
 	}
 	input.close();
-	if (count == 1)
+	if (found == 1)
 	{
 		cout << "\nLOGIN SUCCESSFUL...\nThanks for being a partner with us\nThanks for logging in.\n";
 	}
