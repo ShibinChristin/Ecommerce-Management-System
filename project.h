@@ -9,12 +9,15 @@ using namespace std;
 
 class Authentication
 {
-    string username1 ,password1,password_confirm1 , pass1 ,user;
+    string username1, password1, password_confirm1, pass1, user;
     string username2, password2, password_confirm2;
     string username3, password3, password_confirm3;
+
 public:
-int count;
-string line1 , line2 , line3; 
+    size_t pos = 0;
+    std::string delimiter = ";";
+    int count;
+    string line1, line2, line3;
     void CustomerLogin();
     void CustomerRegistration();
     void MerchantLogin();
@@ -32,6 +35,7 @@ class Customer
     std::string id, customer_id;
     std::string merchant_id, merId;
     int cusId;
+
 public:
     int customerChoice;
     std::string line;
@@ -66,9 +70,9 @@ public:
 class Courier
 {
 public:
-void listOfOrders();
-void courierOptions();
-void StatusUpdate();
-void PendingAndDelivered();
-void courierMenu();
+    void listOfOrders();
+    void courierOptions();
+    void StatusUpdate();
+    void PendingAndDelivered();
+    void courierMenu();
 };
