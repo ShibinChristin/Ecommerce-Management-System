@@ -1,5 +1,5 @@
 #include "project.h"
-fstream file1;
+// fstream file1;
 
 void Authentication::mainMenu()
 {	
@@ -55,8 +55,8 @@ int Authentication::idGeneration()
 }
 void Authentication::CustomerRegistration()
 {
-	size_t pos = 0;
-	std::string delimiter = ";";
+	// size_t pos = 0;
+	// std::string delimiter = ";";
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 
 	cout << "Enter your desired username : ";
@@ -70,7 +70,7 @@ void Authentication::CustomerRegistration()
 	}
 	
 	ifstream in1;
-	bool found = false;
+	bool customerUsername = false;
 	in1.open("CustomerAuthentication.txt", ios::in);
 	while (std::getline(in1, line1))
 	{
@@ -78,15 +78,15 @@ void Authentication::CustomerRegistration()
 
 		if (line1.find(username1) != string::npos)
 		{
-			found = true;
+			customerUsername = true;
 		}
 		line1.erase(0, pos + delimiter.length());
 	}
 
-	if (found)
+	if (customerUsername)
 	{
 		cout << "Username already exists" << endl;
-		found = false;
+		customerUsername = false;
 		mainMenu();
 		
 	}
@@ -96,14 +96,14 @@ void Authentication::CustomerRegistration()
 	file1.open("CustomerAuthentication.txt", ios::in | ios::out | ios::app);
 	cout << "Enter password :";
 	cin >> password1;
-passwordStart1:
+passwordStart:
 	cout << "Enter password to confirm :";
 	getline(cin >> ws, password_confirm1);
 
 	if (password1 != password_confirm1)
 	{
 		cout << "\nThe passwords do not match. Please enter a new password\n";
-		goto passwordStart1;
+		goto passwordStart;
 	}
 	else
 	{
@@ -128,8 +128,8 @@ void Authentication::CustomerLogin()
 	bool ifound = false, flag = false;
 	std::string line5, token, CustomerID, pass;
 	std::string ChecK_name;
-	std::string delimiter = ";";
-	size_t pos = 0;
+	// std::string delimiter = ";";
+	// size_t pos = 0;
 	cout << "Hello Customer...\nSo Glad to see you back......." << endl;
 
 	cout << "Please enter the following details" << endl;
@@ -193,8 +193,8 @@ void Authentication::CustomerLogin()
 void Authentication::MerchantRegistration()
 {
 	string username2, password2, password_confirm2;
-	size_t pos = 0;
-	string delimiter = ";";
+	// size_t pos = 0;
+	// string delimiter = ";";
 
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 
@@ -231,13 +231,13 @@ void Authentication::MerchantRegistration()
 
 	cout << "Enter password :";
 	cin >> password2;
-passwordStart2:
+promptPassword:
 	cout << "Enter password to confirm :";
 	getline(cin >> ws, password_confirm2);
 	if (password2 != password_confirm2)
 	{
 		cout << "\nThe passwords do not match. Please enter a new password\n";
-		goto passwordStart2;
+		goto promptPassword;
 	}
 	else
 	{
@@ -259,8 +259,8 @@ void Authentication::MerchantLogin()
 	bool ifound = false, flag = false;
 	std::string line6, token, MerchantID, pass;
 	std::string Check_name;
-	std::string delimiter = ";";
-	size_t pos = 0;
+	// std::string delimiter = ";";
+	// size_t pos = 0;
 	string username2, password2, u, p, condition;
 	cout << "Hello Merchant..........So Glad to see you back......." << endl;
 
@@ -358,13 +358,13 @@ void Authentication::CourierRegistration()
 	file3.open("CourierAuthentication.txt", ios::out | ios::app);
 	cout << "Enter password :";
 	cin >> password3;
-passwordStart3:
+passwordMatch:
 	cout << "Enter password to confirm :";
 	getline(cin >> ws, password_confirm3);
 	if (password3 != password_confirm3)
 	{
 		cout << "\nThe passwords do not match. Please enter a new password\n";
-		goto passwordStart3;
+		goto passwordMatch;
 	}
 	else
 	{
@@ -380,7 +380,7 @@ passwordStart3:
 void Authentication::CourierLogin()
 {
 	int count;
-	string username3, password3, u, p;
+	string username3, password3, fileUsername, filePassword;
 	cout << "Hello Courier........So Glad to see you back......." << endl;
 
 	cout << "Please enter the following details" << endl;
@@ -391,9 +391,9 @@ void Authentication::CourierLogin()
 	cin >> password3;
 
 	ifstream input("CourierAuthentication.txt");
-	while (input >> u >> p)
+	while (input >> fileUsername >> filePassword)
 	{
-		if (u == username3 && p == password3)
+		if (fileUsername == username3 && filePassword == password3)
 		{
 			count = 1;
 		}
