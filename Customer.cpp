@@ -107,24 +107,18 @@ void Customer::showProducts() ////// To Display the Products
             token = line1.substr(0, pos);
             if (token.rfind("ProductID ", 0) == 0)
             {
-                // std::cout << "Product ID: " << token.substr(9);
                 ProductID = token.substr(9);
             }
             if (token.rfind("Name ", 0) == 0)
             {
-                // std::cout << " |Name : " << token.substr(5);
                 ProductName = token.substr(5);
             }
             if (token.rfind("Price ", 0) == 0)
             {
-                // cout << " |"
-                //  << "Price : " << token.substr(6);
                 ProductPrice = token.substr(6);
             }
             if (token.rfind("Type ", 0) == 0)
             {
-                // cout << " |"
-                //  << "Type : " << token.substr(5) << endl;
                 ProductType = token.substr(5);
             }
             line1.erase(0, pos + delimiter.length());
@@ -195,10 +189,10 @@ buy:
     }
     in1.close();
     int TempCount;
-    int ProductC;
+    int productCount; 
 
     TempCount = stoi(count);
-    ProductC = stoi(Val);
+    productCount = stoi(Val);
     ifstream in3("products.txt", ios::in);
     std::string line3;
     while (std::getline(in3, line3))
@@ -237,7 +231,7 @@ buy:
         }
         if (idfound)
         {
-            if (ProductC - TempCount < 0)
+            if (productCount - TempCount < 0)
             {
                 cout << "Product Out of stock......\nPlease try again later\n";
                 customerChoiceDisplay();
@@ -249,7 +243,7 @@ buy:
                 temp << ";Name " << Cproduct;
                 temp << ";Price " << Price;
                 temp << ";Type " << ProductType;
-                temp << ";Count " << ProductC - TempCount << ";" << endl;
+                temp << ";Count " << productCount - TempCount << ";" << endl;
             }
         }
 

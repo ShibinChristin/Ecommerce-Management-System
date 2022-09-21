@@ -365,8 +365,8 @@ void Merchant::assignCourier()
         std::cout << "***********************      Orders     ********************************\n";
         std::string line1, defstatus = "Pending", status, Order, Name, Type, customer_id, merchant_id, merId, Mer;
         ifstream view1("orders.txt", ios::in);
-        bool st = false, flag = false;
-        int count = 0;
+        bool statusFound = false, flag = false;
+        int count = 0 , statusCount=0;
         ifstream MerchantId("merchantId.txt", ios::in);
         while (std::getline(MerchantId, merId))
         {
@@ -411,12 +411,13 @@ void Merchant::assignCourier()
                                 status = token.substr(7);
                                 if (defstatus == status)
                                 {
-                                        st = true;
+                                        statusFound = true;
+                                        statusCount++;
                                 }
                         }
                         line1.erase(0, pos + delimiter.length());
                 }
-                if (st)
+                if (statusFound)
                 {
                         std::cout << "Order ID " << Order << "|"
                                   << "Name " << Name << "|"
@@ -425,11 +426,11 @@ void Merchant::assignCourier()
                                   << "Status "
                                   << status
                                   << std::endl;
-                        st = false;
+                        statusFound = false;
                 }
                 flag = false;
         }
-        if (count == 0)
+        if (count == 0 || statusCount==0)
         {
                 std::cout << "No Products to assign......." << endl;
                 return;
