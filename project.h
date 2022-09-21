@@ -18,12 +18,12 @@ public:
     std::string delimiter = ";";
     int count;
     string line1, line2, line3;
-    void CustomerLogin();
-    void CustomerRegistration();
-    void MerchantLogin();
-    void MerchantRegistration();
-    void CourierLogin();
-    void CourierRegistration();
+    void customerLogin();
+    void customerRegistration();
+    void merchantLogin();
+    void merchantRegistration();
+    void courierLogin();
+    void courierRegistration();
     int idGeneration();
     void mainMenu();
 };
@@ -40,11 +40,11 @@ public:
     int customerChoice;
     std::string line;
     int ProductBuy;
-    void CustomerBuy();
-    void CustomerChoiceDisplay();
+    void customerBuy();
+    void customerChoiceDisplay();
     void showProducts();
     void orderStatus();
-    void CancelOrder();
+    void cancelOrder();
     int idGenerate();
     void customerMenu();
 };
@@ -62,7 +62,7 @@ public:
     void displayOutOfStock();
     void assignCourier();
     void cancelledProducts();
-    void OrderStatusView();
+    void orderStatusView();
     int idGeneration();
     void merchantMenu();
 };
@@ -72,7 +72,7 @@ class Courier
 public:
     void listOfOrders();
     void courierOptions();
-    void StatusUpdate();
-    void PendingAndDelivered();
+    void statusUpdate();
+    void pendingAndDelivered();
     void courierMenu();
 };

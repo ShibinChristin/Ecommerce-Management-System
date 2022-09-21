@@ -1,7 +1,7 @@
 #include "project.h"
 void Merchant::merchantMenu()
 {
-        Authentication auth;
+        Authentication authenticationObj;
         std::string merchantChoice;
         std::cout << "********************************************************************************\n\n";
         std::cout << "                          Welcome to Merchant Portal                             \n\n";
@@ -20,21 +20,21 @@ void Merchant::merchantMenu()
         switch (stoi(merchantChoice))
         {
         case 1:
-                auth.MerchantLogin();
+                authenticationObj.merchantLogin();
                 merchantOptions();
                 break;
         case 2:
-                auth.MerchantRegistration();
+                authenticationObj.merchantRegistration();
                 merchantMenu();
                 merchantOptions();
                 break;
 
         case 3:
-                auth.mainMenu();
+                authenticationObj.mainMenu();
                 break;
         }
 }
-void Merchant::OrderStatusView() // View the  Orders made by the customer
+void Merchant::orderStatusView() // View the  Orders made by the customer
 {
 
         ifstream customer1("orders.txt", ios::in);
@@ -250,7 +250,7 @@ void Merchant::merchantOptions()
         break;
         case 3:
         {
-                OrderStatusView();
+                orderStatusView();
 
                 merchantOptions();
         }

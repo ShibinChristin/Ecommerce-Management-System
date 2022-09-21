@@ -1,12 +1,12 @@
 #include "project.h"
 int main()
 {
-    Authentication auth;
-    Customer cust;
-    Merchant Mer;
-    Courier C;
+    Authentication authenticationObj;
+    Customer customerObj;
+    Merchant merchantObj;
+    Courier courierObj;
 
-    auth.mainMenu();
+    authenticationObj.mainMenu();
     
     return 0;
 }

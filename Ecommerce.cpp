@@ -1,11 +1,9 @@
 #include "project.h"
-// fstream file1;
-
 void Authentication::mainMenu()
 {	
-	Customer cust;
-	Merchant Mer;
-	Courier C;
+	Customer customerObj;
+	Merchant merchantObj;
+	Courier courierObj;
 	std::string choice;
 	cout << "\n\n*******************************************************************************\n\n";
     cout << "                           Welcome to ShopTronics                               \n\n";
@@ -28,15 +26,15 @@ void Authentication::mainMenu()
 	switch(stoi(choice))
 	{
 		case 1:
-		cust.customerMenu();
+		customerObj.customerMenu();
 		break;
 		
 		case 2:
-		Mer.merchantMenu();
+		merchantObj.merchantMenu();
 		break;
 
 		case 3:
-		C.courierMenu();
+		courierObj.courierMenu();
 		break;
 		
 		case 4:
@@ -44,7 +42,6 @@ void Authentication::mainMenu()
 		exit(0);
 
 	}
-//}
 }
 int Authentication::idGeneration()
 {
@@ -53,10 +50,8 @@ int Authentication::idGeneration()
 	id = rand() % 100 + 1; // generate random numbers
 	return id;
 }
-void Authentication::CustomerRegistration()
+void Authentication::customerRegistration()
 {
-	// size_t pos = 0;
-	// std::string delimiter = ";";
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 
 	cout << "Enter your desired username : ";
@@ -66,7 +61,7 @@ void Authentication::CustomerRegistration()
 		std::cout << "\n";
 		std::cout << "       ===Invalid name! Please try again.===\n";
 		std::cout << "\n";
-		CustomerRegistration();
+		customerRegistration();
 	}
 	
 	ifstream in1;
@@ -118,18 +113,15 @@ passwordStart:
 	cout << "\n";
 	
 	}
-//}
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-void Authentication::CustomerLogin()
+void Authentication::customerLogin()
 {
 	int cAuthenticate = 0;
 	bool ifound = false, flag = false;
 	std::string line5, token, CustomerID, pass;
 	std::string ChecK_name;
-	// std::string delimiter = ";";
-	// size_t pos = 0;
 	cout << "Hello Customer...\nSo Glad to see you back......." << endl;
 
 	cout << "Please enter the following details" << endl;
@@ -185,16 +177,13 @@ void Authentication::CustomerLogin()
 		mainMenu();
 	}
 	input.close();
-//}
 	
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
-void Authentication::MerchantRegistration()
+void Authentication::merchantRegistration()
 {
 	string username2, password2, password_confirm2;
-	// size_t pos = 0;
-	// string delimiter = ";";
 
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 
@@ -205,7 +194,7 @@ void Authentication::MerchantRegistration()
 		std::cout << "\n";
 		std::cout << "===Invalid name! Please try again.===\n";
 		std::cout << "\n";
-		MerchantRegistration();
+		merchantRegistration();
 	}
 
 	ifstream in2;
@@ -253,14 +242,12 @@ promptPassword:
 	
 }
 
-void Authentication::MerchantLogin()
+void Authentication::merchantLogin()
 {
 	int mAuthenticate = 0;
 	bool ifound = false, flag = false;
 	std::string line6, token, MerchantID, pass;
 	std::string Check_name;
-	// std::string delimiter = ";";
-	// size_t pos = 0;
 	string username2, password2, u, p, condition;
 	cout << "Hello Merchant..........So Glad to see you back......." << endl;
 
@@ -323,7 +310,7 @@ void Authentication::MerchantLogin()
 
 ///////////////////////////////////////////////////////////////////////
 
-void Authentication::CourierRegistration()
+void Authentication::courierRegistration()
 {
 	
 	count = 0;
@@ -335,7 +322,7 @@ void Authentication::CourierRegistration()
 		std::cout << "\n";
 		std::cout << "===Invalid name! Please try again.===\n";
 		std::cout << "\n";
-		CourierRegistration();
+		courierRegistration();
 	}
 	
 	ifstream in3;
@@ -377,7 +364,7 @@ passwordMatch:
 	cout << "\n";
 	
 }
-void Authentication::CourierLogin()
+void Authentication::courierLogin()
 {
 	int count;
 	string username3, password3, fileUsername, filePassword;

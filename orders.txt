@@ -1,5 +1,6 @@
 CustomerID 23;MerchantID 32;OrderID 5;ProductID 62;Name Sofa;Type Furniture;Count 2;Courier Kochi;Status Delivered;
 CustomerID 49;MerchantID 32;OrderID 35;ProductID 62;Name Sofa;Type Furniture;Count 2;Status Pending;
-CustomerID 49;MerchantID 64;OrderID 18;ProductID 73;Name Mens shirt;Type Fashion;Count 1;Status Pending;
+CustomerID 49;MerchantID 64;OrderID 18;ProductID 73;Name Mens shirt;Type Fashion;Count 1;Courier Kochi;Status Shipping;
 CustomerID 49;MerchantID 21;OrderID 15;ProductID 39;Name Galaxy S21;Type Electronics;Count 3;Status Pending;
 CustomerID 23;MerchantID 32;OrderID 34;ProductID 62;Name Sofa Set;Type Furniture;Count 2;Status Pending;
+CustomerID 49;MerchantID 64;OrderID 50;ProductID 73;Name Mens shirt;Type Fashion;Count 1;Status Cancelled;

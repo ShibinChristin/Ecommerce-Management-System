@@ -3,7 +3,7 @@ ifstream customer("products.txt", ios::in);
 ifstream Customerid("customerId.txt", ios::in);
 void Customer::customerMenu()
 {
-    Authentication auth;
+    Authentication authenticationObj;
     std::string CustChoice;
     cout << "********************************************************************************\n\n";
     cout << "                          Welcome to Customer Portal                             \n\n";
@@ -22,17 +22,17 @@ void Customer::customerMenu()
     switch (stoi(CustChoice))
     {
     case 1:
-        auth.CustomerLogin();
-        CustomerChoiceDisplay();
+        authenticationObj.customerLogin();
+        customerChoiceDisplay();
         break;
     case 2:
-        auth.CustomerRegistration();
+        authenticationObj.customerRegistration();
         customerMenu();
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
         break;
 
     case 3:
-        auth.mainMenu();
+        authenticationObj.mainMenu();
         break;
     }
 }
@@ -44,7 +44,7 @@ int Customer::idGenerate()
     return id;
 }
 
-void Customer::CustomerChoiceDisplay()
+void Customer::customerChoiceDisplay()
 {
     std::string options;
     cout << "***********************       MENU        ********************************\n\n";
@@ -60,32 +60,32 @@ void Customer::CustomerChoiceDisplay()
     if (!(regex_match(options, w)))
     {
         cout << "\nInvalid Choice .....Please try again\n";
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     switch (stoi(options))
     {
     case 1:
     {
-        CustomerBuy();
-        CustomerChoiceDisplay();
+        customerBuy();
+        customerChoiceDisplay();
     }
     break;
     case 2:
     {
         showProducts();
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     break;
     case 3:
     {
         orderStatus();
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     break;
     case 4:
     {
-        CancelOrder();
-        CustomerChoiceDisplay();
+        cancelOrder();
+        customerChoiceDisplay();
     }
     break;
     case 5:
@@ -133,7 +133,7 @@ void Customer::showProducts() ////// To Display the Products
     }
     in.close();
 }
-void Customer::CustomerBuy()
+void Customer::customerBuy()
 {
     ifstream Customerid("customerId.txt", ios::in);
     ifstream customer1("products.txt", ios::in);
@@ -191,7 +191,7 @@ buy:
     if (ProductNotFound == 0)
     {
         cout << "Product not found " << endl;
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     in1.close();
     int TempCount;
@@ -240,7 +240,7 @@ buy:
             if (ProductC - TempCount < 0)
             {
                 cout << "Product Out of stock......\nPlease try again later\n";
-                CustomerChoiceDisplay();
+                customerChoiceDisplay();
             }
             else
             {
@@ -388,11 +388,11 @@ void Customer::orderStatus()
     if (buy == 0)
     {
         cout << "\nYou haven't made any orders...." << endl;
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     in.close();
 }
-void Customer::CancelOrder()
+void Customer::cancelOrder()
 {
     ifstream Customerid("customerId.txt", ios::in);
     ifstream view("orders.txt", ios::in);
@@ -459,7 +459,7 @@ void Customer::CancelOrder()
     if (NoOrders == 0)
     {
         cout << "No orders to cancel.....\n";
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     view.close();
     ////////////////////////////////////////////////////////////////////////////
@@ -537,7 +537,7 @@ cancel:
     if (count == 0)
     {
         cout << "No Such Order ID exists......." << endl;
-        CustomerChoiceDisplay();
+        customerChoiceDisplay();
     }
     remove("orders.txt");
     rename("temp.txt", "orders.txt");

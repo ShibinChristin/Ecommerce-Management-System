@@ -2,7 +2,7 @@
 std::string choice;
 void Courier::courierMenu()
 {
-    Authentication auth;
+    Authentication authenticationObj;
     std::string CourierChoice;
     std::cout << "******************************************************************************\n\n";
     std::cout << "                        Welcome to Courier Portal                             \n\n";
@@ -22,20 +22,20 @@ void Courier::courierMenu()
     {
     case 1:
     {
-        auth.CourierLogin();
+        authenticationObj.courierLogin();
         courierOptions();
     }
     break;
     case 2:
     {
-        auth.CourierRegistration();
+        authenticationObj.courierRegistration();
         courierMenu();
         courierOptions();
     }
     break;
     case 3:
     {
-        auth.mainMenu();
+        authenticationObj.mainMenu();
     }
     break;
     }
@@ -66,13 +66,13 @@ void Courier::courierOptions()
     break;
     case 2:
     {
-        StatusUpdate();
+        statusUpdate();
         courierOptions();
     }
     break;
     case 3:
     {
-        PendingAndDelivered();
+        pendingAndDelivered();
         courierOptions();
     }
     break;
@@ -167,7 +167,7 @@ ch:
     in.close();
 }
 
-void Courier::StatusUpdate()
+void Courier::statusUpdate()
 {
     std::string Orderid;
     // listOfOrders();
@@ -373,7 +373,7 @@ ch:
     rename("Temp.txt", "orders.txt");
 }
 
-void Courier::PendingAndDelivered()
+void Courier::pendingAndDelivered()
 {
     std::string stats;
     std::string Name, OrderID, ProductID, Count, Type;
