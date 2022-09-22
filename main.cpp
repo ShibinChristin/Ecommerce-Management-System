@@ -2,9 +2,9 @@
 int main()
 {
     Authentication authenticationObj;
-    Customer customerObj;
-    Merchant merchantObj;
-    Courier courierObj;
+    // Customer customerObj;
+    // Merchant merchantObj;
+    // Courier courierObj;
 
     authenticationObj.mainMenu();
     

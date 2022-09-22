@@ -1,8 +1,0 @@
-CustomerID 23;MerchantID 64;OrderID 48;ProductID 88;Name Crop tops;Type Fashion;Count 2;Courier Kochi;Status Delivered;
-CustomerID 23;MerchantID 32;OrderID 31;ProductID 62;Name Chairs Set;Type Furniture;Count 2;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 20;ProductID 62;Name Chairs Set;Type Furniture;Count 1;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 93;ProductID 62;Name Chairs Set;Type Furniture;Count 1;Status Cancelled;
-CustomerID 23;MerchantID 21;OrderID 67;ProductID 62;Name Chairs Set;Type Furniture;Count 3;Status Cancelled;
-CustomerID 23;MerchantID 64;OrderID 80;ProductID 88;Name Crop tops;Type Fashion;Count 2;Status Cancelled;
-CustomerID 49;MerchantID 21;OrderID 9;ProductID 87;Name Galaxy S22;Type Electronics;Count 3;Status Pending;
-CustomerID 23;MerchantID 32;OrderID 63;ProductID 82;Name Dining set;Type Furniture;Count 2;Status Cancelled;

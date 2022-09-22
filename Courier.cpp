@@ -201,7 +201,7 @@ ch:
         size_t pos = 0;
         std::string originalLine = line1;
         std::string delimiter = ";";
-        std::string token , merchant_id , customer_id;
+        std::string token, merchant_id, customer_id;
         found = false;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
@@ -268,7 +268,7 @@ ch:
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             token = line.substr(0, pos);
-             if (token.rfind("CustomerID ", 0) == 0)
+            if (token.rfind("CustomerID ", 0) == 0)
             {
                 customer_id = token.substr(11);
             }
@@ -337,6 +337,7 @@ ch:
         case 2:
             if (flag)
             {
+                std::cout << "Updated Successfully......" << std::endl;
                 temp << "CustomerID " << customer_id << ";"
                      << "MerchantID " << merchant_id << ";"
                      << "OrderID " << OrderID << ";"

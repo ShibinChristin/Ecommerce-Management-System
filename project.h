@@ -9,9 +9,9 @@ using namespace std;
 
 class Authentication
 {
-    string username1, password1, password_confirm1, pass1, user;
-    string username2, password2, password_confirm2;
-    string username3, password3, password_confirm3;
+    string customerUsername, customerPassword, password_confirm1, pass1, user;
+    string merchantUsername, merchantPassword, password_confirm2;
+    string courierUsername, courierPassword, password_confirm3;
 
 public:
     size_t pos = 0;

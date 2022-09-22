@@ -146,7 +146,6 @@ void Merchant::addProducts()
 
 choice:
         std ::cout << "\nEnter the Type of the Product \n1.Electronics\n2.Furniture\n3.Fashion\nEnter choice :";
-        // std ::cin >> productChoice;
         std::getline(std::cin >> std::ws, productChoice);
         std::regex l("^[1-3]$");
         if (!(regex_match(productChoice, l)))
@@ -578,7 +577,7 @@ void Merchant::searchProducts()
 
                 std::string delimiter = ";";
                 ifstream pName;
-                int k = 0;
+                int ProductNotFound = 0;
                 pName.open("products.txt", std::ios::in);
                 while (std::getline(pName, line))
                 {
@@ -606,7 +605,7 @@ void Merchant::searchProducts()
                                         if (search == Name)
                                         {
                                                 found = true;
-                                                k++;
+                                                ProductNotFound++;
                                         }
                                 }
                                 if (token.rfind("Price ", 0) == 0 && found)
@@ -636,7 +635,7 @@ void Merchant::searchProducts()
                         flag = false;
                 }
                 pName.close();
-                if (k == 0)
+                if (ProductNotFound == 0)
                 {
                         std::cout << "Product not found" << std::endl;
                 }

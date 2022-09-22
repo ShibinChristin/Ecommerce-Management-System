@@ -127,7 +127,7 @@ void Customer::showProducts() ////// To Display the Products
     }
     in.close();
 }
-void Customer::customerBuy()
+void Customer::customerBuy() /*Function to buy products from merchant*/
 {
     ifstream Customerid("customerId.txt", ios::in);
     ifstream customer1("products.txt", ios::in);
@@ -386,6 +386,7 @@ void Customer::orderStatus()
     }
     in.close();
 }
+/*Function to cancel the order*/
 void Customer::cancelOrder()
 {
     ifstream Customerid("customerId.txt", ios::in);
@@ -400,14 +401,14 @@ void Customer::cancelOrder()
     Customerid.close();
     while (std::getline(view, line1))
     {
-        bool idCustomer = false, st = false;
+        bool idCustomer = false, statusCancelled = false;
         size_t pos = 0;
         while ((pos = line1.find(delimiter)) != std::string::npos)
         {
             token = line1.substr(0, pos);
             if (token.rfind("CustomerID ", 0) == 0)
             {
-                Cid = token.substr(11);
+                Cid = token.substr(11); // Cid = Customer ID
                 if (Cid == customer_id)
                 {
                     idCustomer = true;
@@ -431,13 +432,13 @@ void Customer::cancelOrder()
                 status = token.substr(7);
                 if (status == defstatus || status == defstatus1)
                 {
-                    st = true;
+                    statusCancelled = true;
                     NoOrders++;
                 }
             }
             line1.erase(0, pos + delimiter.length());
         }
-        if (st)
+        if (statusCancelled)
         {
             cout << "Order ID " << Order << "|"
                  << "Name " << Name << "|"
@@ -446,7 +447,7 @@ void Customer::cancelOrder()
                  << "Status "
                  << status
                  << endl;
-            st = false;
+            statusCancelled = false;
         }
         idCustomer = false;
     }

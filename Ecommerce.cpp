@@ -55,30 +55,30 @@ void Authentication::customerRegistration()
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 
 	cout << "Enter your desired username : ";
-	getline(cin >> ws, username1);
-	if (!(regex_match(username1, s)))
+	getline(cin >> ws,customerUsername);
+	if (!(regex_match(customerUsername, s)))
 	{
 		std::cout << "\n";
 		std::cout << "       ===Invalid name! Please try again.===\n";
 		std::cout << "\n";
-		customerRegistration();
+		mainMenu();
 	}
 	
 	ifstream in1;
-	bool customerUsername = false;
+	bool cUsername = false;
 	in1.open("CustomerAuthentication.txt", ios::in);
 	while (std::getline(in1, line1))
 	{
 		std::string token = line1.substr(0, pos);
 
-		if (line1.find(username1) != string::npos)
+		if (line1.find(customerUsername) != string::npos)
 		{
-			customerUsername = true;
+			cUsername = true;
 		}
 		line1.erase(0, pos + delimiter.length());
 	}
 
-	if (customerUsername)
+	if (cUsername)
 	{
 		cout << "Username already exists" << endl;
 		customerUsername = false;
@@ -90,12 +90,12 @@ void Authentication::customerRegistration()
 	fstream file1;
 	file1.open("CustomerAuthentication.txt", ios::in | ios::out | ios::app);
 	cout << "Enter password :";
-	cin >> password1;
+	cin >> customerPassword;
 passwordStart:
 	cout << "Enter password to confirm :";
 	getline(cin >> ws, password_confirm1);
 
-	if (password1 != password_confirm1)
+	if (customerPassword != password_confirm1)
 	{
 		cout << "\nThe passwords do not match. Please enter a new password\n";
 		goto passwordStart;
@@ -105,9 +105,9 @@ passwordStart:
 		cout << "Awesome....Your Registration is successful......" << endl;
 	}
 	cout << "Your USERNAME :"
-		 << username1 << endl;
-	file1 << "Username " << username1 << ";"
-		  << "Password " << password1 << ";"
+		 << customerUsername << endl;
+	file1 << "Username " << customerUsername << ";"
+		  << "Password " << customerPassword << ";"
 		  << "CustomerID " << idGeneration() << ";" << endl;
 	file1.close();
 	cout << "\n";
@@ -126,9 +126,9 @@ void Authentication::customerLogin()
 
 	cout << "Please enter the following details" << endl;
 	cout << "USERNAME :";
-	cin >> username1;
+	cin >> customerUsername;
 	cout << "PASSWORD :";
-	cin >> password1;
+	cin >> customerPassword;
 
 	ifstream input("CustomerAuthentication.txt", ios::in);
 	ofstream cId("customerId.txt", ios::out);
@@ -141,7 +141,7 @@ void Authentication::customerLogin()
 			if (token.rfind("Username ", 0) == 0)
 			{
 				ChecK_name = token.substr(9);
-				if (username1 == ChecK_name)
+				if (customerUsername == ChecK_name)
 				{
 					ifound = true;
 				}
@@ -149,7 +149,7 @@ void Authentication::customerLogin()
 			if (token.rfind("Password ", 0) == 0 && ifound)
 			{
 				pass = token.substr(9);
-				if(pass == password1)
+				if(pass == customerPassword)
 				{
 					flag = true;
 					cAuthenticate++;
@@ -183,18 +183,18 @@ void Authentication::customerLogin()
 
 void Authentication::merchantRegistration()
 {
-	string username2, password2, password_confirm2;
+	string merchantUsername, merchantPassword, password_confirm2;
 
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 
 	cout << "Enter your desired username : ";
-	getline(cin >> ws, username2);
-	if (!(regex_match(username2, s)))
+	getline(cin >> ws, merchantUsername);
+	if (!(regex_match(merchantUsername, s)))
 	{
 		std::cout << "\n";
 		std::cout << "===Invalid name! Please try again.===\n";
 		std::cout << "\n";
-		merchantRegistration();
+		mainMenu();
 	}
 
 	ifstream in2;
@@ -202,7 +202,7 @@ void Authentication::merchantRegistration()
 	in2.open("merchantAuthentication.txt", ios::in);
 	while (std::getline(in2, line2))
 	{
-		if (line2.find(username2) != string::npos)
+		if (line2.find(merchantUsername) != string::npos)
 		{
 			found = true;
 		}
@@ -219,11 +219,11 @@ void Authentication::merchantRegistration()
 	file2.open("merchantAuthentication.txt", ios::out | ios::app);
 
 	cout << "Enter password :";
-	cin >> password2;
+	cin >> merchantPassword;
 promptPassword:
 	cout << "Enter password to confirm :";
 	getline(cin >> ws, password_confirm2);
-	if (password2 != password_confirm2)
+	if (merchantPassword != password_confirm2)
 	{
 		cout << "\nThe passwords do not match. Please enter a new password\n";
 		goto promptPassword;
@@ -233,9 +233,9 @@ promptPassword:
 		cout << "Awesome....Your Registration is successful......" << endl;
 	}
 	cout << "Your USERNAME :"
-		 << username2 << endl;
-	file2 << "Username " << username2 << ";"
-		  << "Password " << password2 << ";"
+		 << merchantUsername << endl;
+	file2 << "Username " << merchantUsername << ";"
+		  << "Password " << merchantPassword << ";"
 		  << "MerchantID " << idGeneration() << ";" << endl;
 	file2.close();
 	cout << "\n";
@@ -248,14 +248,14 @@ void Authentication::merchantLogin()
 	bool ifound = false, flag = false;
 	std::string line6, token, MerchantID, pass;
 	std::string Check_name;
-	string username2, password2, u, p, condition;
+	string merchantUsername, merchantPassword, u, p, condition;
 	cout << "Hello Merchant..........So Glad to see you back......." << endl;
 
 	cout << "Please enter the following details" << endl;
 	cout << "USERNAME :";
-	cin >> username2;
+	cin >> merchantUsername;
 	cout << "PASSWORD :";
-	cin >> password2;
+	cin >> merchantPassword;
 
 	ifstream merchantFile("merchantAuthentication.txt");
 	ofstream mId("merchantId.txt", ios::out);
@@ -269,7 +269,7 @@ void Authentication::merchantLogin()
 			if (token.rfind("Username ", 0) == 0)
 			{
 				Check_name = token.substr(9);
-				if (username2 == Check_name)
+				if (merchantUsername == Check_name)
 				{
 					ifound = true;
 				}
@@ -277,7 +277,7 @@ void Authentication::merchantLogin()
 			if (token.rfind("Password ", 0) == 0 && ifound)
 			{
 				pass = token.substr(9);
-				if(pass == password2)
+				if(pass == merchantPassword)
 				{
 					flag = true;
 					mAuthenticate++;
@@ -316,20 +316,20 @@ void Authentication::courierRegistration()
 	count = 0;
 	std::regex s("^[a-zA-Z0-9\\s]+$");
 	cout << "Enter your desired username : ";
-	getline(cin >> ws, username3);
-	if (!(regex_match(username3, s)))
+	getline(cin >> ws, courierUsername);
+	if (!(regex_match(courierUsername, s)))
 	{
 		std::cout << "\n";
 		std::cout << "===Invalid name! Please try again.===\n";
 		std::cout << "\n";
-		courierRegistration();
+		mainMenu();
 	}
 	
 	ifstream in3;
 	in3.open("CourierAuthentication.txt");
 	while (std::getline(in3, line3))
 	{
-		if (line3.find(username3) != string::npos)
+		if (line3.find(courierUsername) != string::npos)
 		{
 			count++;
 		}
@@ -344,11 +344,11 @@ void Authentication::courierRegistration()
 	fstream file3;
 	file3.open("CourierAuthentication.txt", ios::out | ios::app);
 	cout << "Enter password :";
-	cin >> password3;
+	cin >> courierPassword;
 passwordMatch:
 	cout << "Enter password to confirm :";
 	getline(cin >> ws, password_confirm3);
-	if (password3 != password_confirm3)
+	if (courierPassword != password_confirm3)
 	{
 		cout << "\nThe passwords do not match. Please enter a new password\n";
 		goto passwordMatch;
@@ -358,8 +358,8 @@ passwordMatch:
 		cout << "Awesome....Your Registration is successful......" << endl;
 	}
 	cout << "Your USERNAME :"
-		 << username3 << endl;
-	file3 << username3 << " " << password3 << endl;
+		 << courierUsername << endl;
+	file3 << courierUsername << " " << courierPassword << endl;
 	file3.close();
 	cout << "\n";
 	
@@ -367,20 +367,20 @@ passwordMatch:
 void Authentication::courierLogin()
 {
 	int found;
-	string username3, password3, fileUsername, filePassword;
+	string  fileUsername, filePassword;
 	cout << "Hello Courier........So Glad to see you back......." << endl;
 
 	cout << "Please enter the following details" << endl;
 	cout << "USERNAME :";
-	cin >> username3;
+	cin >> courierUsername;
 
 	cout << "PASSWORD :";
-	cin >> password3;
+	cin >> courierPassword;
 
 	ifstream input("CourierAuthentication.txt");
 	while (input >> fileUsername >> filePassword)
 	{
-		if (fileUsername == username3 && filePassword == password3)
+		if (fileUsername == courierUsername && filePassword == courierPassword)
 		{
 			found = 1;
 		}
