@@ -179,8 +179,6 @@ void Authentication::customerLogin()
 	input.close();
 	
 }
-/////////////////////////////////////////////////////////////////////////////////////////
-
 void Authentication::merchantRegistration()
 {
 	string merchantUsername, merchantPassword, password_confirm2;
@@ -307,8 +305,6 @@ void Authentication::merchantLogin()
 	}
 	merchantFile.close();
 	}
-
-///////////////////////////////////////////////////////////////////////
 
 void Authentication::courierRegistration()
 {

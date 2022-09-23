@@ -128,8 +128,6 @@ void Merchant::addProducts()
 {
         std::string line, Merchant_id, MerId;
         std::string productChoice;
-        // std::fstream writeData;
-        // writeData.open("products.txt", std::ios::in | std::ios::out);
         ifstream merchantId1("merchantId.txt", ios::in);
         while (std::getline(merchantId1, MerId))
         {
@@ -179,9 +177,6 @@ b:
                 std::cout << "\n";
                 goto b;
         }
-        // else
-        // {
-        // }
 Type:
         std::cout << "\nThe number of available " << productType << " Products : ";
         std::getline(std::cin >> std::ws, productCount);
@@ -192,17 +187,11 @@ Type:
                 std::cout << "\n";
                 goto Type;
         }
-        else
-        {
-        }
         std::fstream merchantFile;
         merchantFile.open("products.txt", std::ios::in | std::ios::out | std::ios::app);
         merchantFile << "ProductID " << idGeneration() << ";MerchantID " << Merchant_id << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << std::endl;
         std::cout << "\n";
-
-        // writeData.close();
         merchantFile.close();
-
         std::cout << "<----------------------- PRODUCT ADDED SUCCESFULLY---------------------------->";
         std::cout << "\nWould you like to continue?(Y/N) ";
         std::string choice;
@@ -537,8 +526,8 @@ void Merchant::assignCourier()
                         }
                         break;
                 default:
-                        // cout << "Not Valid...." << endl;
-                        continue;
+                        // // cout << "Not Valid...." << endl;
+                        // continue;
                         break;
                 }
         }

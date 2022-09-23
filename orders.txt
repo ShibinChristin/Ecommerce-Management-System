@@ -1,1 +1,1 @@
-CustomerID 23;MerchantID 21;OrderID 56;ProductID 39;Name Galaxy S21;Type Electronics;Count 2;Courier Kochi;Status Delivered;
+CustomerID 23;MerchantID 21;OrderID 56;ProductID 39;Name Galaxy S21;Type Electronics;Count 2;Status Pending;
