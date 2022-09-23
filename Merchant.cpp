@@ -915,7 +915,7 @@ void Merchant::addOutofStock()
         bool OutOfStock = false;
         ProductFile.open("products.txt", ios::in);
         // displayOutOfStock();
-        cout << "Enter the Product Id of stock  to be  increased (Else press 5):";
+        cout << "Enter the Product Id of stock  to be  increased :";
         getline(cin >> ws, PID);
         cout << "Enter the  number of products :";
         getline(cin, ProductNumber);
