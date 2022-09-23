@@ -52,6 +52,9 @@ public:
 class Merchant
 {
 public:
+    size_t pos = 0;
+    std::string token;
+    std::string delimiter = ";";
     std::string merchantId, productId;
     std::string productName, productPrice;
     std::string productType, productCount; //,MerchantChoice;

@@ -128,11 +128,12 @@ void Customer::showProducts() ////// To Display the Products
     in.close();
 }
 void Customer::customerBuy() /*Function to buy products from merchant*/
-{
+{/* @param  cProduct Customer Product */
+    
     ifstream Customerid("customerId.txt", ios::in);
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[1-5]$");
-    std::string Cproduct, line2, name, ProductID, count, ProductType, ProductPrice, Val, Price, merchant_id1, merchant_id2; /// cProduct   --- Customer Product
+    std::string Cproduct, line2, name, ProductID, count, ProductType, ProductPrice, Val, Price, merchant_id1, merchant_id2;
     bool found = false;
     ofstream buy("orders.txt", ios::out | ios::app);
     showProducts();
@@ -190,7 +191,6 @@ buy:
     in1.close();
     int TempCount;
     int productCount; 
-
     TempCount = stoi(count);
     productCount = stoi(Val);
     ifstream in3("products.txt", ios::in);
@@ -570,7 +570,7 @@ cancel:
         }
     }
     in.close();
-    //////////////////////////////////////////////////////////////////////////
+    /*Updating Products.txt*/
     ifstream updation("products.txt", ios::in);
     ofstream Temp("temp2.txt", ios::out);
     std::string line4, name, Price, Type2, Count, merchant_id1;

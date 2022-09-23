@@ -38,7 +38,7 @@ void Merchant::orderStatusView() // View the  Orders made by the customer
 {
 
         ifstream customer1("orders.txt", ios::in);
-        std::string Cproduct, line2, delimiter = ";";
+        std::string Cproduct, line2;
         std::string OrderId, OrderName, ProductstatusID, StatusType, OrderCount, OrderStatus, defStatus = "Pending", merId, merchant_id, Merchant;
         bool status = false, flag = false;
         int NoStatus = 0;
@@ -53,8 +53,6 @@ void Merchant::orderStatusView() // View the  Orders made by the customer
         merchantId1.close();
         while (std::getline(customer1, line2))
         {
-                size_t pos = 0;
-                std::string token;
                 while ((pos = line2.find(delimiter)) != std::string::npos)
                 {
                         token = line2.substr(0, pos);
@@ -175,27 +173,27 @@ b:
         std ::cout << "\nEnter the Price of the Product : ";
         std::getline(std::cin >> std::ws, productPrice);
         std::regex q("^[1-9]+[0-9]*$");
-        if (std::regex_match(productPrice, q))
-        {
-        }
-        else
+        if (!(std::regex_match(productPrice, q)))
         {
                 std::cout << "Invalid data...! Please Try Again.." << std::endl;
                 std::cout << "\n";
                 goto b;
         }
+        // else
+        // {
+        // }
 Type:
         std::cout << "\nThe number of available " << productType << " Products : ";
         std::getline(std::cin >> std::ws, productCount);
         std::regex i("^[1-9]+[0-9]*$");
-        if (std::regex_match(productCount, i))
-        {
-        }
-        else
+        if (!(std::regex_match(productCount, i)))
         {
                 std::cout << "Invalid data...! Please Try Again.." << std::endl;
                 std::cout << "\n";
                 goto Type;
+        }
+        else
+        {
         }
         std::fstream merchantFile;
         merchantFile.open("products.txt", std::ios::in | std::ios::out | std::ios::app);
@@ -288,16 +286,14 @@ void Merchant::merchantOptions()
 }
 void Merchant::displayOutOfStock()
 {
-        // std::cout << "*******************      Out of Stock Products      ********************************\n\n";
         std::string line, name, ProductID, outCount, ProductType, merId, merchant_id, Merchant;
-        int Stock = 0 , lessProductCount = 0;
+        int Stock = 0, lessProductCount = 0;
         bool found = false, id = false;
         std::ifstream file;
         file.open("products.txt", std::ios::in);
-        std::string delimiter = ";";
         ifstream merchantId1("merchantId.txt", ios::in);
-        cout<<"Enter Product Count: ";
-        cin>>lessProductCount;
+        cout << "Enter Product Count: ";
+        cin >> lessProductCount;
         while (std::getline(merchantId1, merId))
         {
                 merchant_id = merId;
@@ -305,8 +301,6 @@ void Merchant::displayOutOfStock()
         merchantId1.close();
         while (std::getline(file, line))
         {
-                size_t pos = 0;
-                std::string token;
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
@@ -365,7 +359,6 @@ void Merchant::assignCourier()
         std::string OrderId, line;
         bool iffound = false;
         std::string CourierChoice;
-        std::string delimiter = ";";
         ifstream courier("orders.txt", ios::in);
         ofstream temp("Temp.txt", ios::out);
         //////////////////////////////////////////////////////////////////////
@@ -382,8 +375,6 @@ void Merchant::assignCourier()
         MerchantId.close();
         while (std::getline(view1, line1))
         {
-                size_t pos = 0;
-                std::string token;
                 while ((pos = line1.find(delimiter)) != std::string::npos)
                 {
                         token = line1.substr(0, pos);
@@ -457,8 +448,7 @@ void Merchant::assignCourier()
         while (std::getline(courier, line))
         {
                 std::string OrderID, ProductID, Name, Type, Count, Status;
-                size_t pos = 0;
-                std::string token, OriginalLine = line;
+                std::string OriginalLine = line;
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
@@ -583,15 +573,12 @@ void Merchant::searchProducts()
 
                 std::string Id, name1, price1, Type1, count1, Merchant;
 
-                std::string delimiter = ";";
                 ifstream pName;
                 int ProductNotFound = 0;
                 pName.open("products.txt", std::ios::in);
                 while (std::getline(pName, line))
                 {
                         bool found = false, flag = false;
-                        size_t pos = 0;
-                        std::string token;
                         while ((pos = line.find(delimiter)) != std::string::npos)
                         {
                                 token = line.substr(0, pos);
@@ -683,13 +670,10 @@ void Merchant::searchProducts()
                 }
                 std::string line, Type, name, id, count, price, Merchant;
                 bool found = false, flag = false;
-                std::string delimiter = ";";
                 ifstream productFile;
                 productFile.open("products.txt", ios::in);
                 while (std::getline(productFile, line))
                 {
-                        size_t pos = 0;
-                        std::string token;
                         while ((pos = line.find(delimiter)) != std::string::npos)
                         {
                                 token = line.substr(0, pos);
@@ -767,7 +751,7 @@ void Merchant::cancelledProducts()
         std::cout << "<--------------------------List of Cancelled Orders----------------------------->" << std::endl;
         std::ifstream orderList;
         orderList.open("orders.txt", std::ios::in);
-        std::string delimiter = ";", merchant_id, merId, Merchant;
+        std::string merchant_id, merId, Merchant;
         ifstream merchantId1("merchantId.txt", ios::in);
         while (std::getline(merchantId1, merId))
         {
@@ -776,8 +760,6 @@ void Merchant::cancelledProducts()
         merchantId1.close();
         while (std::getline(orderList, line))
         {
-                size_t pos = 0;
-                std::string token;
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
@@ -845,7 +827,6 @@ void Merchant::addOutofStock()
         std::cout << "*******************      Out of Stock Products      ********************************\n\n";
         std::string line, name, ProductID, outCount, ProductType, merId, merchant_id, Merchant;
         int Stock = 0;
-        std::string delimiter = ";";
         bool found = false, id = false;
         std::ifstream file;
         file.open("products.txt", std::ios::in);
@@ -857,8 +838,6 @@ void Merchant::addOutofStock()
         merchantId1.close();
         while (std::getline(file, line))
         {
-                size_t pos = 0;
-                std::string token;
                 while ((pos = line.find(delimiter)) != std::string::npos)
                 {
                         token = line.substr(0, pos);
@@ -924,8 +903,6 @@ void Merchant::addOutofStock()
         while (std::getline(ProductFile, addline))
         {
                 std::string OriginalLine = addline;
-                size_t pos = 0;
-                std::string token;
                 while ((pos = addline.find(delimiter)) != std::string::npos)
                 {
                         token = addline.substr(0, pos);
