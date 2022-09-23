@@ -65,6 +65,7 @@ public:
     void orderStatusView();
     int idGeneration();
     void merchantMenu();
+    void addOutofStock();
 };
 
 class Courier

@@ -130,8 +130,8 @@ void Merchant::addProducts()
 {
         std::string line, Merchant_id, MerId;
         std::string productChoice;
-        std::fstream writeData;
-        writeData.open("products.txt", std::ios::in | std::ios::out);
+        // std::fstream writeData;
+        // writeData.open("products.txt", std::ios::in | std::ios::out);
         ifstream merchantId1("merchantId.txt", ios::in);
         while (std::getline(merchantId1, MerId))
         {
@@ -202,7 +202,7 @@ Type:
         merchantFile << "ProductID " << idGeneration() << ";MerchantID " << Merchant_id << ";Name " << productName << ";Price " << productPrice << ";Type " << productType << ";Count " << productCount << ";" << std::endl;
         std::cout << "\n";
 
-        writeData.close();
+        // writeData.close();
         merchantFile.close();
 
         std::cout << "<----------------------- PRODUCT ADDED SUCCESFULLY---------------------------->";
@@ -223,11 +223,12 @@ void Merchant::merchantOptions()
         std::cout << "3.Orders List\n";
         std::cout << "4.Products Out Of Stock\n";
         std::cout << "5.Cancelled Products\n";
-        std::cout << "6.Assign Delivery to Courier\n";
-        std::cout << "7.Exit\n";
+        std::cout << "6.Add Stock to Out of Stock\n";
+        std::cout << "7.Assign Delivery to Courier\n";
+        std::cout << "8.Exit\n";
         std::cout << "Enter choice : ";
         std::cin >> options;
-        std::regex y("^[1-7]$");
+        std::regex y("^[1-8]$");
         if (!(regex_match(options, y)))
         {
                 std::cout << "\nInvalid Choice .....Please try again\n";
@@ -268,11 +269,17 @@ void Merchant::merchantOptions()
         break;
         case 6:
         {
-                assignCourier();
+                addOutofStock();
                 merchantOptions();
         }
         break;
         case 7:
+        {
+                assignCourier();
+                merchantOptions();
+        }
+        break;
+        case 8:
         {
                 merchantMenu();
         }
@@ -282,7 +289,6 @@ void Merchant::merchantOptions()
 void Merchant::displayOutOfStock()
 {
         std::cout << "*******************      Out of Stock Products      ********************************\n\n";
-
         std::string line, name, ProductID, outCount, ProductType, merId, merchant_id, Merchant;
         int Stock = 0;
         bool found = false, id = false;
@@ -365,7 +371,7 @@ void Merchant::assignCourier()
         std::string line1, defstatus = "Pending", status, Order, Name, Type, customer_id, merchant_id, merId, Mer;
         ifstream view1("orders.txt", ios::in);
         bool statusFound = false, flag = false;
-        int count = 0 , statusCount=0;
+        int count = 0, statusCount = 0;
         ifstream MerchantId("merchantId.txt", ios::in);
         while (std::getline(MerchantId, merId))
         {
@@ -429,7 +435,7 @@ void Merchant::assignCourier()
                 }
                 flag = false;
         }
-        if (count == 0 || statusCount==0)
+        if (count == 0 || statusCount == 0)
         {
                 std::cout << "No Products to assign......." << endl;
                 return;
@@ -820,13 +826,8 @@ void Merchant::cancelledProducts()
                                   << "Name " << pName << " | "
                                   << "Type " << pType << " | "
                                   << "Count " << pCount << std::endl;
-                        //<< "Status " << status << std::endl;
                         found = false;
                 }
-                // else
-                // {
-                //         continue;
-                // }
                 id = false;
         }
 
@@ -835,4 +836,144 @@ void Merchant::cancelledProducts()
                 std::cout << "\nNo Products have been cancelled by user......" << std::endl;
         }
         orderList.close();
+}
+
+void Merchant::addOutofStock()
+{
+        std::cout << "*******************      Out of Stock Products      ********************************\n\n";
+        std::string line, name, ProductID, outCount, ProductType, merId, merchant_id, Merchant;
+        int Stock = 0;
+        std::string delimiter = ";";
+        bool found = false, id = false;
+        std::ifstream file;
+        file.open("products.txt", std::ios::in);
+        ifstream merchantId1("merchantId.txt", ios::in);
+        while (std::getline(merchantId1, merId))
+        {
+                merchant_id = merId;
+        }
+        merchantId1.close();
+        while (std::getline(file, line))
+        {
+                size_t pos = 0;
+                std::string token;
+                while ((pos = line.find(delimiter)) != std::string::npos)
+                {
+                        token = line.substr(0, pos);
+                        if (token.rfind("ProductID ", 0) == 0)
+                        {
+                                ProductID = token.substr(10);
+                        }
+                        if (token.rfind("MerchantID ", 0) == 0)
+                        {
+                                Merchant = token.substr(11);
+                                if (Merchant == merchant_id)
+                                {
+                                        id = true;
+                                }
+                        }
+                        if (token.rfind("Name ", 0) == 0 && id)
+                        {
+                                name = token.substr(5);
+                        }
+                        if (token.rfind("Type ", 0) == 0 && id)
+                        {
+                                ProductType = token.substr(5);
+                        }
+                        if (token.rfind("Count ", 0) == 0 && id)
+                        {
+                                outCount = token.substr(6); // out of stock count
+                                int CountVal = stoi(outCount);
+                                if (CountVal <= 0)
+                                {
+                                        found = true;
+                                        Stock++;
+                                }
+                        }
+                        line.erase(0, pos + delimiter.length());
+                }
+                if (found)
+                {
+                        std::cout << "Product ID: " << ProductID << " | "
+                                  << "Name: " << name << " | "
+                                  << "Type: " << ProductType << std::endl;
+                        found = false;
+                }
+                id = false;
+        }
+        if (Stock == 0)
+        {
+                cout << "\nNo products are out of stock.........";
+                return;
+        }
+
+        file.close();
+        std::string addline, addProductId, addMerchantID, addName, addPrice, addType, addCount, PID, ProductNumber;
+        ifstream ProductFile;
+        ofstream ProductTemp("ProductTemp.txt", ios::out | ios::app);
+        int productOut = 0;
+        bool OutOfStock = false;
+        ProductFile.open("products.txt", ios::in);
+        // displayOutOfStock();
+        cout << "Enter the Product Id of stock  to be  increased (Else press 5):";
+        getline(cin >> ws, PID);
+        cout << "Enter the  number of products :";
+        getline(cin, ProductNumber);
+        while (std::getline(ProductFile, addline))
+        {
+                std::string OriginalLine = addline;
+                size_t pos = 0;
+                std::string token;
+                while ((pos = addline.find(delimiter)) != std::string::npos)
+                {
+                        token = addline.substr(0, pos);
+
+                        if (token.rfind("ProductID ", 0) == 0)
+                        {
+                                addProductId = token.substr(10);
+                                if (addProductId == PID)
+                                {
+                                        OutOfStock = true;
+                                        productOut++;
+                                }
+                        }
+                        if (token.rfind("MerchantID ", 0) == 0 && OutOfStock)
+                        {
+                                addMerchantID = token.substr(11);
+                        }
+                        if (token.rfind("Name ", 0) == 0 && OutOfStock)
+                        {
+                                addName = token.substr(5);
+                        }
+                        if (token.rfind("Price ", 0) == 0 && OutOfStock)
+                        {
+                                addPrice = token.substr(6);
+                        }
+                        if (token.rfind("Type ", 0) == 0 && OutOfStock)
+                        {
+                                addType = token.substr(5);
+                        }
+                        if (token.rfind("Count ", 0) == 0 && OutOfStock)
+                        {
+                                addCount = token.substr(6);
+                        }
+                        addline.erase(0, pos + delimiter.length());
+                }
+                if (OutOfStock)
+                {
+                        ProductTemp << "ProductID " << addProductId << ";MerchantID " << addMerchantID << ";Name " << addName << ";Price " << addPrice
+                                    << ";Type " << addType << ";Count " << ProductNumber << ";" << endl;
+                        OutOfStock = false;
+                }
+                else
+                {
+                        ProductTemp << OriginalLine << endl;
+                }
+        }
+        if (productOut == 0)
+        {
+                cout << "\nNo Such Product ID....................";
+        }
+        remove("products.txt");
+        rename("ProductTemp.txt", "products.txt");
 }
