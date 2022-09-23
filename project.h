@@ -9,7 +9,7 @@ using namespace std;
 
 class Authentication
 {
-    string customerUsername, customerPassword, password_confirm1, pass1, user;
+    string customerUsername, customerPassword, phoneNumber, emailId ,password_confirm1, pass1, user;
     string merchantUsername, merchantPassword, password_confirm2;
     string courierUsername, courierPassword, password_confirm3;
 
