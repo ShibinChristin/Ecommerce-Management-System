@@ -221,7 +221,7 @@ void Merchant::merchantOptions()
         std::cout << "1.Add Products\n";
         std::cout << "2.Search Products\n";
         std::cout << "3.Orders List\n";
-        std::cout << "4.Products Out Of Stock\n";
+        std::cout << "4.Products Count\n";
         std::cout << "5.Cancelled Products\n";
         std::cout << "6.Add Stock to Out of Stock\n";
         std::cout << "7.Assign Delivery to Courier\n";
@@ -288,14 +288,16 @@ void Merchant::merchantOptions()
 }
 void Merchant::displayOutOfStock()
 {
-        std::cout << "*******************      Out of Stock Products      ********************************\n\n";
+        // std::cout << "*******************      Out of Stock Products      ********************************\n\n";
         std::string line, name, ProductID, outCount, ProductType, merId, merchant_id, Merchant;
-        int Stock = 0;
+        int Stock = 0 , lessProductCount = 0;
         bool found = false, id = false;
         std::ifstream file;
         file.open("products.txt", std::ios::in);
         std::string delimiter = ";";
         ifstream merchantId1("merchantId.txt", ios::in);
+        cout<<"Enter Product Count: ";
+        cin>>lessProductCount;
         while (std::getline(merchantId1, merId))
         {
                 merchant_id = merId;
@@ -333,7 +335,7 @@ void Merchant::displayOutOfStock()
                         {
                                 outCount = token.substr(6); // out of stock count
                                 int CountVal = stoi(outCount);
-                                if (CountVal <= 0)
+                                if (CountVal <= lessProductCount)
                                 {
                                         found = true;
                                         Stock++;
