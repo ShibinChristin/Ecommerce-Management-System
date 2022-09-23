@@ -87,6 +87,33 @@ void Authentication::customerRegistration()
 	}
 
 	in1.close();
+	fstream file2;
+	file2.open("CustomerAuthentication.txt",ios::in | ios::out | ios::app);
+	cout << "Enter Phone number: ";
+	getline(cin>> ws,phoneNumber);
+	std:: regex p("(0|91)?[6-9][0-9]{9}");
+	if(!(regex_match(phoneNumber,p)))
+	{
+		cout<<"\n";
+		cout<<"    ===Invalid phone number ! Please try again.===\n";
+		cout<<"\n";
+		mainMenu();
+	}
+	file2.close();
+    fstream file3;
+	file3.open("CustomerAuthentication.txt",ios::in | ios::out | ios::app);
+	cout<<"Enter email ID: ";
+	getline(cin>>ws,emailId);
+	std:: regex q("^(\\w+)(\\.|_)?(\\w*)@gmail\\.com$");
+	
+	if(!(regex_match(emailId,q)))
+	{
+		cout<<"\n";
+		cout<<"       ===Invalid mail ID! Please try again.===\n";
+		cout<<"\n";
+		mainMenu();
+	}
+    file3.close();
 	fstream file1;
 	file1.open("CustomerAuthentication.txt", ios::in | ios::out | ios::app);
 	cout << "Enter password :";
@@ -108,6 +135,8 @@ passwordStart:
 		 << customerUsername << endl;
 	file1 << "Username " << customerUsername << ";"
 		  << "Password " << customerPassword << ";"
+		  << "PhoneNumber "<< phoneNumber << ";"
+		  << "EmailID "<< emailId<<";"
 		  << "CustomerID " << idGeneration() << ";" << endl;
 	file1.close();
 	cout << "\n";
