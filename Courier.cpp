@@ -47,7 +47,7 @@ void Courier::courierOptions()
     std::cout << "\t1. View assigned orders \n";
     std::cout << "\t2. Update status of orders \n";
     std::cout << "\t3. List of pending and completed delivery \n";
-    std::cout << "\t4. LOGOUT\n\n";
+    std::cout << "\t4.Press 4 to Logout\n";
     std::cout << "\nEnter your choice: ";
     std::cin >> courierchoice;
     std::regex k("^[1-4]$");

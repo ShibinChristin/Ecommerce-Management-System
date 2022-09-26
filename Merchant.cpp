@@ -212,7 +212,7 @@ void Merchant::merchantOptions()
         std::cout << "5.Cancelled Products\n";
         std::cout << "6.Add Stock to Out of Stock\n";
         std::cout << "7.Assign Delivery to Courier\n";
-        std::cout << "8.Exit\n";
+        std::cout << "8.Press 8 to logout\n";
         std::cout << "Enter choice : ";
         std::cin >> options;
         std::regex y("^[1-8]$");
@@ -526,8 +526,6 @@ void Merchant::assignCourier()
                         }
                         break;
                 default:
-                        // // cout << "Not Valid...." << endl;
-                        // continue;
                         break;
                 }
         }

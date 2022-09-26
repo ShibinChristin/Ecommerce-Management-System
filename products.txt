@@ -1,8 +1,7 @@
 ProductID 87;MerchantID 21;Name Galaxy S22;Price 100999;Type Electronics;Count 2;
 ProductID 39;MerchantID 21;Name Galaxy S21;Price 34999;Type Electronics;Count 5;
 ProductID 73;MerchantID 64;Name Mens shirt;Price 1499;Type Fashion;Count 11;
-ProductID 88;MerchantID 64;Name Crop tops;Price 1999;Type Fashion;Count 6;
+ProductID 88;MerchantID 64;Name Crop tops;Price 1999;Type Fashion;Count 5;
 ProductID 82;MerchantID 32;Name Dining set;Price 50000;Type Furniture;Count 5;
 ProductID 62;MerchantID 32;Name Chairs Set;Price 30000;Type Furniture;Count 5;
 ProductID 72;MerchantID 21;Name Galaxy Flip 1;Price 10000;Type Electronics;Count 20;
-ProductID 27;MerchantID 21;Name sda;Price 10;Type Electronics;Count 40;

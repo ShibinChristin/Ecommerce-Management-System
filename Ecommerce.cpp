@@ -85,10 +85,7 @@ void Authentication::customerRegistration()
 		mainMenu();
 		
 	}
-
 	in1.close();
-	fstream file2;
-	file2.open("CustomerAuthentication.txt",ios::in | ios::out | ios::app);
 	cout << "Enter Phone number: ";
 	getline(cin>> ws,phoneNumber);
 	std:: regex p("(0|91)?[6-9][0-9]{9}");
@@ -99,9 +96,7 @@ void Authentication::customerRegistration()
 		cout<<"\n";
 		mainMenu();
 	}
-	file2.close();
     fstream file3;
-	file3.open("CustomerAuthentication.txt",ios::in | ios::out | ios::app);
 	cout<<"Enter email ID: ";
 	getline(cin>>ws,emailId);
 	std:: regex q("^(\\w+)(\\.|_)?(\\w*)@gmail\\.com$");
@@ -113,7 +108,6 @@ void Authentication::customerRegistration()
 		cout<<"\n";
 		mainMenu();
 	}
-    file3.close();
 	fstream file1;
 	file1.open("CustomerAuthentication.txt", ios::in | ios::out | ios::app);
 	cout << "Enter password :";
@@ -142,8 +136,6 @@ passwordStart:
 	cout << "\n";
 	
 	}
-
-////////////////////////////////////////////////////////////////////////////////////
 
 void Authentication::customerLogin()
 {
@@ -275,7 +267,7 @@ void Authentication::merchantLogin()
 	bool ifound = false, flag = false;
 	std::string line6, token, MerchantID, pass;
 	std::string Check_name;
-	string merchantUsername, merchantPassword, u, p, condition;
+	string merchantUsername, merchantPassword;
 	cout << "Hello Merchant..........So Glad to see you back......." << endl;
 
 	cout << "Please enter the following details" << endl;
