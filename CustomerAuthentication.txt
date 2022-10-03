@@ -2,4 +2,4 @@ Username Shibin;Password 2000;PhoneNumber 9493969345;EmailID shibin@gmail.com;Cu
 Username Priyanka;Password 2001;PhoneNumber 8634523987;EmailID priya@gmail.com;CustomerID 22;
 Username Anagha;Password 2000;PhoneNumber 9876543201;EmailID anagha@gmail.com;CustomerID 35;
 Username Asha;Password 2000;PhoneNumber 9867451023;EmailID asha@gmail.com;CustomerID 49;
-Username Anu;Password 12;PhoneNumber 9895994199;EmailID anu@gmail.com;CustomerID 61;
+Username Anu;Password 12;PhoneNumber 9895994199;EmailID anu@gmail.com;CustomerID 61;Username donal;Password 123;PhoneNumber 9546235512;EmailID donal@gmail.com;CustomerID 33;
