@@ -47,7 +47,7 @@ int Customer::idGenerate()
 void Customer::customerChoiceDisplay()
 {
     std::string options;
-    cout << "***********************       MENU        ********************************\n\n";
+    cout << "\n\n***********************       MENU        ********************************\n\n";
     cout << "1.Buy Product\n";
     cout << "2.Show Product\n";
     cout << "3.Order Status\n";
@@ -128,8 +128,8 @@ void Customer::showProducts() ////// To Display the Products
     in.close();
 }
 void Customer::customerBuy() /*Function to buy products from merchant*/
-{/* @param  cProduct Customer Product */
-    
+{
+    /* @param  cProduct Customer Product */
     ifstream Customerid("customerId.txt", ios::in);
     ifstream customer1("products.txt", ios::in);
     std::regex obj("^[1-5]$");
