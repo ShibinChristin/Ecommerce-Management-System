@@ -3,5 +3,5 @@ int main()
 {
     Authentication authenticationObj;
     authenticationObj.mainMenu();
-    // return 0;
+    return 0;
 }
