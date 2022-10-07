@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "project.h
+=======
+#include "project.h"
+>>>>>>> 02f1853b9c776ec70f7f60daaf2c010a0b0b8314
 void Authentication::mainMenu()
 {	
 	Customer customerObj;
