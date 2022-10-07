@@ -1,5 +1,5 @@
 #include "project.h"
-void Authentication::mainMenu
+void Authentication::mainMenu()
 {	
 	Customer customerObj;
 	Merchant merchantObj;
