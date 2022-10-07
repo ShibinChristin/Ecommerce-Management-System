@@ -1,7 +1,7 @@
 #include "project.h"
 int main()
 {
-    Authentication authenticationObj
+    Authentication authenticationObj;
     authenticationObj.mainMenu();
     return 0;
 }
