@@ -1,4 +1,5 @@
 node {
+  label 'win10'
   stage('SCM') {
     checkout scm
   }
